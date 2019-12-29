@@ -1,28 +1,15 @@
 <template>
 	<view>
-		<text>Hello, i'm on the way~</text>
-		<!-- <cu-custom bgColor="bg-gradual-blue" :isBack="true">
+		<cu-custom bgColor="bg-white" :isBack="true">
 			<block slot="backText">返回</block>
-			<block slot="content">导航栏</block>
-		</cu-custom> -->
+			<block slot="content">未来之星</block>
+		</cu-custom>
 		<view class="cu-bar tabbar bg-white shadow foot">
-			<view class="action" @click="NavChange" data-cur="basics">
+			<view v-for="(icon, index) in iconList" :key="index" class="action" @click="NavChange" :data-cur="icon.english">
 				<view class='cuIcon-cu-image'>
-					<image :src="'/static/tabbar/basics' + [PageCur=='basics'?'_cur':''] + '.png'"></image>
+					<image :src="'/static/tabbar/' + icon.english + [PageCur===icon.english?'_cur':''] + '.png'"></image>
 				</view>
-				<view :class="PageCur=='basics'?'text-green':'text-gray'">元素</view>
-			</view>
-			<view class="action" @click="NavChange" data-cur="component">
-				<view class='cuIcon-cu-image'>
-					<image :src="'/static/tabbar/component' + [PageCur == 'component'?'_cur':''] + '.png'"></image>
-				</view>
-				<view :class="PageCur=='component'?'text-green':'text-gray'">组件</view>
-			</view>
-			<view class="action" @click="NavChange" data-cur="plugin">
-				<view class='cuIcon-cu-image'>
-					<image :src="'/static/tabbar/plugin' + [PageCur == 'plugin'?'_cur':''] + '.png'"></image>
-				</view>
-				<view :class="PageCur=='plugin'?'text-green':'text-gray'">扩展</view>
+				<view :class="PageCur===icon.english?'text-green':'text-gray'">{{icon.chinese}}</view>
 			</view>
 		</view>
 	</view>
@@ -32,7 +19,25 @@
 	export default {
 		data() {
 		return {
-				PageCur: 'basics'
+				PageCur: 'apply',
+				iconList: [
+					{
+						english: 'apply',
+						chinese: '报名',
+					}, {
+						english: 'course',
+						chinese: '班课',
+					}, {
+						english: 'schoolmate',
+						chinese: '校友',
+					}, {
+						english: 'activity',
+						chinese: '活动',
+					}, {
+						english: 'about',
+						chinese: '我的',
+					}
+				]
 			}
 		},
 		methods: {
