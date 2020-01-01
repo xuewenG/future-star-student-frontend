@@ -1,4 +1,4 @@
-<template>
+；<template>
 	<view>
 		<cu-custom bgColor="bg-white" :isBack="true">
 			<block slot="backText">返回</block>
@@ -23,7 +23,7 @@
 			Course
 		},
 		data() {
-		return {
+			return {
 				PageCur: 'apply',
 				iconList: [
 					{
