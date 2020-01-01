@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "yarn build:mp-weixin && .\\run_wx_env.sh /dist/build/mp-weixin",
+    "dev": ".\\run_wx_env.sh /dist/dev/mp-weixin && cross-env NODE_ENV=development UNI_PLATFORM=mp-weixin vue-cli-service uni-build --watch",
     "serve": "yarn dev:mp-weixin",
     "build": "yarn build:mp-weixin",
     "build:app-plus": "cross-env NODE_ENV=production UNI_PLATFORM=app-plus vue-cli-service uni-build",

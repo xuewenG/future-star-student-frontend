@@ -1,20 +1,16 @@
 <template>
 	<view>
 		<scroll-view scroll-x class="bg-white nav">
-			<view class="flex text-center">
-				<view class="cu-item flex-sub" 
-				:class="index==TabCur?'text-green cur':''" 
-				v-for="(item,index) in navigatorList" :key="index" 
-				@tap="tabSelect" :data-id="index">
-					{{item}}
-				</view>
-			</view>
+			<TopNav :nav-list="navigatorList" @cur-changed="getCurrentList"></TopNav>
 			<view class="cu-list menu">
 				<view class="cu-item arrow" v-for="(item, index) in currentList" :key="index">
-					<view class="content">
-						<image :src="item.avatar" class="png" mode="aspectFit"></image>
-						<text class="text-grey" v-text="item.name"></text>
-					</view>
+          <view class="content" @tap="toCourseInfo(item.id)">
+            <image :src="item.avatar" class="png" mode="aspectFit"></image>
+            <text class="text-grey" v-text="item.name"></text>
+          </view>
+					<navigator :url="'pages/Course/CourseInfo?id=1'" class="content">
+            click me
+          </navigator>
 				</view>
 			</view>
 		</scroll-view>
@@ -22,7 +18,11 @@
 </template>
 
 <script>
+  import TopNav from '@/components/TopNav.vue'
 	export default {
+    components: {
+      TopNav
+    },
 		data() {
 			return {
 				TabCur: 0,
@@ -31,23 +31,29 @@
 				currentList: [{avatar:'/static/logo.png',name:'没刷新啊'}],
 					courseItemList: [
 						[{
+              id: 0,
 							avatar: '/static/logo.png',
 							name: '正在进行的课程一'
 						},{
+              id: 1,
 							avatar: '/static/logo.png',
 							name: '正在进行的课程二'
 						},{
+              id: 2,
 							avatar: '/static/logo.png',
 							name: '正在进行的课程三'
 						}],
 						[{
+              id: 3,
 							avatar: '/static/logo.png',
 							name: '正在审核的课程一'
 						},{
+              id: 4,
 							avatar: '/static/logo.png',
 							name: '正在审核的课程二'
 						}],
 						[{
+              id: 5,
 							avatar: '/static/logo.png',
 							name: '已经结束的课程一'
 						}]
@@ -55,14 +61,25 @@
 			};
 		},
 		methods: {
-			tabSelect(e) {
-				this.TabCur = e.currentTarget.dataset.id;
-				this.scrollLeft = (e.currentTarget.dataset.id - 1) * 60
-				this.getCurrentList(e.currentTarget.dataset.id)
-			},
+      handlePageCurChanged (p1) {
+        this.getCurrentList(p1)
+      },
 			getCurrentList (i) {
 				this.currentList = this.courseItemList[i]
-			}
+			},
+      toCourseInfo (id) {
+        console.log('hello')
+        /* global uni:false */
+        uni.navigateTo({
+          url:'/pages/Course/CourseInfo?id='+id,
+          fail:function(){
+            console.log('fail')
+          },
+          success:function(){
+            console.log('success')
+          }
+        })
+      }
 		},
 		mounted () {
 			this.getCurrentList(0)

@@ -3,7 +3,15 @@
 		{
 			"path": "pages/index",
 			"style": {}
-		}
+		},
+    {
+    	"path": "pages/Course/Course",
+    	"style": {}
+    },
+    {
+    	"path": "pages/Course/CourseInfo",
+    	"style": {}
+    }
 	],
 	"globalStyle": {
 		"navigationStyle": "custom",
