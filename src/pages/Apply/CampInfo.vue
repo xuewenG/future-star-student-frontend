@@ -64,7 +64,44 @@
             </view>
           </view>
 
-          <view class="cu-list menu sm-border card-menu margin-top">
+          <uni-collapse accordion="true">
+            <uni-collapse-item
+              v-for="(course, courseIndex) in clazz.courseList"
+              :key="courseIndex"
+              :show-animation="true"
+              :title="course.courseName + ' ' + course.courseType"
+            >
+              <view class="cu-bar bg-white margin-top-sm">
+                <view class="action">
+                  <text class="cuIcon-titles text-orange" /> 课程安排
+                </view>
+              </view>
+              <uni-list>
+                <uni-list-item
+                  v-for="(module, moduleIndex) in course.moduleList"
+                  :key="moduleIndex"
+                  :show-arrow="false"
+                  :note="moduleIndex+1 + '.' + module"
+                />
+              </uni-list>
+
+              <view class="cu-bar bg-white">
+                <view class="action">
+                  <text class="cuIcon-titles text-orange" /> 往期教师&拟邀讲师
+                </view>
+              </view>
+              <uni-list>
+                <uni-list-item
+                  v-for="(lecturer, lecturerIndex) in course.lecturerList"
+                  :key="lecturerIndex"
+                  :show-arrow="false"
+                  :thumb="lecturer.avatar"
+                  :note="lecturer.lecturerName + ' ' + lecturer.title"
+                />
+              </uni-list>
+            </uni-collapse-item>
+          </uni-collapse>
+          <!-- <view class="cu-list menu sm-border card-menu margin-top">
             <view
               v-for="(course, courseIndex) in clazz.courseList"
               :key="courseIndex"
@@ -77,7 +114,7 @@
                 </view>
               </view>
             </view>
-          </view>
+          </view> -->
         </view>
       </view>
     </view>
@@ -94,8 +131,15 @@
 </template>
 
 <script>
+import { uniCollapse, uniCollapseItem, uniList, uniListItem } from '@dcloudio/uni-ui'
 export default {
   name: 'CampInfo',
+  components: {
+    uniCollapse,
+    uniCollapseItem,
+    uniList,
+    uniListItem
+  },
   data () {
     return {
       camp: {
@@ -123,14 +167,14 @@ export default {
                 courseStart: '2019-07-01',
                 courseEnd: '2019-07-03',
                 courseSpot: '北京',
-                modelList: [
+                moduleList: [
                   '了解前沿技术发展，探讨未来技术与教育的具体结合',
                   '了解经济发展，消费升级给行业发展带来的机遇和挑战'
                 ],
                 lecturerList: [
                   {
                     lecturerId: '',
-                    avatar: '../../static/EdStarsLogo.png',
+                    avatar: '/static/EdStarsLogo.png',
                     lecturerName: '李善友',
                     title: '混沌大学创始人',
                     briefInfo: '李善友是混沌大学创始人',
@@ -138,7 +182,7 @@ export default {
                   },
                   {
                     lecturerId: '',
-                    avatar: '../../static/EdStarsLogo.png',
+                    avatar: '/static/EdStarsLogo.png',
                     lecturerName: '卫哲',
                     title: '嘉御基金创始人',
                     briefInfo: '卫哲是嘉御基金创始人',
@@ -146,7 +190,7 @@ export default {
                   },
                   {
                     lecturerId: '',
-                    avatar: '../../static/EdStarsLogo.png',
+                    avatar: '/static/EdStarsLogo.png',
                     lecturerName: '李朝晖',
                     title: '腾讯投资管理合伙人',
                     briefInfo: '李朝晖是腾讯投资管理合伙人',
@@ -154,7 +198,7 @@ export default {
                   },
                   {
                     lecturerId: '',
-                    avatar: '../../static/EdStarsLogo.png',
+                    avatar: '/static/EdStarsLogo.png',
                     lecturerName: '黄谭',
                     title: '好未来首席技术官',
                     briefInfo: '黄谭是好未来首席技术官',
@@ -171,7 +215,7 @@ export default {
                 courseStart: '2019-09-01',
                 courseEnd: '2019-09-03',
                 courseSpot: '北京',
-                modelList: [],
+                moduleList: [],
                 lecturerList: []
               },
               {
@@ -182,7 +226,7 @@ export default {
                 courseStart: '2019-11-01',
                 courseEnd: '2019-11-03',
                 courseSpot: '北京',
-                modelList: [],
+                moduleist: [],
                 lecturerList: []
               }
             ]
@@ -206,14 +250,14 @@ export default {
                 courseStart: '2019-07-01',
                 courseEnd: '2019-07-03',
                 courseSpot: '北京',
-                modelList: [
+                moduleist: [
                   '了解前沿技术发展，探讨未来技术与教育的具体结合',
                   '了解经济发展，消费升级给行业发展带来的机遇和挑战'
                 ],
                 lecturerList: [
                   {
                     lecturerId: '',
-                    avatar: '../../static/EdStarsLogo.png',
+                    avatar: '/static/EdStarsLogo.png',
                     lecturerName: '李善友',
                     title: '混沌大学创始人',
                     briefInfo: '李善友是混沌大学创始人',
@@ -221,7 +265,7 @@ export default {
                   },
                   {
                     lecturerId: '',
-                    avatar: '../../static/EdStarsLogo.png',
+                    avatar: '/static/EdStarsLogo.png',
                     lecturerName: '卫哲',
                     title: '嘉御基金创始人',
                     briefInfo: '卫哲是嘉御基金创始人',
@@ -229,7 +273,7 @@ export default {
                   },
                   {
                     lecturerId: '',
-                    avatar: '../../static/EdStarsLogo.png',
+                    avatar: '/static/EdStarsLogo.png',
                     lecturerName: '李朝晖',
                     title: '腾讯投资管理合伙人',
                     briefInfo: '李朝晖是腾讯投资管理合伙人',
@@ -237,7 +281,7 @@ export default {
                   },
                   {
                     lecturerId: '',
-                    avatar: '../../static/EdStarsLogo.png',
+                    avatar: '/static/EdStarsLogo.png',
                     lecturerName: '黄谭',
                     title: '好未来首席技术官',
                     briefInfo: '黄谭是好未来首席技术官',
@@ -252,7 +296,7 @@ export default {
                 courseStart: '',
                 courseSpot: '',
                 courseEnd: '',
-                modelList: [],
+                moduleist: [],
                 lecturerList: []
               },
               {
@@ -262,20 +306,12 @@ export default {
                 courseStart: '',
                 courseSpot: '',
                 courseEnd: '',
-                modelList: [],
+                moduleist: [],
                 lecturerList: []
               }
             ]
           }
         ]
-      },
-      lecturer: {
-        lecturerId: '',
-        avatar: '',
-        lecturerName: '',
-        title: '',
-        briefInfo: '',
-        tel: ''
       }
     }
   },

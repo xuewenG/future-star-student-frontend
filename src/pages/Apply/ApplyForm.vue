@@ -118,7 +118,7 @@
         </picker>
       </view>
 
-      <view class="cu-bar bg-white margin-top-sm">
+      <view class="cu-bar bg-white margin-top-sm solids-bottom">
         <view class="action">
           <text class="cuIcon-titles text-orange" /> 教育/工作背景
         </view>
@@ -128,7 +128,7 @@
         class="block"
         @change="selectEducation"
       >
-        <view class="cu-bar bg-white">
+        <view class="cu-bar bg-white cu-item">
           <view class="action">
             <text class="cuIcon-profile text-cyan margin-left" />
             <text class="margin-left">
@@ -161,34 +161,53 @@
         </view>
       </radio-group>
 
-      <view class="cu-bar bg-white">
-        <view class="action">
-          <view class="cuIcon-cu-image">
-            <image src="../../static/college.png" />
-          </view>
-          <view class="title margin-left">
-            最高学历毕业院校及起止时间
-          </view>
-          <view class="text-content">
-            如：2004-2008/北京大学/计算机科学/学士
+      <view class="cu-list menu solids-top">
+        <view class="cu-item">
+          <view class="content">
+            <image
+              src="../../static/college.png"
+              class="png"
+              mode="aspectFit"
+            />
+            <text class="margin-left-sm text-center">
+              最高学历毕业院校及起止时间
+            </text>
           </view>
         </view>
-        <view class="cu-form-group align-start">
+        <view class="cu-item text-gray">
+          如：2004-2008/北京大学/计算机科学/学士
+        </view>
+        <view class="cu-form-group cu-item align-start">
           <textarea
             v-model="applyForm.graduation"
+            class="sm-border"
             maxlength="-1"
             placeholder="请按上述格式输入毕业院校及起止时间"
           />
         </view>
 
-        <view class="btn-area margin-top padding">
-          <button
-            formType="submit"
-            class="cu-btn bg-cyan shadow block"
-            @tap="submitApplyForm"
-          >
-            提交
-          </button>
+        <view class="cu-item">
+          <view class="content">
+            <image
+              src="../../static/company.png"
+              class="png"
+              mode="aspectFit"
+            />
+            <text class="margin-left-sm text-center">
+              您创业前所在公司、职位及时间
+            </text>
+          </view>
+        </view>
+        <view class="cu-item text-gray">
+          如：2010-2015/好未来/产品经理
+        </view>
+        <view class="cu-form-group cu-item align-start">
+          <textarea
+            v-model="applyForm.career"
+            class="sm-border"
+            maxlength="-1"
+            placeholder="请按上述格式输入就业经历"
+          />
         </view>
       </view>
     </form>
