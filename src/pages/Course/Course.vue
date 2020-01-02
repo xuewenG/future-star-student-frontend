@@ -5,12 +5,9 @@
 			<view class="cu-list menu">
 				<view class="cu-item arrow" v-for="(item, index) in currentList" :key="index">
           <view class="content" @tap="toCourseInfo(item.id)">
-            <image :src="item.avatar" class="png" mode="aspectFit"></image>
+            <image :src="item.avatar" class="png xl"></image>
             <text class="text-grey" v-text="item.name"></text>
           </view>
-					<navigator :url="'pages/Course/CourseInfo?id=1'" class="content">
-            click me
-          </navigator>
 				</view>
 			</view>
 		</scroll-view>
@@ -73,10 +70,7 @@
         uni.navigateTo({
           url:'/pages/Course/CourseInfo?id='+id,
           fail:function(){
-            console.log('fail')
-          },
-          success:function(){
-            console.log('success')
+            console.log('fail to navigate')
           }
         })
       }
