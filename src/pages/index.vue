@@ -1,11 +1,10 @@
 ；<template>
 	<view>
-		<cu-custom bgColor="bg-white" :isBack="true">
-			<block slot="backText">返回</block>
+		<cu-custom bgColor="bg-white">
 			<block slot="content">未来之星</block>
 		</cu-custom>
 		<Course v-if="PageCur==='course'"></Course>
-		<view class="cu-bar tabbar bg-white shadow foot">
+    <view class="cu-bar tabbar bg-white shadow foot">
 			<view v-for="(icon, index) in iconList" :key="index" class="action" @click="NavChange" :data-cur="icon.english">
 				<view class='cuIcon-cu-image'>
 					<image :src="'/static/tabbar/' + icon.english + [PageCur===icon.english?'_cur':''] + '.png'"></image>
