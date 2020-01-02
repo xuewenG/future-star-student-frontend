@@ -5,6 +5,7 @@
         未来之星
       </block>
     </cu-custom>
+    <camp-item v-if="PageCur==='apply'" />
     <Course v-if="PageCur==='course'" />
     <view class="cu-bar tabbar bg-white shadow foot">
       <view
@@ -27,8 +28,10 @@
 
 <script>
 import Course from '@/pages/Course/Course.vue'
+import CampItem from '@/components/CampItem.vue'
 export default {
   components: {
+    CampItem,
     Course
   },
   data () {
