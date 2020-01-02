@@ -33,15 +33,16 @@ process.UNI_LIBRARIES.forEach(libraryName => {
   plugins.push([
     'import',
     {
-      'libraryName': libraryName,
-      'customName': (name) => {
+      libraryName: libraryName,
+      customName: (name) => {
         return `${libraryName}/lib/${name}/${name}`
       }
     }
   ])
 })
 module.exports = api => {
-  const isTest = api.env('test');
+  // eslint-disable-next-line no-unused-vars
+  const isTest = api.env('test')
   // You can use isTest to determine what presets and plugins to use.
   return {
     presets: [
@@ -51,18 +52,18 @@ module.exports = api => {
           modules: 'commonjs',
           useBuiltIns: process.env.UNI_PLATFORM === 'h5' ? 'usage' : 'entry'
         }
-      ],[
+      ], [
         '@babel/preset-env',
         {
           targets: {
-            node: 'current',
-          },
+            node: 'current'
+          }
         }
       ]
     ],
     plugins
-  };
-};
+  }
+}
 // module.exports = {
 //   presets: [
 //     [
