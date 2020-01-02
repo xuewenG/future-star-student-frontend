@@ -4,11 +4,12 @@
 			<block slot="backText">返回</block>
 			<block slot="content">未来之星</block>
 		</cu-custom>
+    <CampItem v-if="PageCur==='apply'"></CampItem>
 		<Course v-if="PageCur==='course'"></Course>
 		<view class="cu-bar tabbar bg-white shadow foot">
 			<view v-for="(icon, index) in iconList" :key="index" class="action" @click="NavChange" :data-cur="icon.english">
 				<view class='cuIcon-cu-image'>
-					<image :src="'/static/tabbar/' + icon.english + [PageCur===icon.english?'_cur':''] + '.png'"></image>
+					<image :src="'../static/tabbar/' + icon.english + [PageCur===icon.english?'_cur':''] + '.png'"></image>
 				</view>
 				<view :class="PageCur===icon.english?'text-green':'text-gray'">{{icon.chinese}}</view>
 			</view>
@@ -17,10 +18,12 @@
 </template>
 
 <script>
+  import CampItem from '../components/CampItem'
 	import Course from '@/pages/Course/Course.vue'
 	export default {
 		components:{
-			Course
+			Course,
+      CampItem
 		},
 		data() {
 			return {
