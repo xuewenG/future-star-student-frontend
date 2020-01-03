@@ -23,6 +23,13 @@
         ,{
             "path" : "pages/Course/FinishedCourse",
             "style" : {}
+        },{
+            "path" : "pages/Activity/Activity",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/Activity/HotActivity",
+            "style" : {}
         }
     ],
 	"globalStyle": {

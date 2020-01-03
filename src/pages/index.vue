@@ -6,7 +6,8 @@
       </block>
     </cu-custom>
     <camp-item v-if="PageCur==='apply'" />
-    <Course v-if="PageCur==='course'" />
+    <course v-if="PageCur==='course'" />
+    <activity v-if="PageCur==='activity'" />
     <view class="cu-bar tabbar bg-white shadow foot">
       <view
         v-for="(icon, index) in iconList"
@@ -29,10 +30,12 @@
 <script>
 import Course from '@/pages/Course/Course.vue'
 import CampItem from '@/components/CampItem.vue'
+import Activity from '@/pages/Activity/Activity.vue'
 export default {
   components: {
     CampItem,
-    Course
+    Course,
+    Activity
   },
   data () {
     return {
