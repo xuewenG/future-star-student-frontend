@@ -876,12 +876,10 @@ export default {
       const position = this.positionList
       const values = e.detail.value
       for (let i = 0, lenI = position.length; i < lenI; ++i) {
-        position[i].checked = false
-        for (let j = 0, lenJ = values.length; j < lenJ; ++j) {
-          if (position[i].value === values[j]) {
-            position[i].checked = true
-            break
-          }
+        if (values.includes(position[i].value)) {
+          this.$set(position[i], 'checked', true)
+        } else {
+          this.$set(position[i], 'checked', false)
         }
       }
       this.applyForm.positions = values
@@ -941,12 +939,10 @@ export default {
       const canal = this.canalList
       const values = e.detail.value
       for (let i = 0, lenI = canal.length; i < lenI; ++i) {
-        canal[i].checked = false
-        for (let j = 0, lenJ = values.length; j < lenJ; ++j) {
-          if (canal[i].value === values[j]) {
-            canal[i].checked = true
-            break
-          }
+        if (values.includes(canal[i].value)) {
+          this.$set(canal[i], 'checked', true)
+        } else {
+          this.$set(canal[i], 'checked', false)
         }
       }
       this.applyForm.canals = values
@@ -954,6 +950,14 @@ export default {
     submitApplyForm () {
       if (this.otherEducation !== '') {
         this.applyForm.education = this.otherEducation
+      }
+      if (this.otherPosition !== '') {
+        const tmp = this.applyForm.positions.indexOf('其他')
+        this.applyForm.positions[tmp] = this.otherPosition
+      }
+      if (this.otherCanal !== '') {
+        const tmp = this.applyForm.canals.indexOf('其他')
+        this.applyForm.canals[tmp] = this.otherCanal
       }
       console.log(this.applyForm)
     }
