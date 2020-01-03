@@ -21,7 +21,7 @@ export default {
   data () {
     return {
       TabCur: 0,
-      navigatorList: ['当前热门', '往期活动', '我参与的'],
+      navigatorList: ['当前热门', '往期活动', '我参与的']
     }
   },
   mounted () {
