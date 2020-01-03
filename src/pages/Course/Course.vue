@@ -4,7 +4,7 @@
       scroll-x
       class="bg-white nav"
     >
-      <TopNav
+      <top-nav
         :nav-list="navigatorList"
         @cur-changed="getCurrentList"
       />
@@ -42,7 +42,6 @@ export default {
   data () {
     return {
       TabCur: 0,
-      scrollLeft: 0,
       navigatorList: ['正在进行', '审核中', '往期课程'],
       currentList: [{ avatar: '/static/logo.png', name: '没刷新啊' }],
       courseItemList: [

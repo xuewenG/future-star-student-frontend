@@ -1,7 +1,7 @@
 <template>
   <view>
-    <TitleBar title="课程信息" />
-    <TopNav
+    <title-bar title="课程信息" />
+    <top-nav
       :nav-list="navigatorList"
       @cur-changed="(cur)=>{pageCur=cur}"
     />

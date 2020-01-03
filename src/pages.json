@@ -1,9 +1,8 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-    {
-		"path": "pages/index",
-		"style": {}
-	}, {
+	"pages": [{
+        "path": "pages/index",
+        "style": {}
+    }, {
         "path": "pages/Apply/CampInfo",
         "style": {}
     }, {
@@ -12,18 +11,22 @@
     }, {
         "path": "pages/Course/Course",
         "style": {}
-    },{
+    }, {
         "path" : "pages/Course/OngoingCourse",
         "style" : {}
+    }, {
+        "path" : "pages/Course/AuditingCourse",
+        "style" : {}
+    }, {
+        "path" : "pages/Course/FinishedCourse",
+        "style" : {}
+    }, {
+        "path" : "pages/Activity/Activity",
+        "style" : {}
+    }, {
+        "path" : "pages/Activity/HotActivity",
+        "style" : {}
     }
-        ,{
-            "path" : "pages/Course/AuditingCourse",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/Course/FinishedCourse",
-            "style" : {}
-        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom",
