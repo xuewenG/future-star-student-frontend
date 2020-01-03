@@ -13,9 +13,21 @@
         "path": "pages/Course/Course",
         "style": {}
     }, {
-      "path": "pages/Course/CourseInfo",
-      "style": {}
-    }],
+        "path": "pages/Course/CourseInfo",
+        "style": {}
+    },{
+        "path" : "pages/Course/ongoingCourse",
+        "style" : {}
+    }
+        ,{
+            "path" : "pages/Course/auditingCourse",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/Course/finishedCourse",
+            "style" : {}
+        }
+    ],
 	"globalStyle": {
 		"navigationStyle": "custom",
 		"navigationBarTextStyle": "black",

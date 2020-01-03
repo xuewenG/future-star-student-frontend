@@ -16,7 +16,7 @@
         >
           <view
             class="content"
-            @tap="toCourseInfo(item.id)"
+            @tap="toCourseInfo(index, item.id)"
           >
             <image
               :src="item.avatar"
@@ -86,7 +86,7 @@ export default {
     getCurrentList (i) {
       this.currentList = this.courseItemList[i]
     },
-    toCourseInfo (id) {
+    toCourseInfo (pageindex, id) {
       console.log('hello')
       /* global uni:false */
       uni.navigateTo({
