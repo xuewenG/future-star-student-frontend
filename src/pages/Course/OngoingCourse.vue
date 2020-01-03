@@ -5,11 +5,11 @@
       :nav-list="navigatorList"
       @cur-changed="(cur)=>{pageCur=cur}"
     />
-    <course-info 
+    <course-info
       v-if="pageCur===0"
       :course-data="courseData"
     />
-    <course-audit-state
+    <course-resource
       v-if="pageCur===1"
       :course-resource-list="courseItemList"
     />
@@ -19,18 +19,18 @@
 import TitleBar from '@/components/TitleBar.vue'
 import TopNav from '@/components/TopNav.vue'
 import CourseInfo from '@/components/CourseInfo.vue'
-import CourseAuditState from '@/components/CourseAuditState.vue'
+import CourseResource from '@/components/CourseResource.vue'
 export default {
   components: {
     TopNav,
     TitleBar,
     CourseInfo,
-    CourseAuditState
+    CourseResource
   },
   data () {
     return {
       pageCur: 0,
-      navigatorList: ['课程介绍', '审核状态'],
+      navigatorList: ['课程介绍', '课程资料', '同学列表'],
       courseData: {
         time: '2020年1月1日——2020年2月15日',
         place: '霸都飞禽繁育与生态研究中心',
@@ -41,7 +41,15 @@ export default {
           title: '2019年金鸽杯全国鸽手大赛“最佳鸽王”',
           contact: 'Coo@666.com'
         }
+      },
+      courseItemList: [{
+        title: '第一次开课'
+      }, {
+        title: '第二次开课'
+      }, {
+        title: '第三次开课'
       }
+      ]
     }
   },
   onLoad (option) {
