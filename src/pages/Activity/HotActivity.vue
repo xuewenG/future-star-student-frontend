@@ -33,6 +33,29 @@
       :nav-list="navigatorList"
       @cur-changed="getCurrentList"
     />
+    <view
+      v-if="TabCur===0"
+      class="cu-list menu sm-border card-menu margin-top"
+    >
+      <view
+        v-for="(item, index) in ongoingActivityList"
+        :key="index"
+        class="cu-item arrow"
+        @tap="showCampInfo"
+      >
+        <view class="content">
+          <image
+            :src="item.url"
+            class="png"
+            mode="aspectFit"
+          />
+          <text
+            class="text-grey"
+            v-text="item.name"
+          />
+        </view>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -45,16 +68,41 @@ export default {
   data () {
     return {
       TabCur: 0,
-      navigatorList: ['正在进行', '即将开始']
+      navigatorList: ['正在进行', '即将开始'],
+      swiperList: [{
+        id: 0,
+        type: 'image',
+        url: '../../static/EdStarsLogo.png'
+      }],
+      ongoingActivityList: [
+        {
+          name: '热门活动1',
+          url: '../../static/EdStarsLogo.png'
+        }, {
+          name: '热门活动2',
+          url: '../../static/EdStarsLogo.png'
+        }, {
+          name: '热门活动3',
+          url: '../../static/EdStarsLogo.png'
+        }
+      ],
+      awaitActivityList: [
+        {
+          name: '即将上线的活动1',
+          url: '../../static/EdStarsLogo.png'
+        }, {
+          name: '即将上线的活动2',
+          url: '../../static/EdStarsLogo.png'
+        }, {
+          name: '即将上线的活动3',
+          url: '../../static/EdStarsLogo.png'
+        }
+      ]
     }
-  },
-  mounted () {
-    this.getCurrentList(0)
   },
   methods: {
     getCurrentList (i) {
-      this.PageCur = i
-      this.currentList = this.courseItemList[i]
+      this.TabCur = i
     }
   }
 }

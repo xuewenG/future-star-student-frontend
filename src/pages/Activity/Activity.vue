@@ -5,7 +5,7 @@
       @cur-changed="getCurrentList"
     />
     <hot-activity
-      v-if="TabCur===1"
+      v-if="TabCur===0"
     />
   </view>
 </template>
@@ -21,7 +21,7 @@ export default {
   data () {
     return {
       TabCur: 0,
-      navigatorList: ['当前热门', '往期活动', '我参与的']
+      navigatorList: ['当前热门', '往期活动', '我参与的'],
     }
   },
   mounted () {

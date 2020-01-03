@@ -24,7 +24,7 @@
     "dev:mp-weixin": "cross-env NODE_ENV=development UNI_PLATFORM=mp-weixin vue-cli-service uni-build --watch",
     "info": "node node_modules/@dcloudio/vue-cli-plugin-uni/commands/info.js",
     "lint": "yarn lint:script && yarn lint:style",
-    "lint:script": "eslint --ext .js,.vue .",
+    "lint:script": "eslint --ext .js,.vue,.json .",
     "lint:style": "stylelint src/**/*.vue",
     "test": "jest"
   },
