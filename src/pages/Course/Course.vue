@@ -16,7 +16,7 @@
         >
           <view
             class="content"
-            @tap="toCourseInfo(index, item.id)"
+            @tap="toCourseInfo(item.id)"
           >
             <image
               :src="item.avatar"
@@ -80,19 +80,21 @@ export default {
     this.getCurrentList(0)
   },
   methods: {
-    handlePageCurChanged (p1) {
-      this.getCurrentList(p1)
-    },
     getCurrentList (i) {
+      this.PageCur = i
       this.currentList = this.courseItemList[i]
     },
-    toCourseInfo (pageindex, id) {
-      console.log('hello')
+    toCourseInfo (id) {
+      const pagePath = ['Ongoing', 'Auditing', 'Finished']
+      const index = this.PageCur
       /* global uni:false */
       uni.navigateTo({
-        url: '/pages/Course/CourseInfo?id=' + id,
+        url: '/pages/Course/' + pagePath[index] + 'Course?id=' + id,
         fail: function () {
-          console.log('fail to navigate')
+          console.log('fail to navigate to ' + '/pages/Course/' + pagePath[index] + 'Course?id=' + id)
+        },
+        success: function () {
+          console.log('succeed to navigate to ' + '/pages/Course/' + pagePath[index] + 'Course?id=' + id)
         }
       })
     }

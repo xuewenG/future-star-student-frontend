@@ -12,19 +12,16 @@
     }, {
         "path": "pages/Course/Course",
         "style": {}
-    }, {
-        "path": "pages/Course/CourseInfo",
-        "style": {}
     },{
-        "path" : "pages/Course/ongoingCourse",
+        "path" : "pages/Course/OngoingCourse",
         "style" : {}
     }
         ,{
-            "path" : "pages/Course/auditingCourse",
+            "path" : "pages/Course/AuditingCourse",
             "style" : {}
         }
         ,{
-            "path" : "pages/Course/finishedCourse",
+            "path" : "pages/Course/FinishedCourse",
             "style" : {}
         }
     ],
