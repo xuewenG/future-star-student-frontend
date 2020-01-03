@@ -12,10 +12,19 @@
     }, {
         "path": "pages/Course/Course",
         "style": {}
-    }, {
-      "path": "pages/Course/CourseInfo",
-      "style": {}
-    }],
+    },{
+        "path" : "pages/Course/OngoingCourse",
+        "style" : {}
+    }
+        ,{
+            "path" : "pages/Course/AuditingCourse",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/Course/FinishedCourse",
+            "style" : {}
+        }
+    ],
 	"globalStyle": {
 		"navigationStyle": "custom",
 		"navigationBarTextStyle": "black",

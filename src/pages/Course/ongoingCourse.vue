@@ -100,9 +100,6 @@
           </view>
         </uni-collapse-item>
       </uni-collapse>
-      <!-- <view class="text-sm text-gray">11-10-25</view>
-      <view>初心课</view>
-      <button class="">查看</button> -->
     </view>
   </view>
 </template>
