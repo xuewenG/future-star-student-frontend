@@ -9,59 +9,23 @@
       v-if="pageCur===0"
       :course-data="courseData"
     />
-    <view v-if="pageCur===1">
-      <uni-collapse
-        v-for="(item,index) in courseItemList"
-        :key="index"
-        :accordion="true"
-      >
-        <uni-collapse-item
-          :show-animation="true"
-          :title="item.title"
-        >
-          <view class="cu-list menu">
-            <view class="cu-item">
-              <button class="cu-btn content">
-                <text class="cuIcon-write text-gray" />
-                <text class="text-gray">
-                  速记
-                </text>
-              </button>
-            </view>
-            <view class="cu-item">
-              <button class="cu-btn content">
-                <text class="cuIcon-text text-gray" />
-                <text class="text-gray">
-                  课件
-                </text>
-              </button>
-            </view>
-            <view class="cu-item">
-              <button class="cu-btn content">
-                <text class="cuIcon-video text-gray" />
-                <text class="text-gray">
-                  视频
-                </text>
-              </button>
-            </view>
-          </view>
-        </uni-collapse-item>
-      </uni-collapse>
-    </view>
+    <course-resource
+      v-if="pageCur===1"
+      :course-resource-list="courseItemList"
+    />
   </view>
 </template>
 <script>
 import TitleBar from '@/components/TitleBar.vue'
 import TopNav from '@/components/TopNav.vue'
-import { uniCollapse, uniCollapseItem } from '@dcloudio/uni-ui'
 import CourseInfo from '@/components/CourseInfo.vue'
+import CourseResource from '@/components/CourseResource.vue'
 export default {
   components: {
     TopNav,
     TitleBar,
-    uniCollapse,
-    uniCollapseItem,
-    CourseInfo
+    CourseInfo,
+    CourseResource
   },
   data () {
     return {
