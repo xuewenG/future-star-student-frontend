@@ -41,7 +41,30 @@
         v-for="(item, index) in ongoingActivityList"
         :key="index"
         class="cu-item arrow"
-        @tap="showCampInfo"
+        @tap="toActivityInfo(item.id)"
+      >
+        <view class="content">
+          <image
+            :src="item.url"
+            class="png"
+            mode="aspectFit"
+          />
+          <text
+            class="text-grey"
+            v-text="item.name"
+          />
+        </view>
+      </view>
+    </view>
+    <view
+      v-if="TabCur===1"
+      class="cu-list menu sm-border card-menu margin-top"
+    >
+      <view
+        v-for="(item, index) in awaitActivityList"
+        :key="index"
+        class="cu-item arrow"
+        @tap="toActivityInfo(item.id)"
       >
         <view class="content">
           <image
@@ -103,6 +126,21 @@ export default {
   methods: {
     getCurrentList (i) {
       this.TabCur = i
+    },
+    toActivityInfo (id) {
+      console.log('No navigator yet')
+      // const pagePath = ['Ongoing', 'Auditing', 'Finished']
+      // const index = this.PageCur
+      // /* global uni:false */
+      // uni.navigateTo({
+      //   url: '/pages/Course/' + pagePath[index] + 'Course?id=' + id,
+      //   fail: function () {
+      //     console.log('fail to navigate to ' + '/pages/Course/' + pagePath[index] + 'Course?id=' + id)
+      //   },
+      //   success: function () {
+      //     console.log('succeed to navigate to ' + '/pages/Course/' + pagePath[index] + 'Course?id=' + id)
+      //   }
+      // })
     }
   }
 }
