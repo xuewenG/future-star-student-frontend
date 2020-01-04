@@ -8,8 +8,11 @@
       v-if="TabCur===0"
     />
     <finished-activity
-      top-nav="32"
       v-if="TabCur===1"
+      top-nav="32"
+    />
+    <my-activity
+      v-if="TabCur===2"
     />
   </view>
 </template>
@@ -18,11 +21,13 @@
 import TopNav from '@/components/TopNav.vue'
 import HotActivity from '@/pages/Activity/HotActivity.vue'
 import FinishedActivity from '@/pages/Activity/FinishedActivity.vue'
+import MyActivity from '@/pages/Activity/MyActivity.vue'
 export default {
   components: {
     TopNav,
     HotActivity,
-    FinishedActivity
+    FinishedActivity,
+    MyActivity
   },
   data () {
     return {
