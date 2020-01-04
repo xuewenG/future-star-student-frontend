@@ -1,7 +1,7 @@
 <template>
   <view>
     <view
-      class="cu-list menu sm-border card-menu"
+      class="cu-list menu sm-border card-menu margin-top"
     >
       <view
         v-for="(item, index) in list"

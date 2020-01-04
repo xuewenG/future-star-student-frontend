@@ -33,29 +33,14 @@
       :nav-list="navigatorList"
       @cur-changed="getCurrentList"
     />
-    <view
+    <item-list
       v-if="TabCur===0"
-      class="cu-list menu sm-border card-menu margin-top"
-    >
-      <view
-        v-for="(item, index) in ongoingActivityList"
-        :key="index"
-        class="cu-item arrow"
-        @tap="toActivityInfo(item.id)"
-      >
-        <view class="content">
-          <image
-            :src="item.url"
-            class="png"
-            mode="aspectFit"
-          />
-          <text
-            class="text-grey"
-            v-text="item.name"
-          />
-        </view>
-      </view>
-    </view>
+      :list="ongoingActivityList"
+    />
+    <item-list
+      v-if="TabCur===0"
+      :list="ongoingActivityList"
+    />
     <view
       v-if="TabCur===1"
       class="cu-list menu sm-border card-menu margin-top"
@@ -84,9 +69,11 @@
 
 <script>
 import TopNav from '@/components/TopNav.vue'
+import ItemList from '@/components/ItemList.vue'
 export default {
   components: {
-    TopNav
+    TopNav,
+    ItemList
   },
   data () {
     return {
@@ -99,26 +86,38 @@ export default {
       }],
       ongoingActivityList: [
         {
+          id: 1,
           name: '热门活动1',
-          url: '../../static/EdStarsLogo.png'
+          img: '../../static/EdStarsLogo.png',
+          intro: ''
         }, {
+          id: 2,
           name: '热门活动2',
-          url: '../../static/EdStarsLogo.png'
+          img: '../../static/EdStarsLogo.png',
+          intro: ''
         }, {
+          id: 3,
           name: '热门活动3',
-          url: '../../static/EdStarsLogo.png'
+          img: '../../static/EdStarsLogo.png',
+          intro: ''
         }
       ],
       awaitActivityList: [
         {
+          id: 4,
           name: '即将上线的活动1',
-          url: '../../static/EdStarsLogo.png'
+          img: '../../static/EdStarsLogo.png',
+          intro: ''
         }, {
+          id: 5,
           name: '即将上线的活动2',
-          url: '../../static/EdStarsLogo.png'
+          img: '../../static/EdStarsLogo.png',
+          intro: ''
         }, {
+          id: 6,
           name: '即将上线的活动3',
-          url: '../../static/EdStarsLogo.png'
+          img: '../../static/EdStarsLogo.png',
+          intro: ''
         }
       ]
     }
