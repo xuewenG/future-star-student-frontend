@@ -25,32 +25,6 @@
         :list="finishedActivityList"
       />
     </view>
-    <!-- <view
-      class="cu-list menu sm-border card-menu"
-      :style="[{marginTop: topNav+16+'px'}]"
-    >
-      <view
-        v-for="(item, index) in finishedActivityList"
-        :key="index"
-        class="cu-item arrow"
-        @tap="toActivityInfo(item.id)"
-      >
-        <view
-          class="cu-avatar round xl"
-          :style="'background-image:url('+item.img+');'"
-        />
-        <view class="content flex-sub">
-          <view v-text="item.name" />
-          <view
-            v-if="sub !== null"
-            class="text-gray text-sm flex justify-between"
-            v-text="item.intro"
-          >
-            暂无更多信息
-          </view>
-        </view>
-      </view>
-    </view> -->
   </view>
 </template>
 
