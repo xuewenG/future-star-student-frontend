@@ -34,39 +34,39 @@ export default {
           img: '/static/logo.png',
           name: '正在进行的课程一',
           intro: '',
-          url: '@/pages/Course/OngoingCourse'
+          url: '/pages/Course/OngoingCourse'
         }, {
           id: 1,
           img: '/static/logo.png',
           name: '正在进行的课程二',
           intro: '',
-          url: '@/pages/Course/OngoingCourse'
+          url: '/pages/Course/OngoingCourse'
         }, {
           id: 2,
           img: '/static/logo.png',
           name: '正在进行的课程三',
           intro: '',
-          url: '@/pages/Course/OngoingCourse'
+          url: '/pages/Course/OngoingCourse'
         }],
         [{
           id: 3,
           img: '/static/logo.png',
           name: '正在审核的课程一',
           intro: '',
-          url: '@/pages/Course/AuditingCourse'
+          url: '/pages/Course/AuditingCourse'
         }, {
           id: 4,
           img: '/static/logo.png',
           name: '正在审核的课程二',
           intro: '',
-          url: '@/pages/Course/AuditingCourse'
+          url: '/pages/Course/AuditingCourse'
         }],
         [{
           id: 5,
           img: '/static/logo.png',
           name: '已经结束的课程一',
           intro: '',
-          url: '@/pages/Course/FinishedCourse'
+          url: '/pages/Course/FinishedCourse'
         }]
       ]
     }
