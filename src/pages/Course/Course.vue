@@ -64,7 +64,9 @@ export default {
         [{
           id: 5,
           img: '/static/logo.png',
-          name: '已经结束的课程一'
+          name: '已经结束的课程一',
+          intro: '',
+          url: '@/pages/Course/FinishedCourse'
         }]
       ]
     }
@@ -76,20 +78,6 @@ export default {
     getCurrentList (i) {
       this.PageCur = i
       this.currentList = this.courseItemList[i]
-    },
-    toCourseInfo (id) {
-      const pagePath = ['Ongoing', 'Auditing', 'Finished']
-      const index = this.PageCur
-      /* global uni:false */
-      uni.navigateTo({
-        url: '/pages/Course/' + pagePath[index] + 'Course?id=' + id,
-        fail: function () {
-          console.log('fail to navigate to ' + '/pages/Course/' + pagePath[index] + 'Course?id=' + id)
-        },
-        success: function () {
-          console.log('succeed to navigate to ' + '/pages/Course/' + pagePath[index] + 'Course?id=' + id)
-        }
-      })
     }
   }
 }
