@@ -3,7 +3,7 @@
     <view
       v-for="(item,index) in navList"
       :key="index"
-      class="cu-item flex-sub"
+      class="nav-tap cu-item flex-sub"
       :class="index==TabCur?'text-green cur':''"
       :data-id="index"
       @tap="tabSelect"
@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     tabSelect (e) {
-      this.TabCur = e.currentTarget.dataset.id
+      this.TabCur = parseInt(e.currentTarget.dataset.id)
       // this.scrollLeft = (e.currentTarget.dataset.id - 1) * 60
       // this.getCurrentList(e.currentTarget.dataset.id)
       this.$emit('cur-changed', e.currentTarget.dataset.id)
