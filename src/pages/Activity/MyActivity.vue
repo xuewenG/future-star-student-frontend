@@ -12,6 +12,15 @@
           :list="ongoingActivityList"
         />
       </uni-collapse-item>
+
+      <uni-collapse-item
+        :show-animation="true"
+        title="已经结束"
+      >
+        <item-list
+          :list="finishedActivityList"
+        />
+      </uni-collapse-item>
     </uni-collapse>
   </view>
 </template>
@@ -43,6 +52,24 @@ export default {
           img: '../static/EdStarsLogo.png',
           name: '正在进行的校友活动3',
           intro: '正在进行'
+        }
+      ],
+      finishedActivityList: [
+        {
+          id: 110,
+          img: '../static/EdStarsLogo.png',
+          name: '已经结束的校友活动1',
+          intro: '已经结束'
+        }, {
+          id: 220,
+          img: '../static/EdStarsLogo.png',
+          name: '已经结束的校友活动2',
+          intro: '已经结束'
+        }, {
+          id: 330,
+          img: '../static/EdStarsLogo.png',
+          name: '已经结束的校友活动3',
+          intro: '已经结束'
         }
       ]
     }
