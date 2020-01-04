@@ -8,7 +8,10 @@
         :nav-list="navigatorList"
         @cur-changed="getCurrentList"
       />
-      <view class="cu-list menu">
+      <item-list
+        :list="currentList"
+      />
+      <!-- <view class="cu-list menu">
         <view
           v-for="(item, index) in currentList"
           :key="index"
@@ -28,48 +31,56 @@
             />
           </view>
         </view>
-      </view>
+      </view> -->
     </scroll-view>
   </view>
 </template>
 
 <script>
 import TopNav from '@/components/TopNav.vue'
+import ItemList from '@/components/ItemList.vue'
 export default {
   components: {
-    TopNav
+    TopNav,
+    ItemList
   },
   data () {
     return {
       TabCur: 0,
       navigatorList: ['正在进行', '审核中', '往期课程'],
-      currentList: [{ avatar: '/static/logo.png', name: '没刷新啊' }],
+      currentList: [{ id: 0, img: '/static/logo.png', name: '没刷新啊' }],
       courseItemList: [
         [{
           id: 0,
-          avatar: '/static/logo.png',
-          name: '正在进行的课程一'
+          img: '/static/logo.png',
+          name: '正在进行的课程一',
+          intro: '',
+          url: '@/pages/Course/OngoingCourse'
         }, {
           id: 1,
-          avatar: '/static/logo.png',
-          name: '正在进行的课程二'
+          img: '/static/logo.png',
+          name: '正在进行的课程二',
+          intro: '',
+          url: '@/pages/Course/OngoingCourse'
         }, {
           id: 2,
-          avatar: '/static/logo.png',
-          name: '正在进行的课程三'
+          img: '/static/logo.png',
+          name: '正在进行的课程三',
+          intro: '',
+          url: '@/pages/Course/OngoingCourse'
         }],
         [{
           id: 3,
-          avatar: '/static/logo.png',
+          img: '/static/logo.png',
           name: '正在审核的课程一'
         }, {
           id: 4,
-          avatar: '/static/logo.png',
+          img: '/static/logo.png',
           name: '正在审核的课程二'
         }],
         [{
           id: 5,
-          avatar: '/static/logo.png',
+          img: '/static/logo.png',
           name: '已经结束的课程一'
         }]
       ]

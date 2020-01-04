@@ -10,7 +10,7 @@
         @tap="ItemNavigateTo(index)"
       >
         <view
-          class="cu-avatar round xl"
+          class="cu-avatar round lg"
           :style="'background-image:url('+item.img+');'"
         />
         <view class="margin-left content flex-sub">
