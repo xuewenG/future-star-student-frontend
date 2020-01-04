@@ -7,16 +7,21 @@
     <hot-activity
       v-if="TabCur===0"
     />
+    <finished-activity
+      v-if="TabCur===1"
+    />
   </view>
 </template>
 
 <script>
 import TopNav from '@/components/TopNav.vue'
 import HotActivity from '@/pages/Activity/HotActivity.vue'
+import FinishedActivity from '@/pages/Activity/FinishedActivity.vue'
 export default {
   components: {
     TopNav,
-    HotActivity
+    HotActivity,
+    FinishedActivity
   },
   data () {
     return {
@@ -29,7 +34,7 @@ export default {
   },
   methods: {
     getCurrentList (i) {
-      this.PageCur = i
+      this.TabCur = i
     }
   }
 }
