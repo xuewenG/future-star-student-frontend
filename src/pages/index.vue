@@ -10,22 +10,10 @@
     <schoolmate v-if="PageCur==='schoolmate'" />
     <activity v-if="PageCur==='activity'" />
     <about v-if="PageCur==='about'" />
-    <view class="cu-bar tabbar bg-white shadow foot">
-      <view
-        v-for="(icon, index) in iconList"
-        :key="index"
-        class="action"
-        :data-cur="icon.english"
-        @click="NavChange"
-      >
-        <view class="cuIcon-cu-image">
-          <image :src="'/static/tabbar/' + icon.english + [PageCur===icon.english?'_cur':''] + '.png'" />
-        </view>
-        <view :class="PageCur===icon.english?'text-green':'text-gray'">
-          {{ icon.chinese }}
-        </view>
-      </view>
-    </view>
+    <bottom-bar
+      :module-list="moduleList"
+      @cur-changed="getCurPage"
+    />
   </view>
 </template>
 
@@ -35,40 +23,45 @@ import CampItem from '@/components/CampItem.vue'
 import Schoolmate from '@/pages/Schoolmate/Schoolmate.vue'
 import Activity from '@/pages/Activity/Activity.vue'
 import About from '@/pages/About/About.vue'
+import BottomBar from '@/components/BottomBar.vue'
 export default {
   components: {
     CampItem,
     Course,
     Schoolmate,
     Activity,
-    About
+    About,
+    BottomBar
   },
   data () {
     return {
-      PageCur: 'apply',
-      iconList: [
+      PageCur: '',
+      moduleList: [
         {
-          english: 'apply',
-          chinese: '报名'
+          key: 'apply',
+          moduleName: '报名'
         }, {
-          english: 'course',
-          chinese: '班课'
+          key: 'course',
+          moduleName: '班课'
         }, {
-          english: 'schoolmate',
-          chinese: '校友'
+          key: 'schoolmate',
+          moduleName: '校友'
         }, {
-          english: 'activity',
-          chinese: '活动'
+          key: 'activity',
+          moduleName: '活动'
         }, {
-          english: 'about',
-          chinese: '我的'
+          key: 'about',
+          moduleName: '我的'
         }
       ]
     }
   },
+  mounted () {
+    this.getCurPage('apply')
+  },
   methods: {
-    NavChange: function (e) {
-      this.PageCur = e.currentTarget.dataset.cur
+    getCurPage (cur) {
+      this.PageCur = cur
     }
   }
 }
