@@ -11,27 +11,6 @@
       <item-list
         :list="currentList"
       />
-      <!-- <view class="cu-list menu">
-        <view
-          v-for="(item, index) in currentList"
-          :key="index"
-          class="cu-item arrow"
-        >
-          <view
-            class="content"
-            @tap="toCourseInfo(item.id)"
-          >
-            <image
-              :src="item.avatar"
-              class="png xl"
-            />
-            <text
-              class="text-grey"
-              v-text="item.name"
-            />
-          </view>
-        </view>
-      </view> -->
     </scroll-view>
   </view>
 </template>
@@ -72,11 +51,15 @@ export default {
         [{
           id: 3,
           img: '/static/logo.png',
-          name: '正在审核的课程一'
+          name: '正在审核的课程一',
+          intro: '',
+          url: '@/pages/Course/AuditingCourse'
         }, {
           id: 4,
           img: '/static/logo.png',
-          name: '正在审核的课程二'
+          name: '正在审核的课程二',
+          intro: '',
+          url: '@/pages/Course/AuditingCourse'
         }],
         [{
           id: 5,
