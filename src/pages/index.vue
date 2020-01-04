@@ -7,6 +7,7 @@
     </cu-custom>
     <camp-item v-if="PageCur==='apply'" />
     <Course v-if="PageCur==='course'" />
+    <Schoolmate v-if="PageCur==='schoolmate'" />
     <view class="cu-bar tabbar bg-white shadow foot">
       <view
         v-for="(icon, index) in iconList"
@@ -23,7 +24,6 @@
         </view>
       </view>
     </view>
-    <Schoolmate v-if="PageCur==='schoolmate'" />
   </view>
 </template>
 

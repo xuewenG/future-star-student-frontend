@@ -1,5 +1,24 @@
 <template>
   <view>
+    <view
+      class="cu-bar bg-white search fixed"
+      :style="[{top:customBar + 'px'}]"
+    >
+      <view class="search-form round">
+        <text class="cuIcon-search" />
+        <input
+          type="text"
+          placeholder="输入搜索的关键词"
+          confirm-type="search"
+        >
+      </view>
+      <view class="action">
+        <button class="cu-btn bg-gradual-green shadow-blur round">
+          搜索
+        </button>
+      </view>
+    </view>
+
     <scroll-view
       scroll-y
       class="indexes"
@@ -166,10 +185,8 @@ export default {
       that.barTop = res.top
     }).exec()
   },
-
   methods: {
     getSchoolmateInfo (id) {
-
       // uni.navigateTo({
       //   url: '../pages/Schoolmate/SchoolmateInfo?schoolmateId=' + id,
       //   success: (res) => {
@@ -209,10 +226,6 @@ export default {
 </script>
 
 <style>
-page {
-  padding-top: 100upx;
-}
-
 .indexes {
   position: relative;
 }
