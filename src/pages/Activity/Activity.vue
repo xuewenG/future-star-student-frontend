@@ -8,6 +8,7 @@
       v-if="TabCur===0"
     />
     <finished-activity
+      top-nav="32"
       v-if="TabCur===1"
     />
   </view>
