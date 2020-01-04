@@ -29,11 +29,13 @@
     }, {
         "path" : "pages/Activity/FinishedActivity",
         "style" : {}
+    }, {
+        "path" : "pages/Activity/MyActivity",
+        "style" : {}
+    }, {
+        "path" : "pages/About/About",
+        "style" : {}
     }
-        ,{
-            "path" : "pages/Activity/MyActivity",
-            "style" : {}
-        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom",
