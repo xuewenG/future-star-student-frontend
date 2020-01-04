@@ -26,6 +26,9 @@
     }, {
         "path" : "pages/Activity/HotActivity",
         "style" : {}
+    }, {
+        "path" : "pages/Activity/FinishedActivity",
+        "style" : {}
     }
     ],
 	"globalStyle": {
