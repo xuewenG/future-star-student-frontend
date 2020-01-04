@@ -38,32 +38,9 @@
       :list="ongoingActivityList"
     />
     <item-list
-      v-if="TabCur===0"
-      :list="ongoingActivityList"
-    />
-    <view
       v-if="TabCur===1"
-      class="cu-list menu sm-border card-menu margin-top"
-    >
-      <view
-        v-for="(item, index) in awaitActivityList"
-        :key="index"
-        class="cu-item arrow"
-        @tap="toActivityInfo(item.id)"
-      >
-        <view class="content">
-          <image
-            :src="item.url"
-            class="png"
-            mode="aspectFit"
-          />
-          <text
-            class="text-grey"
-            v-text="item.name"
-          />
-        </view>
-      </view>
-    </view>
+      :list="awaitActivityList"
+    />
   </view>
 </template>
 
@@ -89,17 +66,20 @@ export default {
           id: 1,
           name: '热门活动1',
           img: '../../static/EdStarsLogo.png',
-          intro: ''
+          intro: '',
+          url: '@/pages/Activity/ActivityInfo'
         }, {
           id: 2,
           name: '热门活动2',
           img: '../../static/EdStarsLogo.png',
-          intro: ''
+          intro: '',
+          url: '@/pages/Activity/ActivityInfo'
         }, {
           id: 3,
           name: '热门活动3',
           img: '../../static/EdStarsLogo.png',
-          intro: ''
+          intro: '',
+          url: '@/pages/Activity/ActivityInfo'
         }
       ],
       awaitActivityList: [
@@ -107,17 +87,20 @@ export default {
           id: 4,
           name: '即将上线的活动1',
           img: '../../static/EdStarsLogo.png',
-          intro: ''
+          intro: '',
+          url: '@/pages/Activity/ActivityInfo'
         }, {
           id: 5,
           name: '即将上线的活动2',
           img: '../../static/EdStarsLogo.png',
-          intro: ''
+          intro: '',
+          url: '@/pages/Activity/ActivityInfo'
         }, {
           id: 6,
           name: '即将上线的活动3',
           img: '../../static/EdStarsLogo.png',
-          intro: ''
+          intro: '',
+          url: '@/pages/Activity/ActivityInfo'
         }
       ]
     }
