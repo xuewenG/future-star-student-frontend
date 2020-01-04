@@ -1,4 +1,4 @@
-；<template>
+<template>
   <view>
     <cu-custom bg-color="bg-white">
       <block slot="content">
