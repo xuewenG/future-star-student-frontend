@@ -1,4 +1,4 @@
-；<template>
+<template>
   <view>
     <cu-custom bg-color="bg-white">
       <block slot="content">
@@ -23,16 +23,19 @@
         </view>
       </view>
     </view>
+    <Schoolmate v-if="PageCur==='schoolmate'" />
   </view>
 </template>
 
 <script>
 import Course from '@/pages/Course/Course.vue'
 import CampItem from '@/components/CampItem.vue'
+import Schoolmate from '@/pages/Schoolmate/Schoolmate.vue'
 export default {
   components: {
     CampItem,
-    Course
+    Course,
+    Schoolmate
   },
   data () {
     return {
