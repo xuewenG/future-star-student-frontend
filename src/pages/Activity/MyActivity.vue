@@ -41,17 +41,20 @@ export default {
           id: 111,
           img: '../static/EdStarsLogo.png',
           name: '正在进行的校友活动1',
-          intro: '正在进行'
+          intro: '正在进行',
+          url: '/pages/Activity/ActivityInfo'
         }, {
           id: 222,
           img: '../static/EdStarsLogo.png',
           name: '正在进行的校友活动2',
-          intro: '正在进行'
+          intro: '正在进行',
+          url: '/pages/Activity/ActivityInfo'
         }, {
           id: 333,
           img: '../static/EdStarsLogo.png',
           name: '正在进行的校友活动3',
-          intro: '正在进行'
+          intro: '正在进行',
+          url: '/pages/Activity/ActivityInfo'
         }
       ],
       finishedActivityList: [
@@ -59,17 +62,20 @@ export default {
           id: 110,
           img: '../static/EdStarsLogo.png',
           name: '已经结束的校友活动1',
-          intro: '已经结束'
+          intro: '已经结束',
+          url: '/pages/Activity/ActivityInfo'
         }, {
           id: 220,
           img: '../static/EdStarsLogo.png',
           name: '已经结束的校友活动2',
-          intro: '已经结束'
+          intro: '已经结束',
+          url: '/pages/Activity/ActivityInfo'
         }, {
           id: 330,
           img: '../static/EdStarsLogo.png',
           name: '已经结束的校友活动3',
-          intro: '已经结束'
+          intro: '已经结束',
+          url: '/pages/Activity/ActivityInfo'
         }
       ]
     }

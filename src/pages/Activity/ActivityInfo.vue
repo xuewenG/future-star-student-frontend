@@ -3,21 +3,36 @@
     <title-bar
       title="活动详情"
     />
-    <cover-image src="/static/BasicsBg.png" />
+    <cover-image src="/static/EdStarsQualityClass.png" />
+
     <view class="cu-bar bg-white solid-bottom">
       <view class="action">
         <text class="cuIcon-title text-green" /> 活动介绍
       </view>
     </view>
     <view class="text-content padding bg-white text-sm">
-      报名时间：{{ activityData.applyTime }}<br>
-      活动时间：{{ activityData.activityTime }}
+      主办单位：{{ activityData.host }}<br>
+      活动时间：{{ activityData.activityTime }}<br>
+      活动地点：{{ activityData.activityPlace }}
     </view>
     <view
       class="text-content padding bg-white"
-      v-text="activityData.intro"
+      v-text="activityData.detail"
     >
       暂无活动介绍
+    </view>
+
+    <view class="cu-bar bg-white solid-bottom">
+      <view class="action">
+        <text class="cuIcon-title text-green" /> 报名须知
+      </view>
+    </view>
+    <view class="text-content padding bg-white text-sm">
+      报名开始时间：{{ activityData.activityTime }}<br>
+      报名截止时间：{{ activityData.activityPlace }}<br>
+      面向人群：{{ activityData.crowdOriented }}<br>
+      报名人数：{{ activityData.applicantsNumber }}/{{ activityData.applicantsLimit }}<br>
+      收费标准：{{ activityData.charge }}
     </view>
   </view>
 </template>
@@ -31,9 +46,16 @@ export default {
   data () {
     return {
       activityData: {
-        applyTime: '2019年12月25日-2020年1月12日',
+        host: '霸都国家飞禽繁育与生态研究中心',
         activityTime: '2020年1月23日',
-        intro: '这是一次校友活动'
+        activityPlace: '安徽省合肥市天鹅湖国际大酒店',
+        detail: '这是一次校友活动',
+        applyBeginTime: '2019年12月25日',
+        applyEndTime: '2020年1月12日',
+        crowdOriented: '第三、四期未来之星创新班学员',
+        applicantsNumber: 36,
+        applicantsLimit: 50,
+        charge: '350元/人'
       }
     }
   }
