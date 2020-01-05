@@ -34,6 +34,16 @@
       报名人数：{{ activityData.applicantsNumber }}/{{ activityData.applicantsLimit }}<br>
       收费标准：{{ activityData.charge }}
     </view>
+
+    <view class="padding flex flex-direction">
+      <button
+        class="cu-btn bg-green lg"
+        :disabled="!canApply"
+        v-text="applyButtonText"
+      >
+        加载中...
+      </button>
+    </view>
   </view>
 </template>
 
@@ -53,10 +63,33 @@ export default {
         applyBeginTime: '2019年12月25日',
         applyEndTime: '2020年1月12日',
         crowdOriented: '第三、四期未来之星创新班学员',
-        applicantsNumber: 36,
+        applicantsNumber: 42,
         applicantsLimit: 50,
         charge: '350元/人'
+      },
+      canApply: true,
+      applyButtonText: '现在报名'
+    }
+  },
+  methods: {
+    getActivityType (id) {
+      return (id-1)/3
+    }
+  },
+  onLoad (option) {
+    if(this.getActivityType(option.id) === 0){
+      this.canApply = this.activityData.applicantsNumber < this.activityData.applicantsLimit
+      if(!this.canApply){
+        this.applyButtonText = '人数已满'
       }
+    }
+    else if(this.getActivityType(option.id) === 1){
+      this.canApply = false
+      this.applyButtonText = '报名尚未开始'
+    }
+    else if(this.getActivityType(option.id) === 2){
+      this.canApply = false
+      this.applyButtonText = '报名已结束'
     }
   }
 }
