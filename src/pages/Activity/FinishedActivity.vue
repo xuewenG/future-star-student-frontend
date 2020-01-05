@@ -46,19 +46,19 @@ export default {
       finishedActivityList: [{
         id: 7,
         name: '往期活动1',
-        img: '../../static/EdStarsLogo.png',
+        img: '/static/EdStarsLogo.png',
         intro: '2019年12月11日',
         url: '/pages/Activity/ActivityInfo'
       }, {
         id: 8,
         name: '往期活动2',
-        img: '../../static/EdStarsLogo.png',
+        img: '/static/EdStarsLogo.png',
         intro: '2019年6月8日',
         url: '/pages/Activity/ActivityInfo'
       }, {
         id: 9,
         name: '往期活动3',
-        img: '../../static/EdStarsLogo.png',
+        img: '/static/EdStarsLogo.png',
         intro: '2019年3月25日',
         url: '/pages/Activity/ActivityInfo'
       }

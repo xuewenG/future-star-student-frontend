@@ -15,7 +15,7 @@
         <image
           v-if="item.type=='image'"
           :src="item.url"
-          mode="aspectFill"
+          mode="aspectFit"
         />
         <video
           v-if="item.type=='video'"
@@ -59,7 +59,15 @@ export default {
       swiperList: [{
         id: 0,
         type: 'image',
-        url: '../../static/EdStarsLogo.png'
+        url: '/static/EdStarsQualityClass.png'
+      }, {
+        id: 1,
+        type: 'image',
+        url: '/static/EdStarsQualityClass.png'
+      }, {
+        id: 2,
+        type: 'image',
+        url: '/static/EdStarsQualityClass.png'
       }],
       ongoingActivityList: [
         {
