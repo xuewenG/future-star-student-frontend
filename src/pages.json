@@ -33,6 +33,9 @@
         "path" : "pages/Activity/MyActivity",
         "style" : {}
     }, {
+        "path" : "pages/Activity/ActivityInfo",
+        "style" : {}
+    }, {
         "path" : "pages/About/About",
         "style" : {}
     }
