@@ -73,21 +73,19 @@ export default {
   },
   methods: {
     getActivityType (id) {
-      return (id-1)/3
+      return (id - 1) / 3
     }
   },
   onLoad (option) {
-    if(this.getActivityType(option.id) === 0){
+    if (this.getActivityType(option.id) === 0) {
       this.canApply = this.activityData.applicantsNumber < this.activityData.applicantsLimit
-      if(!this.canApply){
+      if (!this.canApply) {
         this.applyButtonText = '人数已满'
       }
-    }
-    else if(this.getActivityType(option.id) === 1){
+    } else if (this.getActivityType(option.id) === 1) {
       this.canApply = false
       this.applyButtonText = '报名尚未开始'
-    }
-    else if(this.getActivityType(option.id) === 2){
+    } else if (this.getActivityType(option.id) === 2) {
       this.canApply = false
       this.applyButtonText = '报名已结束'
     }
