@@ -36,6 +36,12 @@
         "path" : "pages/Activity/ActivityInfo",
         "style" : {}
     }, {
+        "path" : "pages/Schoolmate/Schoolmate",
+        "style" : {}
+    }, {
+        "path" : "pages/Schoolmate/SchoolmateInfo",
+        "style" : {}
+    }, {
         "path" : "pages/About/About",
         "style" : {}
     }
