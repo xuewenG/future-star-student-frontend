@@ -21,5 +21,15 @@ module.exports = {
     'vue'
   ],
   rules: {
-  }
+  },
+  overrides: [
+    {
+      files: [
+        '**/tests/**/*.spec.{j,t}s?(x)'
+      ],
+      env: {
+        jest: true
+      }
+    }
+  ]
 }
