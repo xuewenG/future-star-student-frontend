@@ -18,4 +18,15 @@ describe('TopNav', () => {
   it('is a vue instance', () => {
     expect(wrapper.isVueInstance()).toBeTruthy()
   })
+
+  // 页面元素审查
+  it('has the root view', () => {
+    expect(wrapper.contains('view')).toBe(true)
+  })
+  it('has the NavTabs', () => {
+    expect(wrapper.contains('.nav-tap')).toBe(true)
+    const NavTabs = wrapper.findAll('.nav-tap')
+    expect(NavTabs.at(0).text()).toBe('测试标签页1')
+    expect(NavTabs.at(1).text()).toBe('测试标签页2')
+  })
 })
