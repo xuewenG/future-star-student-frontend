@@ -19,7 +19,7 @@ describe('TopNav', () => {
     expect(wrapper.isVueInstance()).toBeTruthy()
   })
 
-  // 页面元素审查
+  // 页面元素审查测试
   it('has the root view', () => {
     expect(wrapper.contains('view')).toBe(true)
   })
@@ -28,5 +28,15 @@ describe('TopNav', () => {
     const NavTabs = wrapper.findAll('.nav-tap')
     expect(NavTabs.at(0).text()).toBe('测试标签页1')
     expect(NavTabs.at(1).text()).toBe('测试标签页2')
+  })
+
+  // tab事件交互响应测试
+  it('tap should change the tabcur', () => {
+    expect(wrapper.vm.TabCur).toBe(0)
+    console.log(wrapper.vm.TabCur)
+    const NavTabs = wrapper.findAll('.nav-tap')
+    NavTabs.at(1).trigger('tap')
+    console.log(wrapper.vm.TabCur)
+    expect(wrapper.vm.TabCur).toBe(1)
   })
 })
