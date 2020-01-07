@@ -33,10 +33,8 @@ describe('TopNav', () => {
   // tab事件交互响应测试
   it('tap should change the tabcur', () => {
     expect(wrapper.vm.TabCur).toBe(0)
-    console.log(wrapper.vm.TabCur)
     const NavTabs = wrapper.findAll('.nav-tap')
     NavTabs.at(1).trigger('tap')
-    console.log(wrapper.vm.TabCur)
     expect(wrapper.vm.TabCur).toBe(1)
   })
 })
