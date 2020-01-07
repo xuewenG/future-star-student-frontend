@@ -34,4 +34,9 @@ describe('ItemList', () => {
   it('is a vue instance', () => {
     expect(wrapper.isVueInstance()).toBeTruthy()
   })
+
+  // 页面元素审查测试
+  it('has <view> as the number of props list', () => {
+    expect(wrapper.contains('view')).toBe(true)
+  })
 })
