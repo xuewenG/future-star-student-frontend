@@ -18,14 +18,17 @@
       >
         <view class="swiper-item">
           <image
-            :src="item.img"
+            :src="item.swiperImg"
             mode="aspectFill"
           />
         </view>
       </swiper-item>
     </swiper>
 
-    <view class="cu-list menu sm-border card-menu margin-top">
+    <item-list
+      :list="campList"
+    />
+    <!-- <view class="cu-list menu sm-border card-menu margin-top">
       <view
         v-for="(campItem, index) in campList"
         :key="index"
@@ -40,50 +43,52 @@
           <view v-text="campItem.intro" />
         </view>
       </view>
-    </view>
+    </view> -->
   </view>
 </template>
 
 <script>
+import ItemList from '@/components/ItemList.vue'
 export default {
-  name: 'CampList',
+  components: {
+    ItemList
+  },
   data () {
     return {
       campList: [{
         id: 0,
         type: 'image',
-        img: '/static/EdStarsApply.png',
-        campImg: '/static/EdStarsLogo.png',
-        name: '',
-        intro: '未来之星创新院第1期招生中',
+        swiperImg: '/static/EdStarsApply.png',
+        img: '/static/EdStarsLogo.png',
+        name: '未来之星创新院第1期招生中',
         url: '/pages/Apply/CampInfo'
       }, {
         id: 1,
         type: 'image',
-        img: '/static/EdStarsApply.png',
-        campImg: '/static/EdStarsLogo.png',
-        intro: '未来之星创新院第1期招生中',
+        swiperImg: '/static/EdStarsApply.png',
+        img: '/static/EdStarsLogo.png',
+        name: '未来之星创新院第1期招生中',
         url: '/pages/Apply/CampInfo'
       }, {
         id: 2,
         type: 'image',
-        img: '/static/EdStarsApply.png',
-        campImg: '/static/EdStarsLogo.png',
-        intro: '未来之星创新院第1期招生中',
+        swiperImg: '/static/EdStarsApply.png',
+        img: '/static/EdStarsLogo.png',
+        name: '未来之星创新院第1期招生中',
         url: '/pages/Apply/CampInfo'
       }, {
         id: 3,
         type: 'image',
-        img: '/static/EdStarsApply.png',
-        campImg: '/static/EdStarsLogo.png',
-        intro: '未来之星创新院第1期招生中',
+        swiperImg: '/static/EdStarsApply.png',
+        img: '/static/EdStarsLogo.png',
+        name: '未来之星创新院第1期招生中',
         url: '/pages/Apply/CampInfo'
       }, {
         id: 4,
         type: 'image',
-        img: '/static/EdStarsApply.png',
-        campImg: '/static/EdStarsLogo.png',
-        intro: '未来之星创新院第1期招生中',
+        swiperImg: '/static/EdStarsApply.png',
+        img: '/static/EdStarsLogo.png',
+        name: '未来之星创新院第1期招生中',
         url: '/pages/Apply/CampInfo'
       }],
       cardCur: 0
