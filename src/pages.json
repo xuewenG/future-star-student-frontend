@@ -16,6 +16,9 @@
         "path": "pages/Apply/ApplyForm",
         "style": {}
     }, {
+        "path": "pages/Apply/BaseInfoForm",
+        "style": {}
+    }, {
         "path": "pages/Course/Course",
         "style": {}
     }, {
@@ -66,7 +69,7 @@
             "van-dropdown-menu": "/static/vant/dropdown-menu/index",
             "van-dripdown-item": "/static/vant/dropdown-item/index"
           }
-        },
+        }
         }
     ],
 	"globalStyle": {
