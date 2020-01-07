@@ -7,10 +7,17 @@ before_script:
     - yarn
 stages:
     - lint
+    - test
 lint-job:
     stage: lint
     script:
         - yarn lint:style
         - yarn lint:script
+    tags:
+        - student-1
+test-job:
+    stage: test
+    script:
+        - yarn test
     tags:
         - student-1
