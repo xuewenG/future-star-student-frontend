@@ -1,5 +1,7 @@
 <template>
-  <SchoolmateList />
+  <view>
+    <SchoolmateList />
+  </view>
 </template>
 
 <script>
@@ -10,7 +12,6 @@ export default {
     SchoolmateList
   }
 }
-
 </script>
 
 <style>
