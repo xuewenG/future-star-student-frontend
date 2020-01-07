@@ -6,22 +6,26 @@
     <view
       class="cu-list menu sm-border"
     >
-      <view class="cu-item arrow content sm-border flex-sub"
+      <view
+        class="cu-item arrow content sm-border flex-sub"
         @tap="navigateTo('BasicInfo')"
       >
         基本信息
       </view>
-      <view class="cu-item arrow content sm-border flex-sub"
+      <view
+        class="cu-item arrow content sm-border flex-sub"
         @tap="navigateTo('BackgroundInfo')"
       >
         教育/工作背景
       </view>
-      <view class="cu-item arrow content sm-border flex-sub"
+      <view
+        class="cu-item arrow content sm-border flex-sub"
         @tap="navigateTo('CompanyInfo')"
       >
         公司/项目信息
       </view>
-      <view class="cu-item arrow content sm-border flex-sub"
+      <view
+        class="cu-item arrow content sm-border flex-sub"
         @tap="navigateTo('IntroducerInfo')"
       >
         介绍人信息
