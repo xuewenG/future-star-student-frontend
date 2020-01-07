@@ -64,57 +64,45 @@
             </view>
           </view>
 
-          <uni-collapse accordion="true">
-            <uni-collapse-item
+          <van-collapse
+            :value="classCollapse"
+            accordion
+            @change="classChange"
+          >
+            <van-collapse-item
               v-for="(course, courseIndex) in clazz.courseList"
               :key="courseIndex"
-              :show-animation="true"
-              :title="course.courseName + ' ' + course.courseType"
+              :name="index + '-' + courseIndex"
+              :title="course.courseName"
+              :value="course.courseType"
             >
-              <view class="cu-bar bg-white margin-top-sm">
+              <view class="cu-bar bg-white">
                 <view class="action">
                   <text class="cuIcon-titles text-orange" /> 课程安排
                 </view>
               </view>
-              <uni-list>
-                <uni-list-item
+              <van-cell-group>
+                <van-cell
                   v-for="(module, moduleIndex) in course.moduleList"
                   :key="moduleIndex"
-                  :show-arrow="false"
-                  :note="moduleIndex+1 + '.' + module"
+                  :title="moduleIndex+1 + '.' + module"
                 />
-              </uni-list>
-
-              <view class="cu-bar bg-white">
+              </van-cell-group>
+              <view class="cu-bar bg-white margin-top-sm">
                 <view class="action">
                   <text class="cuIcon-titles text-orange" /> 往期教师&拟邀讲师
                 </view>
               </view>
-              <uni-list>
-                <uni-list-item
+              <van-cell-group>
+                <van-cell
                   v-for="(lecturer, lecturerIndex) in course.lecturerList"
                   :key="lecturerIndex"
-                  :show-arrow="false"
-                  :thumb="lecturer.avatar"
-                  :note="lecturer.lecturerName + ' ' + lecturer.title"
+                  :icon="lecturer.avatar"
+                  :title="lecturer.lecturerName + ' ' + lecturer.title"
                 />
-              </uni-list>
-            </uni-collapse-item>
-          </uni-collapse>
-          <!-- <view class="cu-list menu sm-border card-menu margin-top">
-            <view
-              v-for="(course, courseIndex) in clazz.courseList"
-              :key="courseIndex"
-              class="cu-item arrow"
-              @tap="showClassInfo"
-            >
-              <view class="content">
-                <view class="cu-tag bg-cyan">
-                  {{ course.courseName + ' ' + course.courseType }}
-                </view>
-              </view>
-            </view>
-          </view> -->
+              </van-cell-group>
+            </van-collapse-item>
+          </van-collapse>
         </view>
       </view>
     </view>
@@ -131,15 +119,8 @@
 </template>
 
 <script>
-import { uniCollapse, uniCollapseItem, uniList, uniListItem } from '@dcloudio/uni-ui'
 export default {
   name: 'CampInfo',
-  components: {
-    uniCollapse,
-    uniCollapseItem,
-    uniList,
-    uniListItem
-  },
   data () {
     return {
       camp: {
@@ -312,10 +293,15 @@ export default {
             ]
           }
         ]
-      }
+      },
+      classCollapse: '1'
     }
   },
   methods: {
+    classChange (e) {
+      this.classCollapse = e.detail
+      console.log(e.detail)
+    },
     toApply (e) {
       console.log(e)
       /* global uni:false */
