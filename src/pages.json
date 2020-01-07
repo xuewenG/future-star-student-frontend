@@ -38,6 +38,9 @@
     }, {
         "path" : "pages/About/About",
         "style" : {}
+    }, {
+        "path": "pages/About/PersonalInfo",
+        "style": {}
     }
     ],
 	"globalStyle": {
