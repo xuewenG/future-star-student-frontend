@@ -23,7 +23,12 @@
         "style": {}
     }, {
         "path" : "pages/Course/OngoingCourse",
-        "style" : {}
+        "style" : {
+          "usingComponents": {
+            "van-dropdown-menu": "/static/vant/dropdown-menu/index",
+            "van-dripdown-item": "/static/vant/dropdown-item/index"
+          }
+        }
     }, {
         "path" : "pages/Course/AuditingCourse",
         "style" : {}

@@ -2,12 +2,12 @@ import uniRequest from 'uni-request'
 import STATE from '@/request/constant'
 
 function toChineseTimeString (date) {
-  return ''+date.getFullYear()+'年'+(date.getMonth()+1)+'月'+date.getDay()+'日'
+  return '' + date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDay() + '日'
 }
 
 export default {
-  async getOngoingCourseList (id) {
-    console.log('getOngoingCourseList')
+  async getOngoingClassList (id) {
+    console.log('getOngoingClassList')
     try {
       const resp = await uniRequest.get('/clazz/clazz?page=1&page_size=999&student_id=' + id)
       if (resp.data.code === '2000') {
@@ -34,8 +34,8 @@ export default {
     }
   },
 
-  async getAuditingCourseList (id) {
-    console.log('getAuditingCourseList')
+  async getAuditingClassList (id) {
+    console.log('getAuditingClassList')
     try {
       const resp = await uniRequest.get('/clazz/clazz?page=1&page_size=999&student_id=' + id)
       if (resp.data.code === '2000') {
@@ -61,9 +61,9 @@ export default {
       console.error(error)
     }
   },
-  
-  async getFinishedCourseList (id) {
-    console.log('getFinishedCourseList')
+
+  async getFinishedClassList (id) {
+    console.log('getFinishedClassList')
     try {
       const resp = await uniRequest.get('/clazz/clazz?page=1&page_size=999&student_id=' + id)
       if (resp.data.code === '2000') {
@@ -89,25 +89,16 @@ export default {
       console.error(error)
     }
   },
-  
-  async getCourseInfo (id) {
-    console.log('getCourseInfo')
+
+  async getCourseList (clazz_id) {
+    console.log('getCourseList')
     try {
-      const resp = await uniRequest.get('/clazz/clazz?page=1&page_size=999')
+      const resp = await uniRequest.get('/course/course?page=1&page_size=999&clazz_id=' + clazz_id)
       if (resp.data.code === '2000') {
-        let infoItem = {}
+        const infoItem = {}
         for (let i = 0; i < parseInt(resp.data.data.count); i++) {
           const item = resp.data.data.results[i]
           console.log(item)
-          if (item.id === id) {
-            infoItem = {
-              id: item.id,
-              time: toChineseTimeString(new Date(item.start_time))+'-'+toChineseTimeString(new Date(item.end_time)),
-              place: 
-            }
-            console.log(infoItem)
-            return infoItem
-          }
         }
       } else {
         console.error(resp.data.msg)
