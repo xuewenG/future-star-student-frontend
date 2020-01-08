@@ -1,5 +1,8 @@
 {
-	"pages": [{
+	"pages": [ {
+        "path": "pages/Login/Login",
+        "style": {}
+    }, {
         "path": "pages/index",
         "style": {}
     }, {
