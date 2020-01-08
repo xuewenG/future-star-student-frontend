@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 
+import './request/global.config.js'
 import cuCustom from './colorui/components/cu-custom.vue'
 Vue.component('cu-custom', cuCustom)
 

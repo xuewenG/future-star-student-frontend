@@ -50,7 +50,10 @@ module.exports = api => {
         '@vue/app',
         {
           modules: 'commonjs',
-          useBuiltIns: process.env.UNI_PLATFORM === 'h5' ? 'usage' : 'entry'
+          useBuiltIns: process.env.UNI_PLATFORM === 'h5' ? 'usage' : 'entry',
+          targets: {
+            node: 'current'
+          }
         }
       ], [
         '@babel/preset-env',

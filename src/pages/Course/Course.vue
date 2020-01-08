@@ -18,6 +18,7 @@
 <script>
 import TopNav from '@/components/TopNav.vue'
 import ItemList from '@/components/ItemList.vue'
+import CourseRequest from '@/request/Course/CourseRequest.js'
 export default {
   components: {
     TopNav,
