@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import loginRequest from '@/request/Login/LoginRequest'
+
 export default {
   data () {
     return {
@@ -38,9 +40,11 @@ export default {
   methods: {
     // 第一授权获取用户信息===》按钮触发
     wxGetUserInfo () {
+      console.log('click')
       uni.getUserInfo({
         provider: 'weixin',
         success: (infoRes) => {
+          console.log('allow')
           const nickName = infoRes.userInfo.nickName // 昵称
           const avatarUrl = infoRes.userInfo.avatarUrl // 头像
           console.log(nickName)
@@ -48,13 +52,13 @@ export default {
           this.login()
           try {
             uni.setStorageSync('isCanUse', false)// 记录是否第一次授权  false:表示不是第一次授权
-            // _this.updateUserInfo()
           } catch (e) {
             console.log(e)
             console.log('授权失败')
           }
         },
         fail: function (res) {
+          console.log('refuse')
           console.log(res)
           console.log('获取用户信息失败')
         }
@@ -75,29 +79,19 @@ export default {
             // 非第一次授权获取用户信息
             uni.getUserInfo({
               provider: 'weixin',
-              success: function (infoRes) {
+              success: (infoRes) => {
                 console.log('-------获取微信用户所有-----')
                 console.log(JSON.stringify(infoRes.userInfo))
                 // 获取用户信息后向调用信息更新方法
-                const nickName = infoRes.userInfo.nickName // 昵称
+                // const nickName = infoRes.userInfo.nickName // 昵称
                 const avatarUrl = infoRes.userInfo.avatarUrl // 头像
               }
             })
           }
           // 2.将用户登录code传递到后台置换用户SessionKey、OpenId等信息
-          uni.request({
-            url: '服务器地址',
-            data: {
-              code: code
-            },
-            method: 'GET',
-            header: {
-              'content-type': 'application/json'
-            },
-            success: (res) => {
-              // openId、或SessionKdy存储//隐藏loading
-              uni.hideLoading()
-            }
+          loginRequest.login({
+            code,
+            avatar_url: 'avatarUrl'
           })
         }
       })

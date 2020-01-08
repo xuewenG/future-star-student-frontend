@@ -1,5 +1,5 @@
 {
-	"pages": [ {
+	"pages": [{
         "path": "pages/Login/Login",
         "style": {}
     }, {
@@ -20,18 +20,6 @@
         "style": {}
     }, {
         "path": "pages/Apply/BaseInfoForm",
-        "style": {}
-    }, {
-        "path": "pages/Apply/EducationInfo",
-        "style": {}
-    }, {
-        "path": "pages/Apply/CompanyInfo",
-        "style": {}
-    }, {
-        "path": "pages/Apply/RefereesInfo",
-        "style": {}
-    }, {
-        "path": "pages/Apply/OtherInfo",
         "style": {}
     }, {
         "path": "pages/Course/Course",
