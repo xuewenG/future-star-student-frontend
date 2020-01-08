@@ -11,6 +11,16 @@
       <item-list
         :list="currentList"
       />
+      <view
+        v-if="loadModal"
+        class="cu-load load-modal"
+      >
+        <view class="cuIcon-emojifill text-green" />
+        <!-- <image src="/static/logo.png" mode="aspectFit"></image> -->
+        <view class="gray-text">
+          加载中...
+        </view>
+      </view>
     </scroll-view>
   </view>
 </template>
@@ -18,6 +28,7 @@
 <script>
 import TopNav from '@/components/TopNav.vue'
 import ItemList from '@/components/ItemList.vue'
+import CourseRequest from '@/request/Course/CourseRequest'
 export default {
   components: {
     TopNav,
@@ -26,8 +37,9 @@ export default {
   data () {
     return {
       TabCur: 0,
+      loadModal: false,
       navigatorList: ['正在进行', '审核中', '往期课程'],
-      currentList: [{ id: 0, img: '/static/logo.png', name: '没刷新啊' }],
+      currentList: [/* { id: 0, img: '/static/logo.png', name: '没刷新啊' } */],
       courseItemList: [
         [{
           id: 0,
@@ -72,7 +84,12 @@ export default {
     }
   },
   mounted () {
-    this.getCurrentList(0)
+    this.loadModal = true
+    CourseRequest.getOngoingCourseList(1).then(r => {
+      this.courseItemList[0] = r
+      this.getCurrentList(0)
+      this.loadModal = false
+    })
   },
   methods: {
     getCurrentList (i) {
