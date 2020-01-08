@@ -1,5 +1,10 @@
 import uniRequest from 'uni-request'
 import STATE from '@/request/constant'
+
+function toChineseTimeString (date) {
+  return ''+date.getFullYear()+'年'+(date.getMonth()+1)+'月'+date.getDay()+'日'
+}
+
 export default {
   async getOngoingCourseList (id) {
     console.log('getOngoingCourseList')
@@ -90,7 +95,20 @@ export default {
     try {
       const resp = await uniRequest.get('/clazz/clazz?page=1&page_size=999')
       if (resp.data.code === '2000') {
-        
+        let infoItem = {}
+        for (let i = 0; i < parseInt(resp.data.data.count); i++) {
+          const item = resp.data.data.results[i]
+          console.log(item)
+          if (item.id === id) {
+            infoItem = {
+              id: item.id,
+              time: toChineseTimeString(new Date(item.start_time))+'-'+toChineseTimeString(new Date(item.end_time)),
+              place: 
+            }
+            console.log(infoItem)
+            return infoItem
+          }
+        }
       } else {
         console.error(resp.data.msg)
       }

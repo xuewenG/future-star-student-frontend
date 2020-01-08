@@ -46,7 +46,6 @@ export default {
   methods: {
     ItemNavigateTo (index) {
       const item = this.list[index]
-      console.log(item)
       /* global uni:false */
       uni.navigateTo({
         url: item.url + '?id=' + item.id,

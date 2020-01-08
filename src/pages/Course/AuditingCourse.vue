@@ -20,6 +20,7 @@ import TitleBar from '@/components/TitleBar.vue'
 import TopNav from '@/components/TopNav.vue'
 import CourseInfo from '@/components/CourseInfo.vue'
 import CourseAuditState from '@/components/CourseAuditState.vue'
+import CourseRequest from '@/request/Course/CourseRequest'
 export default {
   components: {
     TopNav,
@@ -46,6 +47,9 @@ export default {
   },
   onLoad (option) {
     console.log(option.id)
+    CourseRequest.getCourseInfo(parseInt(option.id)).then(r => {
+      this.courseData = r
+    })
   }
 }
 </script>
