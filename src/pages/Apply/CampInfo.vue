@@ -306,7 +306,7 @@ export default {
       console.log(e)
       /* global uni:false */
       uni.navigateTo({
-        url: '../Apply/ApplyForm',
+        url: '../Apply/BaseInfoForm',
         fail: (res) => {
           console.log(res)
         },
@@ -314,6 +314,15 @@ export default {
           console.log(res)
         }
       })
+      // uni.navigateTo({
+      //   url: '../Apply/ApplyForm',
+      //   fail: (res) => {
+      //     console.log(res)
+      //   },
+      //   success: (res) => {
+      //     console.log(res)
+      //   }
+      // })
     }
   },
   onLoad: function (option) {
