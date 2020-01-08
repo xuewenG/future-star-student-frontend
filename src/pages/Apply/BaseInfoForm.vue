@@ -229,6 +229,15 @@ export default {
         return
       }
       console.log(this.baseInfoForm)
+      uni.navigateTo({
+        url: '/pages/Apply/EducationInfo',
+        fail: (res) => {
+          console.log(res)
+        },
+        success: (res) => {
+          console.log(res)
+        }
+      })
     },
     checkBefore () {
       this.showToast('已经是第一页')
