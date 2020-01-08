@@ -10,14 +10,17 @@
         @tap="ItemNavigateTo(index)"
       >
         <view
-          class="cu-avatar round lg"
+          class="cu-avatar round lg item-image"
           :style="'background-image:url('+item.img+');'"
         />
         <view class="margin-left content flex-sub">
-          <view v-text="item.name" />
+          <view
+            class="item-name"
+            v-text="item.name"
+          />
           <view
             v-if="sub !== null"
-            class="text-gray text-sm flex justify-between"
+            class="text-gray text-sm flex justify-between item-intro"
             v-text="item.intro"
           >
             暂无更多信息
