@@ -93,6 +93,9 @@ export default {
     CourseRequest.getAuditingCourseList(1).then(r => {
       this.courseItemList[1] = r
     })
+    CourseRequest.getFinishedCourseList(1).then(r => {
+      this.courseItemList[2] = r
+    })
   },
   methods: {
     getCurrentList (i) {
