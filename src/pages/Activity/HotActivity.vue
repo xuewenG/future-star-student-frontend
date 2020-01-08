@@ -118,7 +118,7 @@ export default {
   },
   mounted () {
     // this.ongoingActivityList = ActivityRequest.getOngoingActivityList()
-    this.ongoingActivityList = ActivityRequest.getOngoingActivityList().then(r => {
+    ActivityRequest.getOngoingActivityList().then(r => {
       this.ongoingActivityList = r
       console.log(this.ongoingActivityList)
     })
