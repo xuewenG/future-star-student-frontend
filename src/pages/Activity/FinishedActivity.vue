@@ -30,6 +30,7 @@
 
 <script>
 import ItemList from '@/components/ItemList.vue'
+import ActivityRequest from '@/request/Activity/ActivityRequest.js'
 export default {
   components: {
     ItemList
@@ -64,6 +65,12 @@ export default {
       }
       ]
     }
+  },
+  mounted () {
+    ActivityRequest.getFinishedActivityList().then(r => {
+      this.finishedActivityList = r
+      console.log(this.finishedActivityList)
+    })
   }
 }
 </script>
