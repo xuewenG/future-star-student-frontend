@@ -47,6 +47,7 @@
 <script>
 import TopNav from '@/components/TopNav.vue'
 import ItemList from '@/components/ItemList.vue'
+import ActivityRequest from '@/request/Activity/ActivityRequest.js'
 export default {
   components: {
     TopNav,
@@ -56,19 +57,21 @@ export default {
     return {
       TabCur: 0,
       navigatorList: ['正在进行', '即将开始'],
-      swiperList: [{
-        id: 0,
-        type: 'image',
-        url: '/static/EdStarsQualityClass.png'
-      }, {
-        id: 1,
-        type: 'image',
-        url: '/static/EdStarsQualityClass.png'
-      }, {
-        id: 2,
-        type: 'image',
-        url: '/static/EdStarsQualityClass.png'
-      }],
+      swiperList: [
+        {
+          id: 0,
+          type: 'image',
+          url: '/static/EdStarsQualityClass.png'
+        }, {
+          id: 1,
+          type: 'image',
+          url: '/static/EdStarsQualityClass.png'
+        }, {
+          id: 2,
+          type: 'image',
+          url: '/static/EdStarsQualityClass.png'
+        }
+      ],
       ongoingActivityList: [
         {
           id: 1,
@@ -112,6 +115,13 @@ export default {
         }
       ]
     }
+  },
+  mounted () {
+    // this.ongoingActivityList = ActivityRequest.getOngoingActivityList()
+    this.ongoingActivityList = ActivityRequest.getOngoingActivityList().then(r => {
+      this.ongoingActivityList = r
+      console.log(this.ongoingActivityList)
+    })
   },
   methods: {
     getCurrentList (i) {
