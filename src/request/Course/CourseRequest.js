@@ -83,5 +83,19 @@ export default {
     } catch (error) {
       console.error(error)
     }
+  },
+  
+  async getCourseInfo (id) {
+    console.log('getCourseInfo')
+    try {
+      const resp = await uniRequest.get('/clazz/clazz?page=1&page_size=999')
+      if (resp.data.code === '2000') {
+        
+      } else {
+        console.error(resp.data.msg)
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
