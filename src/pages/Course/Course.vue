@@ -90,6 +90,9 @@ export default {
       this.getCurrentList(0)
       this.loadModal = false
     })
+    CourseRequest.getAuditingCourseList(1).then(r => {
+      this.courseItemList[1] = r
+    })
   },
   methods: {
     getCurrentList (i) {
