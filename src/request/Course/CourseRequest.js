@@ -90,16 +90,31 @@ export default {
     }
   },
 
-  async getCourseList (clazz_id) {
+  async getCourseList (clazzId, type) {
     console.log('getCourseList')
     try {
-      const resp = await uniRequest.get('/course/course?page=1&page_size=999&clazz_id=' + clazz_id)
+      const resp = await uniRequest.get('/course/course?page=1&page_size=999&clazz_id=' + clazzId)
       if (resp.data.code === '2000') {
-        const infoItem = {}
+        const list = []
         for (let i = 0; i < parseInt(resp.data.data.count); i++) {
           const item = resp.data.data.results[i]
-          console.log(item)
+          list.push({
+            id: item.id,
+            name: item.name,
+            img: '/static/EdStarsLogo.png',
+            intro: item.introduction,
+            time: toChineseTimeString(new Date(item.start_time)) + '-' + toChineseTimeString(new Date(item.end_time)),
+            location: item.location,
+            teacher: {
+              name: item.teacher.name,
+              avatar: item.teacher.avatar,
+              title: item.teacher.title,
+              contact: item.teacher.contact_way
+            },
+            url: '/pages/Course/' + type
+          })
         }
+        return list
       } else {
         console.error(resp.data.msg)
       }

@@ -11,7 +11,7 @@
       <!-- <item-list
         :list="currentList"
       /> -->
-      
+
       <van-collapse
         :value="classCollapse"
         accordion
@@ -20,9 +20,8 @@
         <van-collapse-item
           v-for="(clazz, clazzIndex) in currentList"
           :key="clazzIndex"
-          :name="index + '-' + clazzIndex"
           :title="clazz.name"
-          :value="clazz.type"
+          @tap="test(clazz.courseList)"
         >
           <view class="cu-bar bg-white">
             <view class="action">
@@ -31,15 +30,15 @@
           </view>
           <van-cell-group>
             <van-cell
-              v-for="(course, courseIndex) in clazz.courseList"
+              v-for="(course, courseIndex) in courseList"
               :key="courseIndex"
               :icon="course.avatar"
-              :title="course.courseName + ' ' + course.title"
+              :title="course.name"
             />
           </van-cell-group>
         </van-collapse-item>
       </van-collapse>
-      
+
       <view
         v-if="loadModal"
         class="cu-load load-modal"
@@ -56,12 +55,10 @@
 
 <script>
 import TopNav from '@/components/TopNav.vue'
-import ItemList from '@/components/ItemList.vue'
 import CourseRequest from '@/request/Course/CourseRequest'
 export default {
   components: {
-    TopNav,
-    ItemList
+    TopNav
   },
   data () {
     return {
@@ -109,27 +106,55 @@ export default {
         //   intro: '',
         //   url: '/pages/Course/FinishedCourse'
         // }]
+      ],
+      courseList: [
+        {
+          name: '???',
+          avatar: '/static/EdStarsLogo.png'
+        }
       ]
     }
   },
   mounted () {
     this.loadModal = true
-    CourseRequest.getOngoingCourseList(1).then(r => {
+    CourseRequest.getOngoingClassList(1).then(r => {
       this.courseItemList[0] = r
+      for (let i = 0; i < this.courseItemList[0].length; i++) {
+        CourseRequest.getCourseList(this.courseItemList[0][i].id, 'OngoingCourse').then(r => {
+          this.courseItemList[0][i].courseList = r
+        })
+      }
       this.getCurrentList(0)
       this.loadModal = false
     })
-    CourseRequest.getAuditingCourseList(1).then(r => {
+    CourseRequest.getAuditingClassList(1).then(r => {
       this.courseItemList[1] = r
+      for (let i = 0; i < this.courseItemList[1].length; i++) {
+        CourseRequest.getCourseList(this.courseItemList[1][i].id, 'AuditingCourse').then(r => {
+          this.courseItemList[1][i].courseList = r
+        })
+      }
     })
-    CourseRequest.getFinishedCourseList(1).then(r => {
+    CourseRequest.getFinishedClassList(1).then(r => {
       this.courseItemList[2] = r
+      for (let i = 0; i < this.courseItemList[2].length; i++) {
+        CourseRequest.getCourseList(this.courseItemList[2][i].id, 'FinishedCourse').then(r => {
+          this.courseItemList[2][i].courseList = r
+        })
+      }
     })
   },
   methods: {
+    classChange (e) {
+      this.classCollapse = e.detail
+      console.log(e.detail)
+    },
     getCurrentList (i) {
       this.PageCur = i
       this.currentList = this.courseItemList[i]
+    },
+    test (clazz) {
+      console.log(clazz)
     }
   }
 }
