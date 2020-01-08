@@ -1,5 +1,4 @@
 import uniRequest from 'uni-request'
-import regeneratorRuntime from 'regenerator-runtime'
 
 export default {
   async getOngoingActivityList () {
@@ -27,7 +26,7 @@ export default {
       console.error(error)
     }
   },
-  
+
   async getAwaitActivityList () {
     console.log('getAwaitActivityList')
     try {

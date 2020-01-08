@@ -122,6 +122,10 @@ export default {
       this.ongoingActivityList = r
       console.log(this.ongoingActivityList)
     })
+    ActivityRequest.getAwaitActivityList().then(r => {
+      this.awaitActivityList = r
+      console.log(this.ongoingActivityList)
+    })
   },
   methods: {
     getCurrentList (i) {
