@@ -15,7 +15,10 @@ export default {
             name: item.name,
             img: '../../static/EdStarsLogo.png',
             intro: '',
-            url: '/pages/Activity/ActivityInfo'
+            url: '/pages/Activity/ActivityInfo',
+            data: {
+              id: item.id
+            }
           })
         }
         return list
@@ -41,7 +44,10 @@ export default {
             name: item.name,
             img: '../../static/EdStarsLogo.png',
             intro: '',
-            url: '/pages/Activity/ActivityInfo'
+            url: '/pages/Activity/ActivityInfo',
+            data: {
+              id: item.id
+            }
           })
         }
         return list
@@ -67,7 +73,10 @@ export default {
             name: item.name,
             img: '../../static/EdStarsLogo.png',
             intro: '',
-            url: '/pages/Activity/ActivityInfo'
+            url: '/pages/Activity/ActivityInfo',
+            data: {
+              id: item.id
+            }
           })
         }
         return list

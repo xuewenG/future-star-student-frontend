@@ -77,15 +77,17 @@ export default {
     }
   },
   onLoad (option) {
-    if (this.getActivityType(option.id) === 0) {
+    this.courseData = JSON.parse(decodeURIComponent(option.data))
+    console.log(this.courseData)
+    if (this.getActivityType(option.data.id) === 0) {
       this.canApply = this.activityData.applicantsNumber < this.activityData.applicantsLimit
       if (!this.canApply) {
         this.applyButtonText = '人数已满'
       }
-    } else if (this.getActivityType(option.id) === 1) {
+    } else if (this.getActivityType(option.data.id) === 1) {
       this.canApply = false
       this.applyButtonText = '报名尚未开始'
-    } else if (this.getActivityType(option.id) === 2) {
+    } else if (this.getActivityType(option.data.id) === 2) {
       this.canApply = false
       this.applyButtonText = '报名已结束'
     }

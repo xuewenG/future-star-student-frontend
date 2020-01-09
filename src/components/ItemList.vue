@@ -48,7 +48,7 @@ export default {
       const item = this.list[index]
       /* global uni:false */
       uni.navigateTo({
-        url: item.url + '?id=' + item.id,
+        url: item.url + '?data=' + encodeURIComponent(JSON.stringify(item.data)),
         fail: function () {
           console.log('fail to navigate to ' + item.url)
         },

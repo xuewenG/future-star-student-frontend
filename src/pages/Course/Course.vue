@@ -8,17 +8,27 @@
         :nav-list="navigatorList"
         @cur-changed="getCurrentList"
       />
-      <!-- <item-list
-        :list="currentList"
-      /> -->
+
+      <van-cell-group
+        v-if="TabCur===1"
+      >
+        <van-cell
+          v-for="(clazz, clazzIndex) in courseItemList[TabCur]"
+          :key="clazzIndex"
+          :title="clazz.name"
+          :value="clazz.state"
+          @tap="ItemNavigateTo(clazzIndex, courseIndex)"
+        />
+      </van-cell-group>
 
       <van-collapse
+        v-if="TabCur===0||TabCur===2"
         :value="classCollapse"
         :accordion="false"
         @change="classChange"
       >
         <van-collapse-item
-          v-for="(clazz, clazzIndex) in currentList"
+          v-for="(clazz, clazzIndex) in courseItemList[TabCur]"
           :key="clazzIndex"
           :title="clazz.name"
         >
@@ -67,14 +77,7 @@ export default {
       loadModal: false,
       classCollapse: ['1'],
       navigatorList: ['正在进行', '审核中', '往期课程'],
-      currentList: [/* { id: 0, img: '/static/logo.png', name: '没刷新啊' } */],
-      courseItemList: [],
-      courseList: [
-        {
-          name: '???',
-          avatar: '/static/EdStarsLogo.png'
-        }
-      ]
+      courseItemList: [[], [], []]
     }
   },
   mounted () {
@@ -112,11 +115,10 @@ export default {
       // console.log(e.detail)
     },
     getCurrentList (i) {
-      this.PageCur = i
-      this.currentList = this.courseItemList[i]
+      this.TabCur = i
     },
     ItemNavigateTo (clazzIndex, courseIndex) {
-      const item = this.currentList[clazzIndex].courseList[courseIndex]
+      const item = this.courseItemList[this.TabCur][clazzIndex].courseList[courseIndex]
       /* global uni:false */
       uni.navigateTo({
         url: item.url + '?data=' + encodeURIComponent(JSON.stringify(item.data)),
