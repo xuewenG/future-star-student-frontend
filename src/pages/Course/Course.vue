@@ -14,14 +14,13 @@
 
       <van-collapse
         :value="classCollapse"
-        accordion
+        :accordion="false"
         @change="classChange"
       >
         <van-collapse-item
           v-for="(clazz, clazzIndex) in currentList"
           :key="clazzIndex"
           :title="clazz.name"
-          @tap="test(clazz.courseList)"
         >
           <view class="cu-bar bg-white">
             <view class="action">
@@ -30,7 +29,7 @@
           </view>
           <van-cell-group>
             <van-cell
-              v-for="(course, courseIndex) in courseList"
+              v-for="(course, courseIndex) in clazz.courseList"
               :key="courseIndex"
               :icon="course.avatar"
               :title="course.name"
@@ -64,49 +63,10 @@ export default {
     return {
       TabCur: 0,
       loadModal: false,
+      classCollapse: ['1'],
       navigatorList: ['正在进行', '审核中', '往期课程'],
       currentList: [/* { id: 0, img: '/static/logo.png', name: '没刷新啊' } */],
-      courseItemList: [
-        // [{
-        //   id: 0,
-        //   img: '/static/EdStarsLogo.png',
-        //   name: '正在进行的课程一',
-        //   intro: '',
-        //   url: '/pages/Course/OngoingCourse'
-        // }, {
-        //   id: 1,
-        //   img: '/static/EdStarsLogo.png',
-        //   name: '正在进行的课程二',
-        //   intro: '',
-        //   url: '/pages/Course/OngoingCourse'
-        // }, {
-        //   id: 2,
-        //   img: '/static/EdStarsLogo.png',
-        //   name: '正在进行的课程三',
-        //   intro: '',
-        //   url: '/pages/Course/OngoingCourse'
-        // }],
-        // [{
-        //   id: 3,
-        //   img: '/static/EdStarsLogo.png',
-        //   name: '正在审核的课程一',
-        //   intro: '',
-        //   url: '/pages/Course/AuditingCourse'
-        // }, {
-        //   id: 4,
-        //   img: '/static/EdStarsLogo.png',
-        //   name: '正在审核的课程二',
-        //   intro: '',
-        //   url: '/pages/Course/AuditingCourse'
-        // }],
-        // [{
-        //   id: 5,
-        //   img: '/static/EdStarsLogo.png',
-        //   name: '已经结束的课程一',
-        //   intro: '',
-        //   url: '/pages/Course/FinishedCourse'
-        // }]
-      ],
+      courseItemList: [],
       courseList: [
         {
           name: '???',
@@ -147,14 +107,11 @@ export default {
   methods: {
     classChange (e) {
       this.classCollapse = e.detail
-      console.log(e.detail)
+      // console.log(e.detail)
     },
     getCurrentList (i) {
       this.PageCur = i
       this.currentList = this.courseItemList[i]
-    },
-    test (clazz) {
-      console.log(clazz)
     }
   }
 }
