@@ -189,6 +189,15 @@ export default {
       }
       console.log(this.educationInfoForm)
       console.log('前往公司信息页')
+      uni.navigateTo({
+        url: '/pages/Apply/CompanyInfo',
+        fail: (res) => {
+          console.log(res)
+        },
+        success: (res) => {
+          console.log(res)
+        }
+      })
     },
     showToast (info) {
       uni.showToast({
