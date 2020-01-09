@@ -515,6 +515,11 @@ export default {
       })
     },
     checkTextArea (text, info) {
+      if (text === null || text === '') {
+        this.showToast(info + '不能为空')
+        return false
+      }
+      return true
     },
     checkCompanyBrand (e) {
       this.checkTextArea(e.detail.value, '公司品牌')
@@ -532,10 +537,52 @@ export default {
       this.checkTextArea(e.detail.value, '公司主要运营数据')
     },
     checkPosition (values) {
+      const position = this.positionList
+      const other = (values.includes('其他') && this.otherPosition === '')
+      const onlyOther = (values.length === 1 && other)
+      if (values.length === 0 || onlyOther) {
+        this.showToast('您在企业中的职位不能为空')
+        return false
+      } else if (other) {
+        this.showToast('请填入您在企业中的其他职位')
+        return false
+      }
+      for (let i = 0, lenI = position.length; i < lenI; ++i) {
+        if (values.includes(position[i].value)) {
+          this.$set(position[i], 'checked', true)
+        } else {
+          this.$set(position[i], 'checked', false)
+        }
+      }
+      this.companyForm.positions = values
+      return true
     },
     checkFinance (finance) {
+      const other = (finance === '其他' && this.otherFinance === '')
+      console.log(finance)
+      console.log(other)
+      if (finance === null || finance === '' || other) {
+        this.showToast('公司目前融资情况不能为空')
+        return false
+      }
+      this.companyForm.finance = finance
+      return true
     },
     checkFinanceDetails (text, length, info) {
+      const finance = this.companyForm.finance
+      if (finance === '已完成种子/天使融资' || finance === '已完成pre-A轮融资') {
+        const textArray = text.split('/')
+        if (textArray.length === 1) {
+          this.showToast(info + '不能为空')
+          return false
+        } else if (textArray.length !== length) {
+          this.showToast(info + '格式错误')
+          return false
+        }
+        return true
+      } else {
+        return true
+      }
     },
     checkBefore () {
       console.log('应返回教育工作背景页，同时保存当前页面数据')
@@ -543,6 +590,12 @@ export default {
     checkNext () {
       console.log('前往推荐人页')
       console.log(this.companyForm)
+    },
+    showToast (info) {
+      uni.showToast({
+        title: info,
+        icon: 'none'
+      })
     }
   }
 }
