@@ -275,6 +275,19 @@ export default {
       })
     },
     submitApplyForm () {
+      uni.redirectTo({
+        url: '/pages/Apply/CampInfo',
+        fail: (res) => {
+          console.log(res)
+        },
+        success: (res) => {
+          console.log(res)
+        }
+      })
+      uni.showToast({
+        title: '报名成功',
+        duration: 3000
+      })
       console.log(this.otherForm)
     }
   }
