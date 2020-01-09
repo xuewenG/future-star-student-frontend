@@ -100,6 +100,18 @@ export default {
       console.log('应返回公司项目信息页，同时保存当前页面数据')
     },
     checkNext () {
+      if (!this.checkFormReferees(this.refereesForm.referees)) {
+        return
+      }
+      uni.navigateTo({
+        url: '/pages/Apply/OtherInfo',
+        fail: (res) => {
+          console.log(res)
+        },
+        success: (res) => {
+          console.log(res)
+        }
+      })
       console.log('前往其他信息页')
       console.log(this.refereesForm)
     }
