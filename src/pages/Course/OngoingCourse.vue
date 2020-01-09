@@ -53,7 +53,8 @@ export default {
     }
   },
   onLoad (option) {
-    console.log(option.id)
+    this.courseData = JSON.parse(decodeURIComponent(option.data))
+    console.log(this.courseData)
   }
 }
 </script>

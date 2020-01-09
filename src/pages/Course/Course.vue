@@ -119,7 +119,7 @@ export default {
       const item = this.currentList[clazzIndex].courseList[courseIndex]
       /* global uni:false */
       uni.navigateTo({
-        url: item.url + '?data=' + item.data,
+        url: item.url + '?data=' + encodeURIComponent(JSON.stringify(item.data)),
         fail: function () {
           console.log('fail to navigate to ' + item.url)
         },

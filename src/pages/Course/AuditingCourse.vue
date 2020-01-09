@@ -45,8 +45,8 @@ export default {
     }
   },
   onLoad (option) {
-    console.log(option.data)
-    this.courseData = option.data
+    this.courseData = JSON.parse(decodeURIComponent(option.data));
+    console.log(this.courseData)
   }
 }
 </script>
