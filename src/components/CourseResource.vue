@@ -83,7 +83,14 @@
 </template>
 
 <script>
+import CourseDetailRequest from '@/request/Course/CourseRequestDetail'
 export default {
+  props: {
+    courseId: {
+      type: Number,
+      required: true
+    }
+  },
   data () {
     return {
       classCollapse: ['1'],
@@ -99,7 +106,9 @@ export default {
     }
   },
   mounted () {
-
+    CourseDetailRequest.getCourseItemList(this.courseId).then(r => {
+      this.courseItemList = r
+    })
   },
   methods: {
     classChange (e) {

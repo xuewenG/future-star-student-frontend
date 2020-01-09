@@ -93,6 +93,7 @@ export default {
     try {
       const resp = await uniRequest.get('/course/course?page=1&page_size=999&clazz_id=' + clazzId)
       if (resp.data.code === STATE.REQUEST.SUCCESS) {
+        // console.log(resp.data.data.results)
         const list = []
         for (let i = 0; i < parseInt(resp.data.data.count); i++) {
           const item = resp.data.data.results[i]
