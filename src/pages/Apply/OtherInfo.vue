@@ -253,6 +253,18 @@ export default {
       console.log('应返回推荐人页，同时保存当前页面数据')
     },
     checkNext () {
+      if (this.otherCanal !== '') {
+        this.otherForm.canals = this.otherCanal
+      }
+      if (!this.checkFormCheck(this.otherForm.check)) {
+        return
+      }
+      if (!this.checkTextArea(this.otherForm.applyReason, '申请理由')) {
+        return
+      }
+      if (!this.checkCanal(this.otherForm.canals)) {
+        return
+      }
       console.log(this.otherForm)
       this.showToast('已经是最后一页，请提交')
     },
