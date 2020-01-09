@@ -21,7 +21,7 @@
         <view class="cu-item">
           <view class="content">
             <image
-              src="../../static/brand.png"
+              src="../../static/icon/brand.png"
               class="png"
               mode="aspectFit"
             />
@@ -47,7 +47,7 @@
         <view class="cu-item">
           <view class="content">
             <image
-              src="../../static/website.png"
+              src="../../static/icon/website.png"
               class="png"
               mode="aspectFit"
             />
@@ -70,7 +70,7 @@
         <view class="cu-item">
           <view class="content">
             <image
-              src="../../static/app.png"
+              src="../../static/icon/app.png"
               class="png"
               mode="aspectFit"
             />
@@ -125,7 +125,7 @@
         <view class="cu-item">
           <view class="content">
             <image
-              src="../../static/staff.png"
+              src="../../static/icon/staff.png"
               class="png"
               mode="aspectFit"
             />
@@ -145,7 +145,7 @@
         <view class="cu-item">
           <view class="content">
             <image
-              src="../../static/position.png"
+              src="../../static/icon/position.png"
               class="png"
               mode="aspectFit"
             />
@@ -186,7 +186,7 @@
         <view class="cu-item">
           <view class="content">
             <image
-              src="../../static/companyInfo.png"
+              src="../../static/icon/companyInfo.png"
               class="png"
               mode="aspectFit"
             />
@@ -210,7 +210,7 @@
         <view class="cu-item">
           <view class="content">
             <image
-              src="../../static/companyOperation.png"
+              src="../../static/icon/companyOperation.png"
               class="png"
               mode="aspectFit"
             />
@@ -234,7 +234,7 @@
         <view class="cu-item">
           <view class="content">
             <image
-              src="../../static/companyProfit.png"
+              src="../../static/icon/companyProfit.png"
               class="png"
               mode="aspectFit"
             />
@@ -254,7 +254,7 @@
         <view class="cu-item">
           <view class="content">
             <image
-              src="../../static/finance.png"
+              src="../../static/icon/finance.png"
               class="png"
               mode="aspectFit"
             />
@@ -305,7 +305,7 @@
         <view class="cu-item">
           <view class="content">
             <image
-              src="../../static/value.png"
+              src="../../static/icon/value.png"
               class="png"
               mode="aspectFit"
             />
@@ -325,7 +325,7 @@
         <view class="cu-item">
           <view class="content">
             <image
-              src="../../static/companyBusiness.png"
+              src="../../static/icon/companyBusiness.png"
               class="png"
               mode="aspectFit"
             />
@@ -375,7 +375,7 @@
         <view class="cu-item">
           <view class="content">
             <image
-              src="../../static/supply.png"
+              src="../../static/icon/supply.png"
               class="png"
               mode="aspectFit"
             />

@@ -57,7 +57,7 @@
         <view class="cu-item">
           <view class="content">
             <image
-              src="../../static/college.png"
+              src="../../static/icon/college.png"
               class="png"
               mode="aspectFit"
             />
@@ -81,7 +81,7 @@
         <view class="cu-item">
           <view class="content">
             <image
-              src="../../static/company.png"
+              src="../../static/icon/company.png"
               class="png"
               mode="aspectFit"
             />

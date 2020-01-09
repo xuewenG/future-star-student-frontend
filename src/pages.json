@@ -16,9 +16,6 @@
           }
         }
     }, {
-        "path": "pages/Apply/ApplyForm",
-        "style": {}
-    }, {
         "path": "pages/Apply/BaseInfoForm",
         "style": {}
     }, {
