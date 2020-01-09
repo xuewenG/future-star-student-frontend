@@ -49,48 +49,14 @@
 
 <script>
 import ItemList from '@/components/ItemList.vue'
+import ApplyRequest from '@/request/Apply/ApplyRequest.js'
 export default {
   components: {
     ItemList
   },
   data () {
     return {
-      campList: [{
-        id: 0,
-        type: 'image',
-        swiperImg: '/static/EdStarsApply.png',
-        img: '/static/EdStarsLogo.png',
-        name: '未来之星创新院第1期招生中',
-        url: '/pages/Apply/CampInfo'
-      }, {
-        id: 1,
-        type: 'image',
-        swiperImg: '/static/EdStarsApply.png',
-        img: '/static/EdStarsLogo.png',
-        name: '未来之星创新院第1期招生中',
-        url: '/pages/Apply/CampInfo'
-      }, {
-        id: 2,
-        type: 'image',
-        swiperImg: '/static/EdStarsApply.png',
-        img: '/static/EdStarsLogo.png',
-        name: '未来之星创新院第1期招生中',
-        url: '/pages/Apply/CampInfo'
-      }, {
-        id: 3,
-        type: 'image',
-        swiperImg: '/static/EdStarsApply.png',
-        img: '/static/EdStarsLogo.png',
-        name: '未来之星创新院第1期招生中',
-        url: '/pages/Apply/CampInfo'
-      }, {
-        id: 4,
-        type: 'image',
-        swiperImg: '/static/EdStarsApply.png',
-        img: '/static/EdStarsLogo.png',
-        name: '未来之星创新院第1期招生中',
-        url: '/pages/Apply/CampInfo'
-      }],
+      campList: [],
       cardCur: 0
     }
   },
@@ -98,6 +64,12 @@ export default {
     getSwipperCampList () {
       return this.campList.slice(0, 4)
     }
+  },
+  mounted () {
+    ApplyRequest.getCampList().then(campList => {
+      this.campList = campList
+      console.log(this.campList)
+    })
   },
   methods: {
     cardSwiper (e) {
