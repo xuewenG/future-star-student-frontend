@@ -25,6 +25,9 @@
         "path": "pages/Apply/EducationInfo",
         "style": {}
     }, {
+        "path": "pages/Apply/CompanyInfo",
+        "style": {}
+    }, {
         "path": "pages/Course/Course",
         "style": {}
     }, {
