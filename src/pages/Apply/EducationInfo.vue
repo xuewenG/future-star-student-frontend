@@ -175,6 +175,19 @@ export default {
       console.log('应返回基本信息页，同时保存当前页面数据')
     },
     checkNext () {
+      if (this.otherEducation !== '') {
+        this.educationInfoForm.education = this.otherEducation
+      }
+      if (!this.checkEducation(this.educationInfoForm.education)) {
+        return
+      }
+      if (!this.checkTextArea(this.educationInfoForm.graduation, 4, '最高学历毕业院校')) {
+        return
+      }
+      if (!this.checkTextArea(this.educationInfoForm.career, 3, '工作经历')) {
+        return
+      }
+      console.log(this.educationInfoForm)
       console.log('前往公司信息页')
     },
     showToast (info) {
