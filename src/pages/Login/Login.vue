@@ -1,6 +1,6 @@
 <template>
   <view>
-    <view v-if="isCanUse">
+    <view>
       <view>
         <view class="header">
           <image src="../../static/EdStarsLogo.png" />
@@ -34,11 +34,11 @@ export default {
       OpenId: '',
       nickName: null,
       avatarUrl: null,
-      isCanUse: uni.getStorageSync('isCanUse') || true// 默认为true
+      allow: uni.getStorageSync('allow')// 默认为true
     }
   },
   methods: {
-    // 第一授权获取用户信息===》按钮触发
+    // 第一授权获取用户信息 => 按钮触发
     wxGetUserInfo () {
       console.log('click')
       uni.getUserInfo({
@@ -50,8 +50,8 @@ export default {
           console.log(nickName)
           console.log(avatarUrl)
           try {
-            uni.setStorageSync('isCanUse', false)// 记录是否第一次授权  false:表示不是第一次授权
-            this.isCanUse = false
+            uni.setStorageSync('allow', true)// 记录是否第一次授权  false:表示不是第一次授权
+            this.allow = true
             this.login()
           } catch (e) {
             console.log(e)
@@ -71,40 +71,43 @@ export default {
     },
     // 登录
     login () {
-      if (!this.isCanUse) {
-        uni.showLoading({
-          title: '登录中...'
-        })
+      if (!this.allow) {
+        return
       }
+      uni.showLoading({
+        title: '登录中...'
+      })
       // 1.wx获取登录用户code
       uni.login({
         provider: 'weixin',
         success: (loginRes) => {
           console.log(JSON.stringify(loginRes))
           const code = loginRes.code
-          if (!this.isCanUse) {
-            // 非第一次授权获取用户信息
-            uni.getUserInfo({
-              provider: 'weixin',
-              success: (infoRes) => {
-                console.log('-------获取微信用户所有-----')
-                console.log(JSON.stringify(infoRes.userInfo))
-                // 获取用户信息后向调用信息更新方法
-                // const nickName = infoRes.userInfo.nickName // 昵称
-                const avatarUrl = infoRes.userInfo.avatarUrl // 头像
-                loginRequest.login({
-                  code,
-                  avatar_url: avatarUrl
-                })
-              }
-            })
-          }
-          // 2.将用户登录code传递到后台置换用户SessionKey、OpenId等信息
+          // 非第一次授权获取用户信息
+          uni.getUserInfo({
+            provider: 'weixin',
+            success: (infoRes) => {
+              console.log('-------获取微信用户所有-----')
+              console.log(JSON.stringify(infoRes.userInfo))
+              // 获取用户信息后向调用信息更新方法
+              const avatarUrl = infoRes.userInfo.avatarUrl // 头像
+              const gender = infoRes.userInfo.gender - 1 // 性别
+              console.log(code)
+              loginRequest.login({
+                code,
+                avatar_url: avatarUrl,
+                gender
+              })
+            },
+            fail: () => {
+              uni.hideLoading()
+            }
+          })
         }
       })
     }
   },
-  onLoad () { // 默认加载
+  onLoad () {
     this.login()
   }
 }
