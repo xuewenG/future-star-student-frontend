@@ -588,8 +588,43 @@ export default {
       console.log('应返回教育工作背景页，同时保存当前页面数据')
     },
     checkNext () {
-      console.log('前往推荐人页')
+      if (this.otherFinance !== '') {
+        this.companyForm.finance = this.otherFinance
+      }
+      if (this.otherPosition !== '') {
+        const tmp = this.companyForm.positions.indexOf('其他')
+        this.companyForm.positions[tmp] = this.otherPosition
+      }
+      if (!this.checkTextArea(this.companyForm.companyBrand, '公司品牌名称')) {
+        return
+      }
+      if (!this.checkTextArea(this.companyForm.website, '公司网址')) {
+        return
+      }
+      if (!this.checkTextArea(this.companyForm.appName, 'App或公众号名称')) {
+        return
+      }
+      if (!this.checkPosition(this.companyForm.positions, '您在企业中的职位')) {
+        return
+      }
+      if (!this.checkTextArea(this.companyForm.companyInfo, '公司/项目介绍')) {
+        return
+      }
+      if (!this.checkTextArea(this.companyForm.operationData, '公司主要运营数据')) {
+        return
+      }
+      if (!this.checkFinance(this.companyForm.finance, '公司目前融资情况')) {
+        return
+      }
+      if (!this.checkFinanceDetails(this.companyForm.financeDetails, 4, '公司融资详情')) {
+        return
+      }
+      if (this.companyForm.businessList.length === 0) {
+        this.showToast('公司介绍材料不能为空')
+        return
+      }
       console.log(this.companyForm)
+      console.log('前往推荐人页')
     },
     showToast (info) {
       uni.showToast({
