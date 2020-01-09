@@ -291,7 +291,7 @@
     "no-eol-whitespace": true,
     "string-no-newline": null,
     "unit-no-unknown": [true, {
-      "ignoreUnits": ["upx"]
+      "ignoreUnits": ["upx", "rpx"]
     }]
   }
 }
