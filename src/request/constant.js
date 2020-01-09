@@ -1,4 +1,7 @@
 export default {
+  REQUEST: {
+    SUCCESS: '2000'
+  },
   ACTIVITY: {
     UNOPENED: 0,
     ENROLLING: 1,

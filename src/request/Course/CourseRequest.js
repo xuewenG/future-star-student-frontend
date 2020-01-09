@@ -10,7 +10,7 @@ export default {
     console.log('getOngoingClassList')
     try {
       const resp = await uniRequest.get('/clazz/clazz?page=1&page_size=999&student_id=' + id)
-      if (resp.data.code === '2000') {
+      if (resp.data.code === STATE.REQUEST.SUCCESS) {
         let list = []
         list = []// make a direct use of list in order to pass eslint
         for (let i = 0; i < parseInt(resp.data.data.count); i++) {
@@ -103,15 +103,18 @@ export default {
             name: item.name,
             img: '/static/EdStarsLogo.png',
             intro: item.introduction,
-            time: toChineseTimeString(new Date(item.start_time)) + '-' + toChineseTimeString(new Date(item.end_time)),
-            location: item.location,
-            teacher: {
-              name: item.teacher.name,
-              avatar: item.teacher.avatar,
-              title: item.teacher.title,
-              contact: item.teacher.contact_way
-            },
-            url: '/pages/Course/' + type
+            url: '/pages/Course/' + type,
+            data: {
+              time: toChineseTimeString(new Date(item.start_time)) + '-' + toChineseTimeString(new Date(item.end_time)),
+              location: item.location,
+              introdution: item.introduction,
+              teacher: {
+                name: item.teacher.name,
+                avatar: item.teacher.avatar,
+                title: item.teacher.title,
+                contact: item.teacher.contact_way
+              }
+            }
           })
         }
         return list

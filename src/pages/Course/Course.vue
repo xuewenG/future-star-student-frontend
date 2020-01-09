@@ -33,6 +33,7 @@
               :key="courseIndex"
               :icon="course.avatar"
               :title="course.name"
+              @tap="ItemNavigateTo(clazzIndex, courseIndex)"
             />
           </van-cell-group>
         </van-collapse-item>
@@ -61,6 +62,7 @@ export default {
   },
   data () {
     return {
+      currentUserId: 1,
       TabCur: 0,
       loadModal: false,
       classCollapse: ['1'],
@@ -77,7 +79,7 @@ export default {
   },
   mounted () {
     this.loadModal = true
-    CourseRequest.getOngoingClassList(1).then(r => {
+    CourseRequest.getOngoingClassList(this.currentUserId).then(r => {
       this.courseItemList[0] = r
       for (let i = 0; i < this.courseItemList[0].length; i++) {
         CourseRequest.getCourseList(this.courseItemList[0][i].id, 'OngoingCourse').then(r => {
@@ -87,7 +89,7 @@ export default {
       this.getCurrentList(0)
       this.loadModal = false
     })
-    CourseRequest.getAuditingClassList(1).then(r => {
+    CourseRequest.getAuditingClassList(this.currentUserId).then(r => {
       this.courseItemList[1] = r
       for (let i = 0; i < this.courseItemList[1].length; i++) {
         CourseRequest.getCourseList(this.courseItemList[1][i].id, 'AuditingCourse').then(r => {
@@ -95,7 +97,7 @@ export default {
         })
       }
     })
-    CourseRequest.getFinishedClassList(1).then(r => {
+    CourseRequest.getFinishedClassList(this.currentUserId).then(r => {
       this.courseItemList[2] = r
       for (let i = 0; i < this.courseItemList[2].length; i++) {
         CourseRequest.getCourseList(this.courseItemList[2][i].id, 'FinishedCourse').then(r => {
@@ -112,6 +114,19 @@ export default {
     getCurrentList (i) {
       this.PageCur = i
       this.currentList = this.courseItemList[i]
+    },
+    ItemNavigateTo (clazzIndex, courseIndex) {
+      const item = this.currentList[clazzIndex].courseList[courseIndex]
+      /* global uni:false */
+      uni.navigateTo({
+        url: item.url + '?data=' + item.data,
+        fail: function () {
+          console.log('fail to navigate to ' + item.url)
+        },
+        success: function () {
+          console.log('succeed to navigate to ' + item.url)
+        }
+      })
     }
   }
 }
