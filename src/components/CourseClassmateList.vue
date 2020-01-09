@@ -15,11 +15,11 @@
           <view class="text-lg">
             {{ schoolmateItem.name }}
           </view>
-          <view class="text-gray">
-            未来之星第{{ schoolmateItem.camp }}期校友 &nbsp;|&nbsp; {{ schoolmateItem.area }}
+          <view class="text-sm text-gray">
+            {{ schoolmateItem.company }}{{ schoolmateItem.position }}
           </view>
-          <view class="text-gray">
-            {{ schoolmateItem.profession }}
+          <view class="text-sm text-gray">
+            {{ schoolmateItem.area }} &nbsp;|&nbsp; {{ schoolmateItem.profession }}
           </view>
         </view>
       </view>
@@ -50,8 +50,7 @@ export default {
     }
   },
   mounted () {
-    console.log(this.clazzId)
-    CourseDetailRequest.getCourseItemList(this.clazzId).then(r => {
+    CourseDetailRequest.getCourseClassmateList(this.clazzId).then(r => {
       this.schoolmateList = r
     })
   },
