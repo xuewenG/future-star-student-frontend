@@ -1,9 +1,6 @@
 import uniRequest from 'uni-request'
 import STATE from '@/request/constant'
-
-function toChineseTimeString (date) {
-  return '' + date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDay() + '日'
-}
+import { toChineseTimeString } from '@/request/util'
 
 export default {
   async getOngoingClassList (id) {
@@ -99,7 +96,7 @@ export default {
         const list = []
         for (let i = 0; i < parseInt(resp.data.data.count); i++) {
           const item = resp.data.data.results[i]
-          // console.log(item)
+          console.log(item)
           list.push({
             id: item.id,
             name: item.name,
@@ -110,6 +107,7 @@ export default {
               time: toChineseTimeString(new Date(item.begin_time)) + '-' + toChineseTimeString(new Date(item.end_time)),
               location: item.location,
               introduction: item.introduction,
+              clazz_id: item.clazz,
               teacher: {
                 name: item.teacher.name,
                 avatar: item.teacher.avatar,
