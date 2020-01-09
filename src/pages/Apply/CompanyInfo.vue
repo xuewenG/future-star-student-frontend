@@ -482,10 +482,37 @@ export default {
       this.companyForm.companyValue = parseFloat(e).toFixed(2)
     },
     selectBusinuessImg () {
+      uni.chooseImage({
+        count: 4,
+        sizeType: ['original', 'compressed'],
+        sourceType: ['album'],
+        success: (res) => {
+          if (this.companyForm.businessList !== 0) {
+            this.companyForm.businessList = this.companyForm.businessList.concat(res.tempFilePaths)
+          } else {
+            this.companyForm.businessList = res.tempFilePaths
+          }
+        }
+      })
     },
     viewBusinuessImg (e) {
+      uni.previewImage({
+        urls: this.companyForm.businessList,
+        current: e.currentTarget.dataset.url
+      })
     },
     delBusinuessImg (e) {
+      uni.showModal({
+        title: '删除图片',
+        content: '确定删除这张照片?',
+        cancelText: '取消',
+        confirmText: '确定',
+        success: res => {
+          if (res.confirm) {
+            this.companyForm.businessList.splice(e.currentTarget.dataset.index, 1)
+          }
+        }
+      })
     },
     checkTextArea (text, info) {
     },
