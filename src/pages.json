@@ -22,6 +22,9 @@
         "path": "pages/Apply/BaseInfoForm",
         "style": {}
     }, {
+        "path": "pages/Apply/EducationInfo",
+        "style": {}
+    }, {
         "path": "pages/Course/Course",
         "style": {}
     }, {

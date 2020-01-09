@@ -84,7 +84,7 @@ export default {
                 console.log(JSON.stringify(infoRes.userInfo))
                 // 获取用户信息后向调用信息更新方法
                 // const nickName = infoRes.userInfo.nickName // 昵称
-                const avatarUrl = infoRes.userInfo.avatarUrl // 头像
+                // const avatarUrl = infoRes.userInfo.avatarUrl // 头像
               }
             })
           }
@@ -105,29 +105,33 @@ export default {
 
 <style>
 .header {
-  margin: 90rpx 0 90rpx 50rpx;
-  border-bottom: 1px solid #ccc;
-  text-align: center;
   width: 650rpx;
   height: 300rpx;
+  margin: 90rpx 0 90rpx 50rpx;
+  border-bottom: 1px solid #ccc;
   line-height: 450rpx;
+  text-align: center;
 }
+
 .header image {
   width: 200rpx;
   height: 200rpx;
 }
+
 .content {
-  margin-left: 50rpx;
   margin-bottom: 90rpx;
+  margin-left: 50rpx;
 }
+
 .content text {
   display: block;
-  color: #9d9d9d;
   margin-top: 40rpx;
+  color: #9d9d9d;
 }
+
 .bottom {
-  border-radius: 80rpx;
   margin: 70rpx 50rpx;
+  border-radius: 80rpx;
   font-size: 35rpx;
 }
 </style>
