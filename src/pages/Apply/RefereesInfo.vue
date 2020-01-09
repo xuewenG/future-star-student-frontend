@@ -81,9 +81,20 @@ export default {
   },
   methods: {
     checkFormReferees (referees) {
+      if (referees.length === 0) {
+        this.showToast('至少需要一位推荐人')
+        return false
+      }
+      return true
     },
     checkReferees (e) {
       this.checkFormReferees(e.detail.value)
+    },
+    showToast (info) {
+      uni.showToast({
+        title: info,
+        icon: 'none'
+      })
     },
     checkBefore () {
       console.log('应返回公司项目信息页，同时保存当前页面数据')
