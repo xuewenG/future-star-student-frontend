@@ -202,11 +202,25 @@ export default {
   },
   methods: {
     checkFormCheck (check) {
+      if (check === null || check === '') {
+        this.showToast('请选择是否接受考勤')
+        return false
+      } else if (check === '接受') {
+        this.otherForm.check = 'accpt'
+      } else {
+        this.otherForm.check = 'refuse'
+      }
+      return true
     },
     selectCheck (e) {
       this.checkFormCheck(e.detail.value)
     },
     checkTextArea (text, info) {
+      if (text === '') {
+        this.showToast(info + '不能为空')
+        return false
+      }
+      return true
     },
     checkApplyReason (e) {
       this.checkTextArea(e.detail.value, '申请理由')
@@ -215,6 +229,25 @@ export default {
       this.checkCanal(e.detail.value)
     },
     checkCanal (values) {
+      const canal = this.canalList
+      const other = (values.includes('其他') && this.otherCanal === '')
+      const onlyOther = (values.length === 1 && other)
+      if (values.length === 0 || onlyOther) {
+        this.showToast('了解渠道不能为空')
+        return false
+      } else if (other) {
+        this.showToast('请填入您其他了解渠道')
+        return false
+      }
+      for (let i = 0, lenI = canal.length; i < lenI; ++i) {
+        if (values.includes(canal[i].value)) {
+          this.$set(canal[i], 'checked', true)
+        } else {
+          this.$set(canal[i], 'checked', false)
+        }
+      }
+      this.otherForm.canals = values
+      return true
     },
     checkBefore () {
       console.log('应返回推荐人页，同时保存当前页面数据')
