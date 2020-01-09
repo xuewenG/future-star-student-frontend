@@ -28,6 +28,9 @@
         "path": "pages/Apply/CompanyInfo",
         "style": {}
     }, {
+        "path": "pages/Apply/RefereesInfo",
+        "style": {}
+    }, {
         "path": "pages/Course/Course",
         "style": {
           "usingComponents": {

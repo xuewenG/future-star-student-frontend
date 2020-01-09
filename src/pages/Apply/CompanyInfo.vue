@@ -625,6 +625,15 @@ export default {
       }
       console.log(this.companyForm)
       console.log('前往推荐人页')
+      uni.navigateTo({
+        url: '/pages/Apply/RefereesInfo',
+        fail: (res) => {
+          console.log(res)
+        },
+        success: (res) => {
+          console.log(res)
+        }
+      })
     },
     showToast (info) {
       uni.showToast({
