@@ -50,7 +50,7 @@ export default {
               img: '/static/EdStarsLogo.png',
               intro: '',
               url: '/pages/Course/AuditingCourse',
-              auditingState: resp.data.data.results[i]
+              auditingState: resp.data.data.results[i].state
             })
           }
         }
