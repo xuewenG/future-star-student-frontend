@@ -136,11 +136,34 @@ export default {
   },
   methods: {
     checkEducation (education) {
+      const other = education === '其他' && this.otherEducation === ''
+      if (education === null || education === '' || other) {
+        this.showToast('最高学历不能为空')
+        return false
+      }
+      this.educationInfoForm.education = education
+      return true
     },
     selectEducation (e) {
       this.checkEducation(e.detail.value)
     },
     checkTextArea (text, length, info) {
+      const textArray = text.split('/')
+      if (text === '' || text === null) {
+        this.showToast(info + '不能为空')
+        return false
+      } else if (textArray.length !== length) {
+        this.showToast(info + '格式错误')
+        return false
+      } else {
+        const time = textArray[0].split('-')
+        console.log(time)
+        if (time.length === 1) {
+          this.showToast(info + '起止时间格式错误')
+          return false
+        }
+      }
+      return true
     },
     checkGraduation (e) {
       this.checkTextArea(e.detail.value, 4, '最高学历毕业院校')
@@ -153,6 +176,12 @@ export default {
     },
     checkNext () {
       console.log('前往公司信息页')
+    },
+    showToast (info) {
+      uni.showToast({
+        title: info,
+        icon: 'none'
+      })
     }
   }
 }
