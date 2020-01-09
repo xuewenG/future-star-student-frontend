@@ -49,9 +49,10 @@ export default {
           const avatarUrl = infoRes.userInfo.avatarUrl // 头像
           console.log(nickName)
           console.log(avatarUrl)
-          this.login()
           try {
             uni.setStorageSync('isCanUse', false)// 记录是否第一次授权  false:表示不是第一次授权
+            this.isCanUse = false
+            this.login()
           } catch (e) {
             console.log(e)
             console.log('授权失败')
@@ -61,14 +62,20 @@ export default {
           console.log('refuse')
           console.log(res)
           console.log('获取用户信息失败')
+          uni.showToast({
+            title: '您拒绝了授权',
+            icon: 'info'
+          })
         }
       })
     },
     // 登录
     login () {
-      uni.showLoading({
-        title: '登录中...'
-      })
+      if (!this.isCanUse) {
+        uni.showLoading({
+          title: '登录中...'
+        })
+      }
       // 1.wx获取登录用户code
       uni.login({
         provider: 'weixin',
@@ -84,21 +91,21 @@ export default {
                 console.log(JSON.stringify(infoRes.userInfo))
                 // 获取用户信息后向调用信息更新方法
                 // const nickName = infoRes.userInfo.nickName // 昵称
-                // const avatarUrl = infoRes.userInfo.avatarUrl // 头像
+                const avatarUrl = infoRes.userInfo.avatarUrl // 头像
+                loginRequest.login({
+                  code,
+                  avatar_url: avatarUrl
+                })
               }
             })
           }
           // 2.将用户登录code传递到后台置换用户SessionKey、OpenId等信息
-          loginRequest.login({
-            code,
-            avatar_url: 'avatarUrl'
-          })
         }
       })
     }
   },
   onLoad () { // 默认加载
-    // this.login()
+    this.login()
   }
 }
 </script>
