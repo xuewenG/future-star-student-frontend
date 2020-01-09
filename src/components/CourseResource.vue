@@ -1,6 +1,6 @@
 <template>
   <view>
-    <uni-collapse
+    <!-- <uni-collapse
       v-for="(item,index) in courseResourceList"
       :key="index"
       :accordion="true"
@@ -36,27 +36,65 @@
           </view>
         </view>
       </uni-collapse-item>
-    </uni-collapse>
+    </uni-collapse> -->
+    <van-collapse
+      :value="classCollapse"
+      @change="classChange"
+    >
+      <van-collapse-item
+        v-for="(lesson,lessonIndex) in courseResourceList"
+        :key="index"
+        :title="clazz.name"
+      >
+        <view
+          v-if="TabCur===1"
+          class="cu-bar bg-white"
+        >
+          <view class="action">
+            <text
+              class="cuIcon-titles"
+              :class="auditState[clazz.auditingState].textClass"
+            >
+              审核状态：{{ auditState[clazz.auditingState].str }}
+            </text>
+          </view>
+        </view>
+        <view class="cu-bar bg-white">
+          <view class="action">
+            <text class="cuIcon-titles text-green" /> 课程列表
+          </view>
+        </view>
+        <van-cell-group>
+          <van-cell
+            v-for="(course, courseIndex) in clazz.courseList"
+            :key="courseIndex"
+            :icon="course.avatar"
+            :title="course.name"
+            @tap="ItemNavigateTo(clazzIndex, courseIndex)"
+          />
+        </van-cell-group>
+      </van-collapse-item>
+    </van-collapse>
   </view>
 </template>
 
 <script>
-import { uniCollapse, uniCollapseItem } from '@dcloudio/uni-ui'
 export default {
-  components: {
-    uniCollapse,
-    uniCollapseItem
-  },
-  props: {
-    courseResourceList: {
-      type: Array,
-      required: true
-    }
-  },
   data () {
     return {
-
+      courseResourceList: [
+        {
+          title: '第一次开课'
+        }, {
+          title: '第二次开课'
+        }, {
+          title: '第三次开课'
+        }
+      ]
     }
+  },
+  mounted () {
+    
   }
 }
 </script>
