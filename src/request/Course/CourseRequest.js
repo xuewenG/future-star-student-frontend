@@ -96,7 +96,6 @@ export default {
         const list = []
         for (let i = 0; i < parseInt(resp.data.data.count); i++) {
           const item = resp.data.data.results[i]
-          console.log(item)
           list.push({
             id: item.id,
             name: item.name,
@@ -104,6 +103,7 @@ export default {
             intro: item.introduction,
             url: '/pages/Course/' + type,
             data: {
+              id: item.id,
               time: toChineseTimeString(new Date(item.begin_time)) + '-' + toChineseTimeString(new Date(item.end_time)),
               location: item.location,
               introduction: item.introduction,

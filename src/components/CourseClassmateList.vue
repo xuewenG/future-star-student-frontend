@@ -27,7 +27,14 @@
   </view>
 </template>
 <script>
+import CourseDetailRequest from '@/request/Course/CourseRequestDetail'
 export default {
+  props: {
+    clazzId: {
+      type: Number,
+      required: true
+    }
+  },
   data () {
     return {
       schoolmateList: [
@@ -41,6 +48,12 @@ export default {
         }
       ]
     }
+  },
+  mounted () {
+    console.log(this.clazzId)
+    CourseDetailRequest.getCourseItemList(this.clazzId).then(r => {
+      this.schoolmateList = r
+    })
   },
   methods: {
     getSchoolmateInfo (id) {

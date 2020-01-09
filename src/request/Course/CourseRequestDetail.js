@@ -21,7 +21,7 @@ export default {
     try {
       const resp = await uniRequest.get('/student/student?page=1&page_size=999&clazz_id=' + id)
       if (resp.data.code === STATE.REQUEST.SUCCESS) {
-        
+        console.log(resp.data.data)
       } else {
         console.error(resp.data.msg)
       }
