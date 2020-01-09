@@ -33,8 +33,8 @@ export default {
       navigatorList: ['课程介绍', '课程资料', '同学列表'],
       courseData: {
         time: '2020年1月1日——2020年2月15日',
-        place: '霸都飞禽繁育与生态研究中心',
-        intro: '这是一门课这是一门课这是一门课这是一门课这是一门课这是一门课这是一门课这是一门课这是一门课这是一门课这是一门课这是一门课',
+        location: '霸都飞禽繁育与生态研究中心',
+        introduction: '这是一门课这是一门课这是一门课这是一门课这是一门课这是一门课这是一门课这是一门课这是一门课这是一门课这是一门课这是一门课',
         teacher: {
           name: '鸽老师',
           avatar: '/static/tabbar/apply.png',
@@ -53,7 +53,8 @@ export default {
     }
   },
   onLoad (option) {
-    console.log(option.id)
+    this.courseData = JSON.parse(decodeURIComponent(option.data))
+    console.log(this.courseData)
   }
 }
 </script>

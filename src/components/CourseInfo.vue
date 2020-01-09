@@ -8,11 +8,11 @@
     </view>
     <view class="text-content padding bg-white text-sm">
       时间：{{ courseData.time }}<br>
-      地点：{{ courseData.place }}
+      地点：{{ courseData.location }}
     </view>
     <view
       class="text-content padding bg-white"
-      v-text="courseData.intro"
+      v-text="courseData.introduction"
     >
       暂无课程介绍
     </view>
