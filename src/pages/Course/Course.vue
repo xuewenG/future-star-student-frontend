@@ -36,7 +36,7 @@
             class="cu-bar bg-white"
           >
             <view class="action">
-              <text 
+              <text
                 class="cuIcon-titles"
                 :class="auditState[clazz.auditingState].textClass"
               >
