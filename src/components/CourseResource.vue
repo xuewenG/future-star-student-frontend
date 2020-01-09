@@ -42,37 +42,41 @@
       @change="classChange"
     >
       <van-collapse-item
-        v-for="(lesson,lessonIndex) in courseResourceList"
-        :key="index"
-        :title="clazz.name"
+        v-for="(courseItem, courseItemIndex) in courseItemList"
+        :key="courseItemIndex"
+        :title="courseItem.title"
       >
-        <view
-          v-if="TabCur===1"
-          class="cu-bar bg-white"
-        >
-          <view class="action">
-            <text
-              class="cuIcon-titles"
-              :class="auditState[clazz.auditingState].textClass"
-            >
-              审核状态：{{ auditState[clazz.auditingState].str }}
-            </text>
-          </view>
-        </view>
-        <view class="cu-bar bg-white">
+        <!-- <view class="cu-bar bg-white">
           <view class="action">
             <text class="cuIcon-titles text-green" /> 课程列表
           </view>
+        </view> -->
+        <view class="cu-list menu">
+          <view class="cu-item">
+            <button class="cu-btn content">
+              <text class="cuIcon-write text-gray" />
+              <text class="text-gray">
+                速记
+              </text>
+            </button>
+          </view>
+          <view class="cu-item">
+            <button class="cu-btn content">
+              <text class="cuIcon-text text-gray" />
+              <text class="text-gray">
+                课件
+              </text>
+            </button>
+          </view>
+          <view class="cu-item">
+            <button class="cu-btn content">
+              <text class="cuIcon-video text-gray" />
+              <text class="text-gray">
+                视频
+              </text>
+            </button>
+          </view>
         </view>
-        <van-cell-group>
-          <van-cell
-            v-for="(course, courseIndex) in clazz.courseList"
-            :key="courseIndex"
-            :icon="course.avatar"
-            :title="course.name"
-            @tap="ItemNavigateTo(clazzIndex, courseIndex)"
-          />
-        </van-cell-group>
       </van-collapse-item>
     </van-collapse>
   </view>
@@ -82,7 +86,8 @@
 export default {
   data () {
     return {
-      courseResourceList: [
+      classCollapse: ['1'],
+      courseItemList: [
         {
           title: '第一次开课'
         }, {
@@ -94,7 +99,13 @@ export default {
     }
   },
   mounted () {
-    
+
+  },
+  methods: {
+    classChange (e) {
+      this.classCollapse = e.detail
+      // console.log(e.detail)
+    }
   }
 }
 </script>
