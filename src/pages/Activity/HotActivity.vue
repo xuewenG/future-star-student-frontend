@@ -41,6 +41,7 @@
       v-if="TabCur===1"
       :list="awaitActivityList"
     />
+    <loading-modal :display="loadModal" />
   </view>
 </template>
 
@@ -56,6 +57,7 @@ export default {
   data () {
     return {
       TabCur: 0,
+      loadModal: false,
       navigatorList: ['正在进行', '即将开始'],
       swiperList: [
         {
@@ -73,53 +75,54 @@ export default {
         }
       ],
       ongoingActivityList: [
-        {
-          id: 1,
-          name: '热门活动1',
-          img: '../../static/EdStarsLogo.png',
-          intro: '',
-          url: '/pages/Activity/ActivityInfo'
-        }, {
-          id: 2,
-          name: '热门活动2',
-          img: '../../static/EdStarsLogo.png',
-          intro: '',
-          url: '/pages/Activity/ActivityInfo'
-        }, {
-          id: 3,
-          name: '热门活动3',
-          img: '../../static/EdStarsLogo.png',
-          intro: '',
-          url: '/pages/Activity/ActivityInfo'
-        }
+        // {
+        //   id: 1,
+        //   name: '热门活动1',
+        //   img: '../../static/EdStarsLogo.png',
+        //   intro: '',
+        //   url: '/pages/Activity/ActivityInfo'
+        // }, {
+        //   id: 2,
+        //   name: '热门活动2',
+        //   img: '../../static/EdStarsLogo.png',
+        //   intro: '',
+        //   url: '/pages/Activity/ActivityInfo'
+        // }, {
+        //   id: 3,
+        //   name: '热门活动3',
+        //   img: '../../static/EdStarsLogo.png',
+        //   intro: '',
+        //   url: '/pages/Activity/ActivityInfo'
+        // }
       ],
       awaitActivityList: [
-        {
-          id: 4,
-          name: '即将上线的活动1',
-          img: '../../static/EdStarsLogo.png',
-          intro: '',
-          url: '/pages/Activity/ActivityInfo'
-        }, {
-          id: 5,
-          name: '即将上线的活动2',
-          img: '../../static/EdStarsLogo.png',
-          intro: '',
-          url: '/pages/Activity/ActivityInfo'
-        }, {
-          id: 6,
-          name: '即将上线的活动3',
-          img: '../../static/EdStarsLogo.png',
-          intro: '',
-          url: '/pages/Activity/ActivityInfo'
-        }
+        // {
+        //   id: 4,
+        //   name: '即将上线的活动1',
+        //   img: '../../static/EdStarsLogo.png',
+        //   intro: '',
+        //   url: '/pages/Activity/ActivityInfo'
+        // }, {
+        //   id: 5,
+        //   name: '即将上线的活动2',
+        //   img: '../../static/EdStarsLogo.png',
+        //   intro: '',
+        //   url: '/pages/Activity/ActivityInfo'
+        // }, {
+        //   id: 6,
+        //   name: '即将上线的活动3',
+        //   img: '../../static/EdStarsLogo.png',
+        //   intro: '',
+        //   url: '/pages/Activity/ActivityInfo'
+        // }
       ]
     }
   },
   mounted () {
-    // this.ongoingActivityList = ActivityRequest.getOngoingActivityList()
+    this.loadModal = true
     ActivityRequest.getOngoingActivityList().then(r => {
       this.ongoingActivityList = r
+      this.loadModal = false
     })
     ActivityRequest.getAwaitActivityList().then(r => {
       this.awaitActivityList = r
