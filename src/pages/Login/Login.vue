@@ -3,7 +3,7 @@
     <view>
       <view>
         <view class="header">
-          <image src="../../static/EdStarsLogo.png" />
+          <image src="https://i.loli.net/2020/01/09/iEZpONujHL4Sc13.png" />
         </view>
         <view class="content">
           <view>申请获取以下权限</view>
