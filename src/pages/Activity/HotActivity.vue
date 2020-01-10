@@ -131,21 +131,6 @@ export default {
   methods: {
     getCurrentList (i) {
       this.TabCur = i
-    },
-    toActivityInfo (id) {
-      console.log('No navigator yet')
-      // const pagePath = ['Ongoing', 'Auditing', 'Finished']
-      // const index = this.PageCur
-      // /* global uni:false */
-      // uni.navigateTo({
-      //   url: '/pages/Course/' + pagePath[index] + 'Course?id=' + id,
-      //   fail: function () {
-      //     console.log('fail to navigate to ' + '/pages/Course/' + pagePath[index] + 'Course?id=' + id)
-      //   },
-      //   success: function () {
-      //     console.log('succeed to navigate to ' + '/pages/Course/' + pagePath[index] + 'Course?id=' + id)
-      //   }
-      // })
     }
   }
 }

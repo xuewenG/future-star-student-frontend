@@ -27,7 +27,7 @@
   </view>
 </template>
 <script>
-import CourseDetailRequest from '@/request/Course/CourseRequestDetail'
+import CourseDetailRequest from '@/request/Course/CourseDetailRequest'
 export default {
   props: {
     clazzId: {

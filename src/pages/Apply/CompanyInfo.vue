@@ -243,12 +243,12 @@
             </text>
           </view>
           <view class="cu-form-group">
-            <uni-number-box
+            <!-- <uni-number-box
               :min="0"
               :max="9999"
               :value="companyForm.profitScale"
               @change="selectCompanyProfit"
-            />
+            /> -->
           </view>
         </view>
         <view class="cu-item">

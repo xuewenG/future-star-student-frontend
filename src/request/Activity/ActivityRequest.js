@@ -14,14 +14,13 @@ export default {
           list.push({
             id: item.id,
             name: item.name,
-            img: '../../static/EdStarsLogo.png',
+            img: item.icon,
             intro: '',
             url: '/pages/Activity/ActivityInfo',
-            data: {
-              id: item.id
-            }
+            data: item
           })
         }
+        console.log(resp.data.data.results)
         return list
       } else {
         console.error(resp.data.msg)
@@ -43,12 +42,10 @@ export default {
           list.push({
             id: item.id,
             name: item.name,
-            img: '../../static/EdStarsLogo.png',
+            img: item.icon,
             intro: '',
             url: '/pages/Activity/ActivityInfo',
-            data: {
-              id: item.id
-            }
+            data: item
           })
         }
         return list
@@ -72,12 +69,10 @@ export default {
           list.push({
             id: item.id,
             name: item.name,
-            img: '../../static/EdStarsLogo.png',
+            img: item.icon,
             intro: '',
             url: '/pages/Activity/ActivityInfo',
-            data: {
-              id: item.id
-            }
+            data: item
           })
         }
         return list
@@ -103,12 +98,10 @@ export default {
           list.push({
             id: item.id,
             name: item.name,
-            img: '/static/EdStarsLogo.png',
+            img: item.icon,
             intro: '',
             url: '/pages/Activity/ActivityInfo',
-            data: {
-              id: item.id
-            }
+            data: item
           })
         }
         return list
@@ -134,12 +127,10 @@ export default {
           list.push({
             id: item.id,
             name: item.name,
-            img: '/static/EdStarsLogo.png',
+            img: item.icon,
             intro: '',
             url: '/pages/Activity/ActivityInfo',
-            data: {
-              id: item.id
-            }
+            data: item
           })
         }
         return list
@@ -165,12 +156,10 @@ export default {
           list.push({
             id: item.id,
             name: item.name,
-            img: '/static/EdStarsLogo.png',
+            img: item.icon,
             intro: '',
             url: '/pages/Activity/ActivityInfo',
-            data: {
-              id: item.id
-            }
+            data: item
           })
         }
         return list

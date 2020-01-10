@@ -115,16 +115,16 @@ export default {
     this.loadModal = true
     ActivityRequest.getMyEnrollingActivityList(1).then(r => {
       this.enrollingActivityList = r
-      console.log(this.enrollingActivityList)
+      // console.log(this.enrollingActivityList)
     }).then(() => {
       ActivityRequest.getMyOngoingActivityList(1).then(r => {
         this.ongoingActivityList = r
-        console.log(this.ongoingActivityList)
+        // console.log(this.ongoingActivityList)
       })
     }).then(() => {
       ActivityRequest.getMyFinishedActivityList(1).then(r => {
         this.finishedActivityList = r
-        console.log(this.finishedActivityList)
+        // console.log(this.finishedActivityList)
       })
     }).then(() => {
       this.loadModal = false

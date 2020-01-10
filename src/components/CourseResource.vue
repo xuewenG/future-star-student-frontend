@@ -44,7 +44,7 @@
       <van-collapse-item
         v-for="(courseItem, courseItemIndex) in courseItemList"
         :key="courseItemIndex"
-        :title="courseItem.title"
+        :title="courseItem.content_name"
       >
         <!-- <view class="cu-bar bg-white">
           <view class="action">
@@ -52,7 +52,27 @@
           </view>
         </view> -->
         <view class="cu-list menu">
-          <view class="cu-item">
+          <view
+            v-for="(resourceItem, resourceIndex) in courseItem.resources"
+            :key="resourceIndex"
+            class="cu-item"
+          >
+            <button
+              class="cu-btn content"
+              :disabled="isClosed(resourceItem)"
+              @tap="test2(resourceItem.state===STATE.RESOURCE.CLOSED)"
+            >
+              <text
+                class="text-black"
+                :class="resourceType[resourceItem.type].icon"
+              />
+              <text class="text-black">
+                {{ resourceType[resourceItem.type].name }}
+              </text>
+            </button>
+          </view>
+
+          <!-- <view class="cu-item">
             <button class="cu-btn content">
               <text class="cuIcon-write text-gray" />
               <text class="text-gray">
@@ -75,7 +95,7 @@
                 视频
               </text>
             </button>
-          </view>
+          </view> -->
         </view>
       </van-collapse-item>
     </van-collapse>
@@ -83,7 +103,8 @@
 </template>
 
 <script>
-import CourseDetailRequest from '@/request/Course/CourseRequestDetail'
+import CourseDetailRequest from '@/request/Course/CourseDetailRequest'
+import STATE from '@/request/constant'
 export default {
   props: {
     courseId: {
@@ -94,6 +115,18 @@ export default {
   data () {
     return {
       classCollapse: ['1'],
+      resourceType: [
+        {
+          icon: 'cuIcon-write',
+          name: '速记'
+        }, {
+          icon: 'cuIcon-text',
+          name: '课件'
+        }, {
+          icon: 'cuIcon-video',
+          name: '视频'
+        }
+      ],
       courseItemList: [
         {
           title: '第一次开课'
@@ -108,12 +141,25 @@ export default {
   mounted () {
     CourseDetailRequest.getCourseItemList(this.courseId).then(r => {
       this.courseItemList = r
+      console.log(this.courseItemList)
     })
   },
   methods: {
     classChange (e) {
       this.classCollapse = e.detail
       // console.log(e.detail)
+    },
+    isClosed (courseItem) {
+      return courseItem.state === STATE.RESOURCE.CLOSED
+    },
+    test (courseItem) {
+      console.log(courseItem)
+      console.log(courseItem.state)
+      console.log(STATE.RESOURCE.CLOSED)
+      console.log(courseItem.state === STATE.RESOURCE.CLOSED)
+    },
+    test2 (e) {
+      console.log(e)
     }
   }
 }

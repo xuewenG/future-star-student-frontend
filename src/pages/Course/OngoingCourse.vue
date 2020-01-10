@@ -11,7 +11,7 @@
     />
     <course-resource
       v-if="pageCur===1"
-      :clazz-id="courseData.clazz_id"
+      :course-id="courseData.id"
     />
     <course-classmate-list
       v-if="pageCur===2"
@@ -53,7 +53,7 @@ export default {
   },
   onLoad (option) {
     this.courseData = JSON.parse(decodeURIComponent(option.data))
-    console.log(this.courseData)
+    console.log('courseData', this.courseData)
   }
 }
 </script>
