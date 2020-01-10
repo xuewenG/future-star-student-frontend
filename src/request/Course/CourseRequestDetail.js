@@ -7,7 +7,7 @@ export default {
     try {
       const resp = await uniRequest.get('/course/content?page=1&page_size=999&course_id=' + id)
       if (resp.data.code === STATE.REQUEST.SUCCESS) {
-        console.log(resp.data.data)
+        return resp.data.data.results
       } else {
         console.error(resp.data.msg)
       }

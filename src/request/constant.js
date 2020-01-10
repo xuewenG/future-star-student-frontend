@@ -16,5 +16,14 @@ export default {
     UNDERWAY: 3,
     CLOSED: 4,
     CANCELLED: 5
+  },
+  RESOURCE: {
+    OPEN: 0,
+    CLOSED: 1
+  },
+  RESOURCE_TYPE: {
+    TEXT: 0,
+    PPT: 1,
+    VIDEO: 2
   }
 }
