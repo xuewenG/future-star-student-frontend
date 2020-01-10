@@ -1,9 +1,6 @@
 import uniRequest from 'uni-request'
 import STATE from '@/request/constant'
-
-function toChineseTimeString (date) {
-  return '' + date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDay() + '日'
-}
+import { toChineseTimeString } from '@/request/util'
 
 export default {
   async getOngoingClassList (id) {
@@ -50,7 +47,7 @@ export default {
               img: '/static/EdStarsLogo.png',
               intro: '',
               url: '/pages/Course/AuditingCourse',
-              auditingState: resp.data.data.results[i]
+              auditingState: resp.data.data.results[i].state
             })
           }
         }
@@ -96,10 +93,10 @@ export default {
     try {
       const resp = await uniRequest.get('/course/course?page=1&page_size=999&clazz_id=' + clazzId)
       if (resp.data.code === STATE.REQUEST.SUCCESS) {
+        // console.log(resp.data.data.results)
         const list = []
         for (let i = 0; i < parseInt(resp.data.data.count); i++) {
           const item = resp.data.data.results[i]
-          // console.log(item)
           list.push({
             id: item.id,
             name: item.name,
@@ -107,9 +104,11 @@ export default {
             intro: item.introduction,
             url: '/pages/Course/' + type,
             data: {
+              id: item.id,
               time: toChineseTimeString(new Date(item.begin_time)) + '-' + toChineseTimeString(new Date(item.end_time)),
               location: item.location,
               introduction: item.introduction,
+              clazz_id: item.clazz,
               teacher: {
                 name: item.teacher.name,
                 avatar: item.teacher.avatar,

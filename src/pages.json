@@ -78,7 +78,17 @@
             "van-dripdown-item": "/static/vant/dropdown-item/index"
           }
         }
+    }, {
+        "path": "components/CourseResource",
+        "style": {
+          "usingComponents": {
+            "van-collapse": "/static/vant/collapse/index",
+            "van-collapse-item": "/static/vant/collapse-item/index",
+            "van-cell": "/static/vant/cell/index",
+            "van-cell-group": "/static/vant/cell-group/index"
+          }
         }
+      }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom",

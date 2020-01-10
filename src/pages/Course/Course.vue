@@ -9,7 +9,7 @@
         @cur-changed="getCurrentList"
       />
 
-      <van-cell-group
+      <!-- <van-cell-group
         v-if="TabCur===1"
       >
         <van-cell
@@ -19,10 +19,9 @@
           :value="clazz.state"
           @tap="ItemNavigateTo(clazzIndex, courseIndex)"
         />
-      </van-cell-group>
+      </van-cell-group> -->
 
       <van-collapse
-        v-if="TabCur===0||TabCur===2"
         :value="classCollapse"
         :accordion="false"
         @change="classChange"
@@ -32,6 +31,19 @@
           :key="clazzIndex"
           :title="clazz.name"
         >
+          <view
+            v-if="TabCur===1"
+            class="cu-bar bg-white"
+          >
+            <view class="action">
+              <text
+                class="cuIcon-titles"
+                :class="auditState[clazz.auditingState].textClass"
+              >
+                审核状态：{{ auditState[clazz.auditingState].str }}
+              </text>
+            </view>
+          </view>
           <view class="cu-bar bg-white">
             <view class="action">
               <text class="cuIcon-titles text-green" /> 课程列表
@@ -72,6 +84,22 @@ export default {
   },
   data () {
     return {
+      auditState: [{
+        str: '待审核',
+        textClass: 'text-blue'
+      }, {
+        str: '已拒绝',
+        textClass: 'text-red'
+      }, {
+        str: '已通过',
+        textClass: 'text-green'
+      }, {
+        str: '已毕业',
+        textClass: 'text-green'
+      }, {
+        str: '未毕业',
+        textClass: 'text-yellow'
+      }],
       currentUserId: 1,
       TabCur: 0,
       loadModal: false,

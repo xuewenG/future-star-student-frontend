@@ -212,7 +212,7 @@ export default {
     getSchoolmateInfo (id) {
       /* global uni:false */
       uni.navigateTo({
-        url: '../pages/Schoolmate/SchoolmateInfo?schoolmateId=' + id,
+        url: '/pages/Schoolmate/SchoolmateInfo?schoolmateId=' + id,
         success: (res) => {
           console.log(res)
         },

@@ -11,7 +11,10 @@
     />
     <course-resource
       v-if="pageCur===1"
-      :course-resource-list="courseItemList"
+    />
+    <course-classmate-list
+      v-if="pageCur===2"
+      :clazz-id="courseData.clazz_id"
     />
   </view>
 </template>
@@ -20,12 +23,14 @@ import TitleBar from '@/components/TitleBar.vue'
 import TopNav from '@/components/TopNav.vue'
 import CourseInfo from '@/components/CourseInfo.vue'
 import CourseResource from '@/components/CourseResource.vue'
+import CourseClassmateList from '@/components/CourseClassmateList.vue'
 export default {
   components: {
     TopNav,
     TitleBar,
     CourseInfo,
-    CourseResource
+    CourseResource,
+    CourseClassmateList
   },
   data () {
     return {
@@ -41,15 +46,7 @@ export default {
           title: '2019年金鸽杯全国鸽手大赛“最佳鸽王”',
           contact: 'Coo@666.com'
         }
-      },
-      courseItemList: [{
-        title: '第一次开课'
-      }, {
-        title: '第二次开课'
-      }, {
-        title: '第三次开课'
       }
-      ]
     }
   },
   onLoad (option) {
