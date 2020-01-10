@@ -60,17 +60,7 @@
           </van-cell-group>
         </van-collapse-item>
       </van-collapse>
-
-      <view
-        v-if="loadModal"
-        class="cu-load load-modal"
-      >
-        <view class="cuIcon-emojifill text-green" />
-        <!-- <image src="/static/logo.png" mode="aspectFit"></image> -->
-        <view class="gray-text">
-          加载中...
-        </view>
-      </view>
+      <loading-modal :display="loadModal" />
     </scroll-view>
   </view>
 </template>
