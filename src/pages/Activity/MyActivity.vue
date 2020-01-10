@@ -65,49 +65,49 @@ export default {
       loadModal: false,
       classCollapse: ['1'],
       enrollingActivityList: [
-        
+
       ],
       ongoingActivityList: [
-        {
-          id: 1,
-          img: '/static/EdStarsLogo.png',
-          name: '正在进行的校友活动1',
-          intro: '正在进行',
-          url: '/pages/Activity/ActivityInfo'
-        }, {
-          id: 2,
-          img: '/static/EdStarsLogo.png',
-          name: '正在进行的校友活动2',
-          intro: '正在进行',
-          url: '/pages/Activity/ActivityInfo'
-        }, {
-          id: 3,
-          img: '/static/EdStarsLogo.png',
-          name: '正在进行的校友活动3',
-          intro: '正在进行',
-          url: '/pages/Activity/ActivityInfo'
-        }
+        // {
+        //   id: 1,
+        //   img: '/static/EdStarsLogo.png',
+        //   name: '正在进行的校友活动1',
+        //   intro: '正在进行',
+        //   url: '/pages/Activity/ActivityInfo'
+        // }, {
+        //   id: 2,
+        //   img: '/static/EdStarsLogo.png',
+        //   name: '正在进行的校友活动2',
+        //   intro: '正在进行',
+        //   url: '/pages/Activity/ActivityInfo'
+        // }, {
+        //   id: 3,
+        //   img: '/static/EdStarsLogo.png',
+        //   name: '正在进行的校友活动3',
+        //   intro: '正在进行',
+        //   url: '/pages/Activity/ActivityInfo'
+        // }
       ],
       finishedActivityList: [
-        {
-          id: 7,
-          img: '/static/EdStarsLogo.png',
-          name: '已经结束的校友活动1',
-          intro: '已经结束',
-          url: '/pages/Activity/ActivityInfo'
-        }, {
-          id: 8,
-          img: '/static/EdStarsLogo.png',
-          name: '已经结束的校友活动2',
-          intro: '已经结束',
-          url: '/pages/Activity/ActivityInfo'
-        }, {
-          id: 9,
-          img: '/static/EdStarsLogo.png',
-          name: '已经结束的校友活动3',
-          intro: '已经结束',
-          url: '/pages/Activity/ActivityInfo'
-        }
+        // {
+        //   id: 7,
+        //   img: '/static/EdStarsLogo.png',
+        //   name: '已经结束的校友活动1',
+        //   intro: '已经结束',
+        //   url: '/pages/Activity/ActivityInfo'
+        // }, {
+        //   id: 8,
+        //   img: '/static/EdStarsLogo.png',
+        //   name: '已经结束的校友活动2',
+        //   intro: '已经结束',
+        //   url: '/pages/Activity/ActivityInfo'
+        // }, {
+        //   id: 9,
+        //   img: '/static/EdStarsLogo.png',
+        //   name: '已经结束的校友活动3',
+        //   intro: '已经结束',
+        //   url: '/pages/Activity/ActivityInfo'
+        // }
       ]
     }
   },
@@ -117,6 +117,11 @@ export default {
       this.enrollingActivityList = r
       this.loadModal = false
       console.log(this.enrollingActivityList)
+    })
+    ActivityRequest.getMyOngoingActivityList(1).then(r => {
+      this.ongoingActivityList = r
+      this.loadModal = false
+      console.log(this.ongoingActivityList)
     })
   },
   methods: {

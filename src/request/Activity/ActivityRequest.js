@@ -92,9 +92,9 @@ export default {
   async getMyEnrollingActivityList (studentId) {
     console.log('getMyEnrollingActivityList')
     try {
-      const resp = await uniRequest.get('/activity/activity?page=1&page_size=999'
-      + '&student_id=' + studentId
-      + '&activity_state=' + STATE.ACTIVITY.ENROLLING)
+      const resp = await uniRequest.get('/activity/activity?page=1&page_size=999' +
+      '&student_id=' + studentId +
+      '&activity_state=' + STATE.ACTIVITY.ENROLLING)
       if (resp.data.code === STATE.REQUEST.SUCCESS) {
         let list = []
         list = []
@@ -123,9 +123,9 @@ export default {
   async getMyOngoingActivityList (studentId) {
     console.log('getMyOngoingActivityList')
     try {
-      const resp = await uniRequest.get('/activity/activity?page=1&page_size=999'
-      + '&student_id=' + studentId
-      + '&activity_state=' + STATE.ACTIVITY.UNDERWAY)
+      const resp = await uniRequest.get('/activity/activity?page=1&page_size=999' +
+      '&student_id=' + studentId +
+      '&activity_state=' + STATE.ACTIVITY.UNDERWAY)
       if (resp.data.code === STATE.REQUEST.SUCCESS) {
         let list = []
         list = []

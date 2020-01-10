@@ -3,11 +3,11 @@ export function toChineseTimeString (date) {
 }
 
 export function queryParams (data, isPrefix = false) {
-  isPrefix = isPrefix ? isPrefix : false
-  let prefix = isPrefix ? '?' : ''
-  let _result = []
-  for (let key in data) {
-    let value = data[key]
+  isPrefix = isPrefix || false
+  const prefix = isPrefix ? '?' : ''
+  const _result = []
+  for (const key in data) {
+    const value = data[key]
     // 去掉为空的参数
     if (['', undefined, null].includes(value)) {
       continue
