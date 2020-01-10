@@ -5,7 +5,7 @@ export default {
   async getOngoingActivityList () {
     console.log('getOngoingActivityList')
     try {
-      const resp = await uniRequest.get('/activity/activity?page=1&page_size=999&activity_state='+STATE.ACTIVITY.ENROLLING)
+      const resp = await uniRequest.get('/activity/activity?page=1&page_size=999&activity_state=' + STATE.ACTIVITY.ENROLLING)
       if (resp.data.code === '2000') {
         let list = []
         list = []
@@ -34,7 +34,7 @@ export default {
   async getAwaitActivityList () {
     console.log('getAwaitActivityList')
     try {
-      const resp = await uniRequest.get('/activity/activity?page=1&page_size=999&activity_state='+STATE.ACTIVITY.UNOPENED)
+      const resp = await uniRequest.get('/activity/activity?page=1&page_size=999&activity_state=' + STATE.ACTIVITY.UNOPENED)
       if (resp.data.code === '2000') {
         let list = []
         list = []
@@ -63,7 +63,7 @@ export default {
   async getFinishedActivityList () {
     console.log('getFinishedActivityList')
     try {
-      const resp = await uniRequest.get('/activity/activity?page=1&page_size=999&activity_state='+STATE.ACTIVITY.CLOSED)
+      const resp = await uniRequest.get('/activity/activity?page=1&page_size=999&activity_state=' + STATE.ACTIVITY.CLOSED)
       if (resp.data.code === '2000') {
         let list = []
         list = []
