@@ -43,22 +43,22 @@
             <view
               v-for="(schoolmateItem, schoolmateIndex) in schoollmateGroup.group"
               :key="schoolmateIndex"
-              class="cu-item arrow"
+              class="cu-item arrow padding-lg"
               @tap="getSchoolmateInfo(schoolmateItem.id)"
             >
               <view
-                class="cu-avatar round lg"
-                :style="'background-image:url('+schoolmateItem.avatar+');'"
+                class="cu-avatar lg"
+                :style="'background-image:url('+schoolmateItem.avatar_url+');'"
               />
               <view class="content">
                 <view class="text-lg">
-                  {{ schoolmateItem.name }}
+                  {{ schoolmateItem.name }} {{ schoolmateItem.wx }}
                 </view>
-                <view class="text-gray">
-                  未来之星第{{ schoolmateItem.camp }}期校友 &nbsp;|&nbsp; {{ schoolmateItem.area }}
+                <view class="text-gray text-sm">
+                  {{ schoolmateItem.company.name + schoolmateItem.company.position }}
                 </view>
-                <view class="text-gray">
-                  {{ schoolmateItem.profession }}
+                <view class="text-gray text-sm">
+                  {{ schoolmateItem.city }} &nbsp;|&nbsp;{{ schoolmateItem.profession }}
                 </view>
               </view>
             </view>
@@ -99,102 +99,46 @@
 </template>
 
 <script>
+import SchoolmateRequest from '@/request/Schoolmate/SchoolmateRequest.js'
 export default {
   name: 'SchoolmateList',
   data () {
     return {
-      schoolmateList: [
-        {
-          letter: 'A',
-          group: [
-            {
-              id: 1,
-              name: '阿黛尔',
-              avatar: '../../static/EdStarsLogo.png',
-              camp: '2',
-              area: '英国',
-              profession: '歌手'
-            }, {
-              id: 2,
-              name: '阿黛尔',
-              avatar: '../../static/EdStarsLogo.png',
-              camp: '2',
-              area: '英国',
-              profession: '歌手'
-            }, {
-              id: 3,
-              name: '阿黛尔',
-              avatar: '../../static/EdStarsLogo.png',
-              camp: '2',
-              area: '英国',
-              profession: '歌手'
-            }
-          ]
-        }, {
-          letter: 'B',
-          group: [
-            {
-              id: 4,
-              name: 'B阿黛尔',
-              avatar: '../../static/EdStarsLogo.png',
-              camp: '3',
-              area: '英国',
-              profession: '歌手'
-            }, {
-              id: 5,
-              name: 'B阿黛尔',
-              avatar: '../../static/EdStarsLogo.png',
-              camp: '3',
-              area: '英国',
-              profession: '歌手'
-            }, {
-              id: 6,
-              name: 'B阿黛尔',
-              avatar: '../../static/EdStarsLogo.png',
-              camp: '3',
-              area: '英国',
-              profession: '歌手'
-            }
-          ]
-        }, {
-          letter: 'C',
-          group: [
-            {
-              id: 7,
-              name: 'C阿黛尔',
-              avatar: '../../static/EdStarsLogo.png',
-              camp: '3',
-              area: '英国',
-              profession: '歌手'
-            }, {
-              id: 8,
-              name: 'C阿黛尔',
-              avatar: '../../static/EdStarsLogo.png',
-              camp: '3',
-              area: '英国',
-              profession: '歌手'
-            }, {
-              id: 9,
-              name: 'C阿黛尔',
-              avatar: '../../static/EdStarsLogo.png',
-              camp: '3',
-              area: '英国',
-              profession: '歌手'
-            }
-          ]
-        }
-      ],
+      schoolmateList: [],
       statusBar: this.StatusBar,
       customBar: this.CustomBar,
       selectBar: '',
       listBar: '',
       hidden: true,
       groupCurId: '',
-      groupCur: ''
+      groupCur: '',
+      option: {
+        camp: '',
+        name: '',
+        city: '',
+        profession: ''
+      }
     }
   },
-  onLoad () {
-    this.groupCur = this.schoolmateList[0]
+  mounted () {
+    let url = '?'
+    if (this.option.camp !== '') {
+      url += 'semester_id=' + this.option.camp + '&'
+    }
+    if (this.option.name !== '') {
+      url += 'name=' + this.option.name + '&'
+    }
+    if (this.option.city !== '') {
+      url += 'city=' + this.option.city + '&'
+    }
+    if (this.option.profession !== '') {
+      url += 'profession=' + this.option.profession
+    }
+    SchoolmateRequest.getSchoolmateList(url).then(schoolmateList => {
+      console.log(schoolmateList)
+      this.schoolmateList = schoolmateList
+      this.groupCur = this.schoolmateList[0]
+    })
   },
   onReady () {
     const that = this
