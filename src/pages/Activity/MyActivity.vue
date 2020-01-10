@@ -1,6 +1,6 @@
 <template>
   <view>
-    <uni-collapse
+    <!-- <uni-collapse
       :accordion="true"
     >
       <uni-collapse-item
@@ -21,21 +21,41 @@
           :list="finishedActivityList"
         />
       </uni-collapse-item>
-    </uni-collapse>
+    </uni-collapse> -->
+    <van-collapse
+      :value="classCollapse"
+      :accordion="false"
+      @change="classChange"
+    >
+      <van-collapse-item
+        title="正在进行"
+      >
+        <item-list
+          :list="ongoingActivityList"
+        />
+      </van-collapse-item>
+      <van-collapse-item
+        title="已结束"
+      >
+        <item-list
+          :list="finishedActivityList"
+        />
+      </van-collapse-item>
+    </van-collapse>
+    <loading-modal :display="loadModal" />
   </view>
 </template>
 
 <script>
-import { uniCollapse, uniCollapseItem } from '@dcloudio/uni-ui'
 import ItemList from '@/components/ItemList.vue'
 export default {
   components: {
-    uniCollapse,
-    uniCollapseItem,
     ItemList
   },
   data () {
     return {
+      loadModal: false,
+      classCollapse: ['1'],
       ongoingActivityList: [
         {
           id: 1,
@@ -78,6 +98,20 @@ export default {
           url: '/pages/Activity/ActivityInfo'
         }
       ]
+    }
+  },
+  mounted () {
+    // this.loadModal = true
+    // ActivityRequest.getMyOngoingActivityList().then(r => {
+    //   this.finishedActivityList = r
+    //   this.loadModal = false
+    //   console.log(this.finishedActivityList)
+    // })
+  },
+  methods: {
+    classChange (e) {
+      this.classCollapse = e.detail
+      // console.log(e.detail)
     }
   }
 }
