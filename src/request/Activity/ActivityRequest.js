@@ -90,11 +90,42 @@ export default {
   },
 
   async getMyEnrollingActivityList (studentId) {
-    console.log('getMyOngoingActivityList')
+    console.log('getMyEnrollingActivityList')
     try {
       const resp = await uniRequest.get('/activity/activity?page=1&page_size=999'
       + '&student_id=' + studentId
       + '&activity_state=' + STATE.ACTIVITY.ENROLLING)
+      if (resp.data.code === STATE.REQUEST.SUCCESS) {
+        let list = []
+        list = []
+        for (let i = 0; i < parseInt(resp.data.data.count); i++) {
+          const item = resp.data.data.results[i]
+          list.push({
+            id: item.id,
+            name: item.name,
+            img: '/static/EdStarsLogo.png',
+            intro: '',
+            url: '/pages/Activity/ActivityInfo',
+            data: {
+              id: item.id
+            }
+          })
+        }
+        return list
+      } else {
+        console.error(resp.data.msg)
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  },
+
+  async getMyOngoingActivityList (studentId) {
+    console.log('getMyOngoingActivityList')
+    try {
+      const resp = await uniRequest.get('/activity/activity?page=1&page_size=999'
+      + '&student_id=' + studentId
+      + '&activity_state=' + STATE.ACTIVITY.UNDERWAY)
       if (resp.data.code === STATE.REQUEST.SUCCESS) {
         let list = []
         list = []
