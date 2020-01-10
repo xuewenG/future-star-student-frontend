@@ -11,6 +11,7 @@
     />
     <course-resource
       v-if="pageCur===1"
+      :course-id="courseData.id"
     />
     <course-classmate-list
       v-if="pageCur===2"

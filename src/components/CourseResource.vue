@@ -59,8 +59,8 @@
           >
             <button
               class="cu-btn content"
-              :disabled="resourceItem.state===STATE.RESOURCE.CLOSED"
-              @tap="test()"
+              :disabled="isClosed(resourceItem)"
+              @tap="test2(resourceItem.state===STATE.RESOURCE.CLOSED)"
             >
               <text
                 class="text-black"
@@ -103,7 +103,7 @@
 </template>
 
 <script>
-import CourseDetailRequest from '@/request/Course/CourseRequestDetail'
+import CourseDetailRequest from '@/request/Course/CourseDetailRequest'
 import STATE from '@/request/constant'
 export default {
   props: {
@@ -149,8 +149,17 @@ export default {
       this.classCollapse = e.detail
       // console.log(e.detail)
     },
+    isClosed (courseItem) {
+      return courseItem.state === STATE.RESOURCE.CLOSED
+    },
     test (courseItem) {
       console.log(courseItem)
+      console.log(courseItem.state)
+      console.log(STATE.RESOURCE.CLOSED)
+      console.log(courseItem.state===STATE.RESOURCE.CLOSED)
+    },
+    test2 (e) {
+      console.log(e)
     }
   }
 }

@@ -74,7 +74,7 @@ export default {
     ActivityRequest.getFinishedActivityList().then(r => {
       this.finishedActivityList = r
       this.loadModal = false
-      console.log(this.finishedActivityList)
+      // console.log(this.finishedActivityList)
     })
   }
 }
