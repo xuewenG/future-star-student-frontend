@@ -28,6 +28,13 @@
       @change="classChange"
     >
       <van-collapse-item
+        title="已报名"
+      >
+        <item-list
+          :list="enrollingActivityList"
+        />
+      </van-collapse-item>
+      <van-collapse-item
         title="正在进行"
       >
         <item-list
@@ -48,6 +55,7 @@
 
 <script>
 import ItemList from '@/components/ItemList.vue'
+import ActivityRequest from '@/request/Activity/ActivityRequest'
 export default {
   components: {
     ItemList
@@ -56,22 +64,25 @@ export default {
     return {
       loadModal: false,
       classCollapse: ['1'],
+      enrollingActivityList: [
+        
+      ],
       ongoingActivityList: [
         {
           id: 1,
-          img: '../static/EdStarsLogo.png',
+          img: '/static/EdStarsLogo.png',
           name: '正在进行的校友活动1',
           intro: '正在进行',
           url: '/pages/Activity/ActivityInfo'
         }, {
           id: 2,
-          img: '../static/EdStarsLogo.png',
+          img: '/static/EdStarsLogo.png',
           name: '正在进行的校友活动2',
           intro: '正在进行',
           url: '/pages/Activity/ActivityInfo'
         }, {
           id: 3,
-          img: '../static/EdStarsLogo.png',
+          img: '/static/EdStarsLogo.png',
           name: '正在进行的校友活动3',
           intro: '正在进行',
           url: '/pages/Activity/ActivityInfo'
@@ -80,19 +91,19 @@ export default {
       finishedActivityList: [
         {
           id: 7,
-          img: '../static/EdStarsLogo.png',
+          img: '/static/EdStarsLogo.png',
           name: '已经结束的校友活动1',
           intro: '已经结束',
           url: '/pages/Activity/ActivityInfo'
         }, {
           id: 8,
-          img: '../static/EdStarsLogo.png',
+          img: '/static/EdStarsLogo.png',
           name: '已经结束的校友活动2',
           intro: '已经结束',
           url: '/pages/Activity/ActivityInfo'
         }, {
           id: 9,
-          img: '../static/EdStarsLogo.png',
+          img: '/static/EdStarsLogo.png',
           name: '已经结束的校友活动3',
           intro: '已经结束',
           url: '/pages/Activity/ActivityInfo'
@@ -101,12 +112,12 @@ export default {
     }
   },
   mounted () {
-    // this.loadModal = true
-    // ActivityRequest.getMyOngoingActivityList().then(r => {
-    //   this.finishedActivityList = r
-    //   this.loadModal = false
-    //   console.log(this.finishedActivityList)
-    // })
+    this.loadModal = true
+    ActivityRequest.getMyEnrollingActivityList(1).then(r => {
+      this.enrollingActivityList = r
+      this.loadModal = false
+      console.log(this.enrollingActivityList)
+    })
   },
   methods: {
     classChange (e) {
