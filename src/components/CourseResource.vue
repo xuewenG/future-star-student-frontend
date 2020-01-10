@@ -156,7 +156,7 @@ export default {
       console.log(courseItem)
       console.log(courseItem.state)
       console.log(STATE.RESOURCE.CLOSED)
-      console.log(courseItem.state===STATE.RESOURCE.CLOSED)
+      console.log(courseItem.state === STATE.RESOURCE.CLOSED)
     },
     test2 (e) {
       console.log(e)
