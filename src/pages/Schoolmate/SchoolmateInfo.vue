@@ -14,15 +14,15 @@
     <view class="cu-list menu">
       <view class="cu-item padding-lg">
         <view
-          class="cu-avatar radius lg"
-          :style="'background-image:url('+schoolmateInfo.avatar+');'"
+          class="cu-avatar lg margin"
+          :style="'background-image:url('+schoolmateInfo.avatar_url+');'"
         />
         <view class="content margin-left">
           <view class="text-lg">
             {{ schoolmateInfo.name }}
           </view>
           <view class="text-gray">
-            未来之星第{{ schoolmateInfo.camp }}期校友 &nbsp;|&nbsp; {{ schoolmateInfo.area }}
+            {{ schoolmateInfo.city }}
           </view>
           <view class="text-gray">
             {{ schoolmateInfo.profession }}
@@ -32,64 +32,113 @@
 
       <view class="cu-item">
         <view class="content">
-          <text class="cuIcon-male text-cyan lg" />
-          <text class="text-grey text-lg">
-            性别&nbsp;&nbsp;&nbsp;&nbsp;{{ schoolmateInfo.sex }}
-          </text>
+          <view class="flex p-xs margin-bottom-sm mb-sm">
+            <view class="flex-sub">
+              <text class="cuIcon-male text-cyan lg" />
+              <text class="margin-xs radius">
+                性别
+              </text>
+            </view>
+            <view class="flex-treble padding-sm margin-xs radius">
+              {{ schoolmateInfo.gender === 0 ? '男' : '女' }}
+            </view>
+          </view>
         </view>
       </view>
 
       <view class="cu-item">
         <view class="content">
-          <text class="cuIcon-calendar text-cyan lg" />
-          <text class="text-grey text-lg">
-            出生日期&nbsp;&nbsp;{{ schoolmateInfo.birth }}
-          </text>
+          <view class="flex p-xs margin-bottom-sm mb-sm">
+            <view class="flex-sub">
+              <text class="cuIcon-calendar text-cyan lg" />
+              <text class="margin-xs radius">
+                出生日期
+              </text>
+            </view>
+            <view class="flex-treble padding-sm margin-xs radius">
+              {{ schoolmateInfo.birthday }}
+            </view>
+          </view>
         </view>
       </view>
 
       <view class="cu-item">
         <view class="content">
-          <text class="cuIcon-dianhua text-cyan lg" />
-          <text class="text-grey text-lg">
-            联系电话&nbsp;&nbsp;{{ schoolmateInfo.tel }}
-          </text>
+          <view class="flex p-xs margin-bottom-sm mb-sm">
+            <view class="flex-sub">
+              <text class="cuIcon-dianhua text-cyan lg" />
+              <text class="margin-xs radius text-grey">
+                联系电话
+              </text>
+            </view>
+            <view class="flex-treble padding-sm margin-xs radius">
+              {{ schoolmateInfo.phone_number }}
+            </view>
+          </view>
         </view>
       </view>
 
       <view class="cu-item">
         <view class="content">
-          <text class="cuIcon-mail text-cyan" />
-          <text class="text-grey">
-            常用邮箱&nbsp;&nbsp;{{ schoolmateInfo.mail }}
-          </text>
+          <view class="flex p-xs margin-bottom-sm mb-sm">
+            <view class="flex-sub">
+              <text class="cuIcon-mail text-cyan lg" />
+              <text class="margin-xs radius text-grey">
+                常用邮箱
+              </text>
+            </view>
+            <view class="flex-treble padding-sm margin-xs radius">
+              {{ schoolmateInfo.email }}
+            </view>
+          </view>
         </view>
       </view>
 
       <view class="cu-item">
         <view class="content">
-          <text class="cuIcon-community text-cyan" />
-          <text class="text-grey">
-            毕业院校&nbsp;&nbsp;{{ schoolmateInfo.graudation }}
-          </text>
+          <view class="flex p-xs margin-bottom-sm mb-sm">
+            <view class="flex-sub">
+              <text class="cuIcon-community text-cyan lg" />
+              <text class="margin-xs radius text-grey">
+                毕业院校
+              </text>
+            </view>
+            <view class="flex-treble padding-sm margin-xs radius">
+              {{ schoolmateInfo.school + '|' + schoolmateInfo.education }}
+            </view>
+          </view>
         </view>
       </view>
 
       <view class="cu-item">
         <view class="content">
-          <text class="cuIcon-community text-cyan" />
-          <text class="text-grey">
-            所在公司&nbsp;&nbsp;{{ schoolmateInfo.company }}
-          </text>
+          <view class="flex p-xs margin-bottom-sm mb-sm">
+            <view class="flex-sub">
+              <text class="cuIcon-community text-cyan lg" />
+              <text class="margin-xs radius text-grey">
+                所在公司
+              </text>
+            </view>
+            <view class="flex-treble padding-sm margin-xs radius">
+              {{ schoolmateInfo.company.name + '|' + schoolmateInfo.company.city }}
+            </view>
+          </view>
         </view>
       </view>
 
       <view class="cu-item">
         <view class="content">
-          <text class="cuIcon-calendar text-cyan" />
-          <text class="text-grey">
-            公司职务&nbsp;&nbsp;{{ schoolmateInfo.position }}
-          </text>
+          <view class="flex p-xs margin-bottom-sm mb-sm">
+            <view class="flex-sub">
+              <text class="cuIcon-calendar text-cyan lg" />
+              <text class="margin-xs radius text-grey">
+                公司职务
+              </text>
+            </view>
+            <view class="flex-treble padding-sm margin-xs radius">
+              {{ schoolmateInfo.company.position }}
+            </view>
+          </view>
         </view>
       </view>
     </view>
@@ -101,26 +150,13 @@ export default {
   name: 'SchoolmateInfo',
   data () {
     return {
-      schoolmateInfo: {
-        schoolmateId: '',
-        name: '余昊然',
-        avatar: '../../static/EdStarsLogo.png',
-        camp: '2',
-        area: '安徽·合肥',
-        profession: '素质教育类',
-        sex: '女',
-        birth: '1978-02-21',
-        tel: '15056042608',
-        mail: '1361051747@qq.com',
-        graudation: '2004-2008/北京大学/计算机科学/学士',
-        company: '计蒜客',
-        position: '讲师'
-      }
+      schoolmateInfo: {}
     }
   },
   onLoad (option) {
-    console.log(option.schoolmateId)
-    this.schoolmateInfo.schoolmateId = option.schoolmateId
+    const schoolmate = JSON.parse(decodeURIComponent(option.schoolmate))
+    console.log(schoolmate)
+    this.schoolmateInfo = schoolmate
   }
 }
 </script>

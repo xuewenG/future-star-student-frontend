@@ -44,7 +44,7 @@
               v-for="(schoolmateItem, schoolmateIndex) in schoollmateGroup.group"
               :key="schoolmateIndex"
               class="cu-item arrow padding-lg"
-              @tap="getSchoolmateInfo(schoolmateItem.id)"
+              @tap="getSchoolmateInfo(index, schoolmateIndex)"
             >
               <view
                 class="cu-avatar lg"
@@ -153,10 +153,11 @@ export default {
     }).exec()
   },
   methods: {
-    getSchoolmateInfo (id) {
+    getSchoolmateInfo (index, schoolmateIndex) {
+      const schoolmate = this.schoolmateList[index].group[schoolmateIndex]
       /* global uni:false */
       uni.navigateTo({
-        url: '/pages/Schoolmate/SchoolmateInfo?schoolmateId=' + id,
+        url: '/pages/Schoolmate/SchoolmateInfo?schoolmate=' + encodeURIComponent(JSON.stringify(schoolmate)),
         success: (res) => {
           console.log(res)
         },
