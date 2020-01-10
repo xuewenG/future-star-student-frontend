@@ -14,12 +14,17 @@ export default {
           campList.push({
             id: camp.id,
             name: camp.subject,
-            introduction: camp.introduction,
-            state: camp.state,
-            type: 'image',
-            swiperImg: 'https://i.loli.net/2020/01/09/zkinxqPBwbtdvXQ.png',
             img: 'https://i.loli.net/2020/01/09/iEZpONujHL4Sc13.png',
-            url: '/pages/Apply/CampInfo'
+            intro: '',
+            url: '/pages/Apply/CampInfo',
+            data: {
+              id: camp.id,
+              name: camp.subject,
+              introduction: camp.introduction,
+              state: camp.state,
+              type: 'image',
+              swiperImg: 'https://i.loli.net/2020/01/09/zkinxqPBwbtdvXQ.png'
+            }
           })
         }
         return campList

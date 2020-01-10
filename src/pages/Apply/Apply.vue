@@ -18,7 +18,7 @@
       >
         <view class="swiper-item">
           <image
-            :src="item.swiperImg"
+            :src="item.data.swiperImg"
             mode="aspectFill"
           />
         </view>

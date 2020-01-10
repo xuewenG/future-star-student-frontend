@@ -21,7 +21,7 @@
       <view class="cu-item shadow">
         <view class="image">
           <image
-            :src="camp.swipperImg"
+            :src="camp.swiperImg"
             class="png"
             mode="widthFix"
           />
@@ -172,7 +172,8 @@ export default {
     }
   },
   onLoad: function (option) {
-    this.camp.id = option.id
+    this.camp = JSON.parse(decodeURIComponent(option.data))
+    console.log(this.camp)
   }
 }
 </script>
