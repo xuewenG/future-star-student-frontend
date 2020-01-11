@@ -7,7 +7,8 @@ export default {
     REFUSED: 1,
     PASSED: 2,
     GRADUATED: 3,
-    UNABLE_FINISHED: 4
+    UNABLE_FINISHED: 4,
+    NOT_APPLY: 5
   },
   ACTIVITY: {
     UNOPENED: 0,

@@ -1,11 +1,12 @@
 import uniRequest from 'uni-request'
+import STATE from '@/request/constant'
 import { toChineseTimeString } from '@/request/util'
 
 export default {
   async getCampList () {
     try {
       const resp = await uniRequest.get('/semester/semester?page=1&page_size=999')
-      if (resp.data.code === '2000') {
+      if (resp.data.code === STATE.REQUEST.SUCCESS) {
         const results = resp.data.data.results
         let campList = []
         campList = []
@@ -38,7 +39,7 @@ export default {
   async getCampInfo (campId) {
     try {
       const resp = await uniRequest.get('/clazz/clazz?page=1&page_size=999&semester_id=' + campId)
-      if (resp.data.code === '2000') {
+      if (resp.data.code === STATE.REQUEST.SUCCESS) {
         const results = resp.data.data.results
         let clazzList = []
         clazzList = []
@@ -68,7 +69,7 @@ export default {
   async getCourseList (classId) {
     try {
       const resp = await uniRequest.get('/course/course?page=1&page_size=999&clazz_id=' + classId)
-      if (resp.data.code === '2000') {
+      if (resp.data.code === STATE.REQUEST.SUCCESS) {
         const results = resp.data.data.results
         let courseList = []
         courseList = []
@@ -98,6 +99,21 @@ export default {
       }
     } catch (error) {
       console.error(error)
+    }
+  },
+  async getClazzApplyState (clazzId, studentId) {
+    try {
+      const resp = await uniRequest.get('/clazz/student?page=1&page_size=999&clazz_id=' + clazzId + '&student_id=' + studentId)
+      if (resp.data.code === STATE.REQUEST.SUCCESS) {
+        if (resp.data.data.count === 0) {
+          return STATE.AUDIT.NOT_APPLY
+        }
+        return resp.data.data.results.state
+      } else {
+        console.error(resp.data.msg)
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 }

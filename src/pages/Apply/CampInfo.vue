@@ -146,7 +146,7 @@
       </form>
 
       <button
-        class="cu-btn bg-cyan shadow block"
+        class="cu-btn bg-cyan shadow block margin"
         @tap="toApply"
       >
         我要报名
@@ -157,6 +157,7 @@
 
 <script>
 import ApplyRequest from '@/request/Apply/ApplyRequest.js'
+import STATE from '@/request/constant'
 export default {
   name: 'CampInfo',
   data () {
@@ -176,7 +177,9 @@ export default {
         }]
       },
       classCollapse: '1',
-      clazzApply: ''
+      clazzApply: '',
+      clazzApplyState: '',
+      toastTitle: ['您已通过初筛，请等待电话面试通知', '您未通过录取', '您已被录取，请线下缴费', '您已成功毕业']
     }
   },
   mounted () {
@@ -214,18 +217,26 @@ export default {
       if (!this.checkClazz(this.clazzApply)) {
         return
       }
-      console.log(e)
-      console.log(this.clazzApply)
-      // uni.setStorageSync('clazz_apply', this.clazzApply)
-      // console.log(uni.getStorageSync('clazz_apply'))
-      /* global uni:false */
-      uni.navigateTo({
-        url: '../Apply/BaseInfoForm',
-        fail: (res) => {
-          console.log(res)
-        },
-        success: (res) => {
-          console.log(res)
+      ApplyRequest.getClazzApplyState(this.clazzApply, uni.getStorageSync('student_id')).then(state => {
+        if (state === STATE.AUDIT.NOT_APPLY) {
+          // uni.setStorageSync('clazz_apply', this.clazzApply)
+          // console.log(uni.getStorageSync('clazz_apply'))
+          console.log(state)
+          /* global uni:false */
+          uni.navigateTo({
+            url: '../Apply/BaseInfoForm',
+            fail: (res) => {
+              console.log(res)
+            },
+            success: (res) => {
+              console.log(res)
+            }
+          })
+        } else {
+          uni.showToast({
+            title: this.toastTitle[state],
+            duration: 3000
+          })
         }
       })
     }
