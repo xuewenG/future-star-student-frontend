@@ -1,6 +1,6 @@
 <template>
   <view>
-    <cover-image src="/static/EdStarsEducationClass.png" />
+    <cover-image :src="courseData.image" />
     <view class="cu-bar bg-white solid-bottom">
       <view class="action">
         <text class="cuIcon-title text-green" /> 课程介绍

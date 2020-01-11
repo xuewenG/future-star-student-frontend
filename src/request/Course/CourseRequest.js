@@ -12,6 +12,7 @@ export default {
         list = []// make a direct use of list in order to pass eslint
         for (let i = 0; i < parseInt(resp.data.data.count); i++) {
           const item = resp.data.data.results[i].clazz
+          console.log(item)
           if (item.state === STATE.ACTIVITY.UNDERWAY) {
             list.push({
               id: item.id,
@@ -109,6 +110,7 @@ export default {
               location: item.location,
               introduction: item.introduction,
               clazz_id: item.clazz,
+              image: item.image,
               teacher: {
                 name: item.teacher.name,
                 avatar: item.teacher.avatar,
