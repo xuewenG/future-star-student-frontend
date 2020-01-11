@@ -44,6 +44,7 @@
         class="cu-btn bg-green lg"
         :disabled="!canApply"
         v-text="applyButtonText"
+        @tap="enroll"
       >
         加载中...
       </button>
@@ -54,6 +55,7 @@
 
 <script>
 import TitleBar from '@/components/TitleBar.vue'
+import ActivityEnrollRequest from '@/request/Activity/ActivityEnrollRequest'
 import STATE from '@/request/constant'
 import { toChineseTimeString } from '@/request/util'
 export default {
@@ -85,6 +87,28 @@ export default {
     },
     changeLoading () {
       this.loadModal = false
+    },
+    enroll () {
+      this.canApply = false
+      this.applyButtonText = '正在报名...'
+      ActivityEnrollRequest.activityEnroll(1, this.activityData.id).then(r => {
+        if (r.state === 'success') {
+          this.canApply = false
+          this.applyButtonText = '已报名'
+          uni.showToast({
+            title: '报名成功',
+            icon: 'success'
+          })
+        }
+        else {
+          this.canApply = true
+          this.applyButtonText = '现在报名'
+          uni.showToast({
+            title: r.msg,
+            icon: 'none'
+          })
+        }
+      })
     },
     test (e) {
       console.log(e)
