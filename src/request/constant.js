@@ -2,6 +2,11 @@ export default {
   REQUEST: {
     SUCCESS: '2000'
   },
+  SCHOOLMATE: {
+    INVALID: 0,
+    NOT_GRADUATE: 1,
+    VALID: 2
+  },
   AUDIT: {
     WAIT_FOR_AUDIT: 0,
     REFUSED: 1,
