@@ -107,6 +107,44 @@
     </view>
 
     <view class="padding">
+      <form>
+        <view class="cu-bar bg-white margin-top-sm solids-bottom">
+          <view class="action">
+            <text class="cuIcon-titles text-orange" /> 报名班级
+          </view>
+        </view>
+        <radio-group
+          class="block"
+          @change="selectClazz"
+        >
+          <view class="cu-bar bg-white cu-item">
+            <view class="action">
+              <text class="cuIcon-profile text-cyan margin-left" />
+              <text class="margin-left">
+                请选择报名的班级
+              </text>
+            </view>
+          </view>
+          <view class="cu-form-group cu-list menu text-left">
+            <view
+              v-for="(clazz, index) in camp.clazzList"
+              :key="index"
+              class="cu-item"
+            >
+              <label class="flex justify-between align-center flex-sub">
+                <radio
+                  class="blue radio"
+                  :class="clazzApply===clazz.id?'checked':''"
+                  :checked="clazzApply===clazz.id?true:false"
+                  :value="clazz.id"
+                />
+                <view class="flex-sub margin-left">{{ clazz.name }}</view>
+              </label>
+            </view>
+          </view>
+        </radio-group>
+      </form>
+
       <button
         class="cu-btn bg-cyan shadow block"
         @tap="toApply"
@@ -137,7 +175,8 @@ export default {
           }]
         }]
       },
-      classCollapse: '1'
+      classCollapse: '1',
+      clazzApply: ''
     }
   },
   mounted () {
@@ -157,8 +196,28 @@ export default {
     classChange (e) {
       this.classCollapse = e.detail
     },
+    checkClazz (clazzApply) {
+      if (clazzApply === null || clazzApply === '') {
+        uni.showToast({
+          title: '请选择报名班级',
+          icon: 'none'
+        })
+        return false
+      }
+      this.clazzApply = clazzApply
+      return true
+    },
+    selectClazz (e) {
+      this.clazzApply = e.detail.value
+    },
     toApply (e) {
+      if (!this.checkClazz(this.clazzApply)) {
+        return
+      }
       console.log(e)
+      console.log(this.clazzApply)
+      // uni.setStorageSync('clazz_apply', this.clazzApply)
+      // console.log(uni.getStorageSync('clazz_apply'))
       /* global uni:false */
       uni.navigateTo({
         url: '../Apply/BaseInfoForm',
