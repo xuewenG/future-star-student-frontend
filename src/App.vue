@@ -101,12 +101,7 @@ export default {
 <style>
   @import "colorui/main.css";
   @import "colorui/icon.css";
-  
-  page {
-    font-family:"PingFangSC-Thin";
-    font-size:32rpx;          /*微信小程序中，使用rpx做单位*/
-  }
-  
+
   .nav-list {
     display: flex;
     flex-wrap: wrap;

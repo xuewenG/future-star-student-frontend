@@ -153,6 +153,7 @@ export default {
         list = []
         for (let i = 0; i < parseInt(resp.data.data.count); i++) {
           const item = resp.data.data.results[i]
+          console.log(item)
           list.push({
             id: item.id,
             name: item.name,

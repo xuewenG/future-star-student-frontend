@@ -68,23 +68,38 @@
               />
               <view class="text-black">
                 <text v-text="resourceType[resourceItem.type].name" />
-                <text class="margin-left-sm" v-text="resourceItem.name" />
+                <text
+                  class="margin-left-sm"
+                  v-text="resourceItem.name"
+                />
               </view>
             </button>
           </view>
-          
-          <view class="cu-modal bottom-modal" :class="modalShow?'show':''">
-          	<view class="cu-dialog">
-          		<view class="cu-bar bg-white">
-          			<view class="action text-black">课堂速记</view>
-          			<view class="action text-red" @tap="hideModal">关闭</view>
-          		</view>
-          		<view class="padding-xl" v-text="modalContent">
-          			Modal 内容。
-          		</view>
-          	</view>
+
+          <view
+            class="cu-modal bottom-modal"
+            :class="modalShow?'show':''"
+          >
+            <view class="cu-dialog">
+              <view class="cu-bar bg-white">
+                <view class="action text-black">
+                  课堂速记
+                </view>
+                <view
+                  class="action text-red"
+                  @tap="hideModal"
+                >
+                  关闭
+                </view>
+              </view>
+              <view
+                class="padding-xl"
+                v-text="modalContent"
+              >
+                Modal 内容。
+              </view>
+            </view>
           </view>
-          
         </view>
       </van-collapse-item>
     </van-collapse>
@@ -152,7 +167,7 @@ export default {
     },
     handleCheck (res) {
       console.log(res)
-      if (res.type === 0){
+      if (res.type === 0) {
         this.showModal(res.word)
       }
     }
