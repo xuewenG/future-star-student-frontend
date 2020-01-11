@@ -1,26 +1,6 @@
 <template>
   <view>
-    <view
-      class="cu-bar bg-white search fixed"
-      :style="[{top:topNav+CustomBar+6+'px'}]"
-    >
-      <view class="search-form round">
-        <text class="cuIcon-search" />
-        <input
-          type="text"
-          placeholder="输入搜索的关键词"
-          confirm-type="search"
-        >
-      </view>
-      <view class="action">
-        <button class="cu-btn bg-green shadow-blur round">
-          搜索
-        </button>
-      </view>
-    </view>
-    <view
-      :style="[{marginTop: topNav+16+'px'}]"
-    >
+    <view>
       <item-list
         :list="finishedActivityList"
       />

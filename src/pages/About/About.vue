@@ -37,9 +37,9 @@ export default {
     return {
       aboutItem: {
         id: 0,
-        img: '/static/EdStarsLogo.png',
-        name: '俞昊然',
-        intro: ''
+        img: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2449839064,3509439903&fm=15&gp=0.jpg',
+        name: '李彦宏',
+        intro: '百度创始人'
       }
     }
   },
