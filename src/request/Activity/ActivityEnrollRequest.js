@@ -15,7 +15,7 @@ export default {
       console.error(error)
     }
   },
-  
+
   async activityEnroll (studentId, activityId) {
     console.log('activityEnroll')
     try {

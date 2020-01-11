@@ -43,8 +43,8 @@
       <button
         class="cu-btn bg-green lg"
         :disabled="!canApply"
-        v-text="applyButtonText"
         @tap="enroll"
+        v-text="applyButtonText"
       >
         加载中...
       </button>
@@ -99,8 +99,7 @@ export default {
             title: '报名成功',
             icon: 'success'
           })
-        }
-        else {
+        } else {
           this.canApply = true
           this.applyButtonText = '现在报名'
           uni.showToast({
