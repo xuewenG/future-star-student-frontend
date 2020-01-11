@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import SchoolmateInfoRequest from '@/request/About/SchoolmateInfoRequest'
 export default {
   props: {
     moduleList: {
@@ -32,8 +33,32 @@ export default {
   },
   methods: {
     NavChange (e) {
-      this.PageCur = e.currentTarget.dataset.cur
-      this.$emit('cur-changed', e.currentTarget.dataset.cur)
+      if (e.currentTarget.dataset.cur === 0 || e.currentTarget.dataset.cur === 4) {
+        this.PageCur = e.currentTarget.dataset.cur
+        this.$emit('cur-changed', e.currentTarget.dataset.cur)
+      } else {
+        const uid = uni.getStorageSync('user_id')
+        if (uid) {
+          SchoolmateInfoRequest.validateIsSchoolmate(uid).then(r => {
+            const isSchoolmate = r.isSchoolmate
+            if (isSchoolmate) {
+              this.PageCur = e.currentTarget.dataset.cur
+              this.$emit('cur-changed', e.currentTarget.dataset.cur)
+            } else {
+              uni.showToast({
+                title: '您还不是校友，请先报名',
+                icon: 'none'
+              })
+            }
+          })
+        } else {
+          console.log('uid', uid)
+          uni.showToast({
+            title: '您的登录存在问题，请重新登录',
+            icon: 'none'
+          })
+        }
+      }
     }
   }
 }

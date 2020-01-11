@@ -2,14 +2,23 @@ import uniRequest from 'uni-request'
 import STATE from '@/request/constant'
 
 export default {
-  async validateEnrollQualification (activityId) {
+  async validateEnrollQualification (activityId, studentId) {
     console.log('validateEnrollQualification')
     try {
-      const resp = await uniRequest.get('/activity/clazz?page=1&page_size=999&activity_id=' + activityId)
+      // const resp = await uniRequest.get('/activity/student/' + activityId + '/' + studentId)
+      const resp = await uniRequest.get('/activity/student/' + activityId + '/' + studentId)
       if (resp.data.code === STATE.REQUEST.SUCCESS) {
-        console.log(resp.data.data)
+        console.log('获取报名状态', resp.data.msg)
+        return {
+          hasEnrolled: true,
+          msg: '已经报名'
+        }
       } else {
-        console.error(resp.data.msg)
+        console.log('获取报名状态', resp.data.msg)
+        return {
+          hasEnrolled: false,
+          msg: '还未报名'
+        }
       }
     } catch (error) {
       console.error(error)

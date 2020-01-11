@@ -83,6 +83,9 @@ export default {
   },
   methods: {
     stringify (time) {
+      console.log('src', time)
+      console.log('date', (new Date(time)).toISOString())
+      console.log('target', toChineseTimeString(new Date(time)))
       return toChineseTimeString(new Date(time))
     },
     changeLoading () {
@@ -118,10 +121,17 @@ export default {
     this.activityData = JSON.parse(decodeURIComponent(option.data))
     console.log('activityState', this.activityData.state)
     if (this.activityData.state === STATE.ACTIVITY.ENROLLING) {
-      this.canApply = this.activityData.current_people_number < this.activityData.people_number_limit
-      if (!this.canApply) {
-        this.applyButtonText = '人数已满'
-      }
+      ActivityEnrollRequest.validateEnrollQualification(this.activityData.id, uni.getStorageSync('user_id')).then(r => {
+        this.canApply = !(r.hasEnrolled)
+        if (!this.canApply) {
+          this.applyButtonText = '已报名'
+        } else {
+          this.canApply = this.activityData.current_people_number < this.activityData.people_number_limit
+          if (!this.canApply) {
+            this.applyButtonText = '人数已满'
+          }
+        }
+      })
     } else if (this.activityData.state === STATE.ACTIVITY.UNOPENED) {
       this.canApply = false
       this.applyButtonText = '报名尚未开始'

@@ -91,7 +91,7 @@ export default {
               console.log(JSON.stringify(infoRes.userInfo))
               // 获取用户信息后向调用信息更新方法
               const avatarUrl = infoRes.userInfo.avatarUrl // 头像
-              const gender = infoRes.userInfo.gender - 1 // 性别
+              const gender = infoRes.userInfo.gender // 性别
               console.log(code)
               loginRequest.login({
                 code,
@@ -105,6 +105,8 @@ export default {
           })
         }
       })
+      uni.clearStorageSync()
+      uni.setStorageSync('user_id', 1)
     }
   },
   onLoad () {

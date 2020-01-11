@@ -60,42 +60,46 @@
             <button
               class="cu-btn content"
               :disabled="isClosed(resourceItem)"
-              @tap="test2(resourceItem.state===STATE.RESOURCE.CLOSED)"
+              @tap="handleCheck(resourceItem)"
             >
               <text
                 class="text-black"
                 :class="resourceType[resourceItem.type].icon"
               />
-              <text class="text-black">
-                {{ resourceType[resourceItem.type].name }}
-              </text>
+              <view class="text-black">
+                <text v-text="resourceType[resourceItem.type].name" />
+                <text
+                  class="margin-left-sm"
+                  v-text="resourceItem.name"
+                />
+              </view>
             </button>
           </view>
 
-          <!-- <view class="cu-item">
-            <button class="cu-btn content">
-              <text class="cuIcon-write text-gray" />
-              <text class="text-gray">
-                速记
-              </text>
-            </button>
+          <view
+            class="cu-modal bottom-modal"
+            :class="modalShow?'show':''"
+          >
+            <view class="cu-dialog">
+              <view class="cu-bar bg-white">
+                <view class="action text-black">
+                  课堂速记
+                </view>
+                <view
+                  class="action text-red"
+                  @tap="hideModal"
+                >
+                  关闭
+                </view>
+              </view>
+              <view
+                class="padding-xl"
+                v-text="modalContent"
+              >
+                Modal 内容。
+              </view>
+            </view>
           </view>
-          <view class="cu-item">
-            <button class="cu-btn content">
-              <text class="cuIcon-text text-gray" />
-              <text class="text-gray">
-                课件
-              </text>
-            </button>
-          </view>
-          <view class="cu-item">
-            <button class="cu-btn content">
-              <text class="cuIcon-video text-gray" />
-              <text class="text-gray">
-                视频
-              </text>
-            </button>
-          </view> -->
         </view>
       </van-collapse-item>
     </van-collapse>
@@ -114,6 +118,8 @@ export default {
   },
   data () {
     return {
+      modalShow: false,
+      modalContent: '暂无内容',
       classCollapse: ['1'],
       resourceType: [
         {
@@ -152,14 +158,18 @@ export default {
     isClosed (courseItem) {
       return courseItem.state === STATE.RESOURCE.CLOSED
     },
-    test (courseItem) {
-      console.log(courseItem)
-      console.log(courseItem.state)
-      console.log(STATE.RESOURCE.CLOSED)
-      console.log(courseItem.state === STATE.RESOURCE.CLOSED)
+    showModal (content) {
+      this.modalShow = true
+      this.modalContent = content
     },
-    test2 (e) {
-      console.log(e)
+    hideModal () {
+      this.modalShow = false
+    },
+    handleCheck (res) {
+      console.log(res)
+      if (res.type === 0) {
+        this.showModal(res.word)
+      }
     }
   }
 }
