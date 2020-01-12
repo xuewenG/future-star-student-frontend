@@ -56,11 +56,12 @@
             v-for="(resourceItem, resourceIndex) in courseItem.resources"
             :key="resourceIndex"
             class="cu-item"
+            :style="[{display:resourceItem.play?'block':'flex'}]"
           >
             <button
               class="cu-btn content"
               :disabled="isClosed(resourceItem)"
-              @tap="handleCheck(resourceItem)"
+              @tap="handleCheck(courseItemIndex, resourceIndex)"
             >
               <text
                 class="text-black"
@@ -74,6 +75,12 @@
                 />
               </view>
             </button>
+            <view>
+              <video
+                v-if="resourceItem.play"
+                :src="resourceItem.url"
+              />
+            </view>
           </view>
 
           <view
@@ -146,7 +153,24 @@ export default {
   },
   mounted () {
     CourseDetailRequest.getCourseItemList(this.courseId).then(r => {
-      this.courseItemList = r
+      let courseItemList = []
+      courseItemList = r
+      for (let i = 0; i < courseItemList.length; i++) {
+        for (let j = 0; j < courseItemList[i].resources.length; j++) {
+          // courseItemList[i].resources[j].play = false
+          courseItemList[i].resources[j] = {
+            content: courseItemList[i].resources[j].content,
+            id: courseItemList[i].resources[j].id,
+            name: courseItemList[i].resources[j].name,
+            state: courseItemList[i].resources[j].state,
+            type: courseItemList[i].resources[j].type,
+            url: courseItemList[i].resources[j].url,
+            word: courseItemList[i].resources[j].word,
+            play: false
+          }
+        }
+      }
+      this.courseItemList = courseItemList
       console.log(this.courseItemList)
     })
   },
@@ -165,10 +189,12 @@ export default {
     hideModal () {
       this.modalShow = false
     },
-    handleCheck (res) {
-      console.log(res)
-      if (res.type === 0) {
+    handleCheck (courseItemIndex, resourceIndex) {
+      const res = this.courseItemList[courseItemIndex].resources[resourceIndex]
+      if (this.resourceType[res.type].name === '速记') {
         this.showModal(res.word)
+      } else if (this.resourceType[res.type].name === '视频') {
+        this.courseItemList[courseItemIndex].resources[resourceIndex].play = !res.play
       }
     }
   }
@@ -176,5 +202,7 @@ export default {
 </script>
 
 <style>
-
+.non-flex {
+  display: block;
+}
 </style>
