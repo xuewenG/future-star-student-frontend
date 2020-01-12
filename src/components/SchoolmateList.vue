@@ -1,29 +1,10 @@
 <template>
   <view>
-    <view
-      class="cu-bar bg-white search fixed"
-      :style="[{top:customBar + 'px'}]"
-    >
-      <view class="search-form round">
-        <text class="cuIcon-search" />
-        <input
-          type="text"
-          placeholder="输入搜索的关键词"
-          confirm-type="search"
-        >
-      </view>
-      <view class="action">
-        <button class="cu-btn bg-gradual-green shadow-blur round">
-          搜索
-        </button>
-      </view>
-    </view>
-
     <scroll-view
       scroll-y
       class="indexes"
       :scroll-into-view="'indexes-'+ groupCurId"
-      :style="[{height:'calc(100vh - '+ customBar + 'px - ' + selectBar + 'px - 50px)'}, {top:selectBar + 'px'}]"
+      :style="[{height:'calc(100vh - '+ customBar + 'px - ' + 2*searchBar + 'px - 50px)'}]"
       :scroll-with-animation="true"
       :enable-back-to-top="true"
     >
@@ -101,50 +82,34 @@
 <script>
 import SchoolmateRequest from '@/request/Schoolmate/SchoolmateRequest.js'
 export default {
-  name: 'SchoolmateList',
+  props: {
+    initOption: {
+      type: Object,
+      required: true
+    },
+    searchBar: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
       schoolmateList: [],
-      statusBar: this.StatusBar,
       customBar: this.CustomBar,
-      selectBar: '',
       listBar: '',
       hidden: true,
       groupCurId: '',
       groupCur: '',
-      option: {
-        camp: '',
-        name: '',
-        city: '',
-        profession: ''
-      }
+      option: this.initOption
     }
   },
   mounted () {
-    let url = '?'
-    if (this.option.camp !== '') {
-      url += 'semester_id=' + this.option.camp + '&'
-    }
-    if (this.option.name !== '') {
-      url += 'name=' + this.option.name + '&'
-    }
-    if (this.option.city !== '') {
-      url += 'city=' + this.option.city + '&'
-    }
-    if (this.option.profession !== '') {
-      url += 'profession=' + this.option.profession
-    }
-    SchoolmateRequest.getSchoolmateList(url).then(schoolmateList => {
-      console.log(schoolmateList)
-      this.schoolmateList = schoolmateList
-      this.groupCur = this.schoolmateList[0]
-    })
+    console.log(this.initOption)
+    console.log(this.selectBar)
+    this.getUrl()
   },
   onReady () {
     const that = this
-    uni.createSelectorQuery().in(this).select('.cu-bar').boundingClientRect(function (res) {
-      that.selectBar = res.height
-    }).exec()
     uni.createSelectorQuery().in(this).select('.indexBar-box').boundingClientRect(function (res) {
       that.boxTop = res.top
     }).exec()
@@ -203,6 +168,31 @@ export default {
           return false
         }
       }
+    },
+    updateOption (option) {
+      console.log(option)
+      this.option = option
+      this.getUrl()
+    },
+    getUrl () {
+      let url = '?'
+      if (this.option.camp !== '') {
+        url += 'semester_id=' + this.option.camp + '&'
+      }
+      if (this.option.name !== '') {
+        url += 'name=' + this.option.name + '&'
+      }
+      if (this.option.city !== '') {
+        url += 'city=' + this.option.city + '&'
+      }
+      if (this.option.profession !== '') {
+        url += 'profession=' + this.option.profession
+      }
+      SchoolmateRequest.getSchoolmateList(url).then(schoolmateList => {
+        console.log(schoolmateList)
+        this.schoolmateList = schoolmateList
+        this.groupCur = this.schoolmateList[0]
+      })
     }
   }
 }
