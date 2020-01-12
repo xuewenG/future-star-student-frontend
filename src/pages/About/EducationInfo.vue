@@ -94,7 +94,14 @@
             @blur="checkCarrer"
           />
         </view>
-        
+        <view class="padding flex flex-direction">
+          <button
+            class="cu-btn bg-green lg"
+            @tap="saveChanges"
+          >
+            确认修改
+          </button>
+        </view>
       </view>
     </form>
   </view>
@@ -116,9 +123,10 @@ export default {
         profession: ''
       },
       otherEducation: '',
-      educationList: ['博士研究生', '硕士研究生', '本科', '专科', '其他'],
+      educationList: ['博士', '硕士', '本科', '专科', '其他'],
       professionList: ['素质教育类', '教育技术类', '学科教育类', '教育信息化类', '幼小教育类'],
-      student: {}
+      student: {},
+      education: ''
     }
   },
   methods: {
@@ -128,11 +136,12 @@ export default {
         this.showToast('最高学历不能为空')
         return false
       }
-      this.educationInfoForm.education = education
+      // this.educationInfoForm.education = education
       return true
     },
     selectEducation (e) {
-      this.checkEducation(e.detail.value)
+      // this.checkEducation(e.detail.value)
+      this.educationInfoForm.education = e.detail.value
     },
     checkTextArea (text, length, info) {
       const textArray = text.split('/')
@@ -161,7 +170,7 @@ export default {
     checkBefore () {
       console.log('应返回基本信息页，同时保存当前页面数据')
     },
-    checkNext () {
+    saveChanges () {
       if (this.otherEducation !== '') {
         this.educationInfoForm.education = this.otherEducation
       }
@@ -176,14 +185,21 @@ export default {
       }
       console.log(this.educationInfoForm)
       this.student.educationInfo = this.educationInfoForm
-      console.log('前往公司信息页')
-      uni.navigateTo({
-        url: '/pages/Apply/CompanyInfo?data=' + encodeURIComponent(JSON.stringify(this.student)),
-        fail: (res) => {
-          console.log(res)
-        },
-        success: (res) => {
-          console.log(res)
+      SchoolmateInfoRequest.editSchoolmateInfo(uni.getStorageSync('student_id'), this.student).then(r => {
+        const status = r
+        console.log('status', status)
+        if (status.success) {
+          uni.showToast({
+            title: '修改成功',
+            icon: 'success'
+          })
+          uni.navigateBack({
+            delta: 1
+          })
+        } else {
+          uni.showToast({
+            title: status.msg
+          })
         }
       })
     },
@@ -193,12 +209,23 @@ export default {
         icon: 'none'
       })
     },
-    onLoad (student) {
-      console.log(JSON.parse(decodeURIComponent(student.data)))
-      this.student = JSON.parse(decodeURIComponent(student.data))
-      this.educationInfoForm = this.student.educationInfo
-      console.log(this.student)
-      console.log(this.educationInfoForm)
+    onLoad () {
+      SchoolmateInfoRequest.getSchoolmateInfo(uni.getStorageSync('student_id')).then(student => {
+        console.log('student', student)
+        this.student = student
+        this.educationInfoForm = this.student.educationInfo
+        let found = false
+        for (let i = 0; i < this.educationList.length; i++) {
+          if (this.educationInfoForm.education === this.educationList[i]) {
+            this.education = this.educationInfoForm.education
+            found = true
+          }
+        }
+        if (!found) {
+          this.education = '其他'
+          this.otherEducation = this.educationInfoForm.education
+        }
+      })
     }
   }
 }

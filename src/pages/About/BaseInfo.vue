@@ -252,15 +252,9 @@ export default {
             title: '修改成功',
             icon: 'success'
           })
-          // uni.navigateTo({
-          //   url: '/pages/Apply/EducationInfo?data=' + encodeURIComponent(JSON.stringify(this.student)),
-          //   fail: (res) => {
-          //     console.log(res)
-          //   },
-          //   success: (res) => {
-          //     console.log(res)
-          //   }
-          // })
+          uni.navigateBack({
+            delta: 1
+          })
         } else {
           uni.showToast({
             title: status.msg
