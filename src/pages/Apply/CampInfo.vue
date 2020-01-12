@@ -224,7 +224,7 @@ export default {
           console.log(state)
           /* global uni:false */
           uni.navigateTo({
-            url: '../Apply/BaseInfoForm',
+            url: '../Apply/BaseInfoForm?clazz=' + this.clazzApply,
             fail: (res) => {
               console.log(res)
             },
