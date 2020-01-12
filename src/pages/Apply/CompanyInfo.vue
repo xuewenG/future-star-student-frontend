@@ -243,12 +243,12 @@
             </text>
           </view>
           <view class="cu-form-group">
-            <!-- <uni-number-box
+            <uni-number-box
               :min="0"
               :max="9999"
               :value="companyForm.profitScale"
               @change="selectCompanyProfit"
-            /> -->
+            />
           </view>
         </view>
         <view class="cu-item">
@@ -454,6 +454,7 @@ export default {
           checked: false
         }
       ],
+      finance: '',
       financeList: ['尚未获得投资', '已完成种子/天使融资', '已完成pre-A轮融资', '已完成A轮融资', '不方便透露', '其他'],
       otherPosition: '',
       otherFinance: '',
@@ -462,9 +463,14 @@ export default {
   },
   onLoad (student) {
     this.student = JSON.parse(decodeURIComponent(student.data))
-    if (typeof (this.student.staffNum) !== 'undefined') {
-      this.companyForm = this.student.companyInfo
+    this.companyForm = this.student.companyInfo
+    const position = this.positionList
+    for (let i = 0, lenI = position.length; i < lenI; ++i) {
+      if (this.companyForm.positions.includes(position[i].value)) {
+        this.$set(position[i], 'checked', true)
+      }
     }
+    this.finance = this.student.companyInfo.finance
     console.log(this.student)
     console.log(this.companyForm)
   },

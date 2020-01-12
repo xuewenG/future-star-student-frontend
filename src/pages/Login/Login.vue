@@ -64,7 +64,7 @@ export default {
           console.log('获取用户信息失败')
           uni.showToast({
             title: '您拒绝了授权',
-            icon: 'info'
+            icon: 'none'
           })
         }
       })
@@ -91,7 +91,10 @@ export default {
               console.log(JSON.stringify(infoRes.userInfo))
               // 获取用户信息后向调用信息更新方法
               const avatarUrl = infoRes.userInfo.avatarUrl // 头像
-              const gender = infoRes.userInfo.gender // 性别
+              let gender = infoRes.userInfo.gender - 1// 性别
+              if (gender !== 0 || gender !== 1) {
+                gender = 0
+              }
               console.log(code)
               loginRequest.login({
                 code,

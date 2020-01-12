@@ -1,4 +1,5 @@
 export default {
+  HOST: 'http://47.101.53.141:8020',
   REQUEST: {
     SUCCESS: '2000'
   },

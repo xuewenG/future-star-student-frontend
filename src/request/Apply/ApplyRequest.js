@@ -108,7 +108,7 @@ export default {
         if (resp.data.data.count === 0) {
           return STATE.AUDIT.NOT_APPLY
         }
-        return resp.data.data.results.state
+        return resp.data.data.results[0].state
       } else {
         console.error(resp.data.msg)
       }
@@ -130,10 +130,6 @@ export default {
     }
   },
   async edit (data) {
-    console.log(data)
-    // uni.request({
-    //   url:
-    // })
     try {
       const resp = await uniRequest.put('/student/student/' + parseInt(uni.getStorageSync('student_id')), data, {
         dataType: 'JSON',
@@ -151,23 +147,37 @@ export default {
       console.log(error)
     }
   },
-  async apply (data) {
-    console.log(data)
-    try {
-      const resp = await uniRequest.post('/clazz/student', data, {
+  apply (data) {
+    return new Promise(function (resolve, reject) {
+      uni.request({
+        url: STATE.HOST + '/clazz/student',
+        method: 'POST',
+        data,
         dataType: 'JSON',
         headers: {
           'content-type': 'application/json'
+        },
+        success: function (resp) {
+          const msg = {}
+          if (resp.data.data.code === STATE.REQUEST.SUCCESS) {
+            console.log('报名成功')
+            msg.detail = 1
+          } else {
+            console.log('报名失败')
+            msg.detail = 0
+          }
+          // 回调成功执行resolve
+          resolve(msg)
+        },
+        fail: function (data) {
+          // 回调失败时
+          if (typeof reject === 'function') {
+            reject(data)
+          } else {
+            console.log(data)
+          }
         }
       })
-      if (resp.data.code === STATE.REQUEST.SUCCESS) {
-        console.log('报名成功')
-        return resp.data
-      } else {
-        console.log(resp.data.msg)
-      }
-    } catch (error) {
-      console.log(error)
-    }
+    })
   }
 }

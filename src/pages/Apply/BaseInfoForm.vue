@@ -164,7 +164,8 @@ export default {
         referees: [],
         otherInfo: {},
         clazz: ''
-      }
+      },
+      sex: ''
     }
   },
   onLoad (option) {
@@ -172,11 +173,11 @@ export default {
     ApplyRequest.getStudentInfo(uni.getStorageSync('student_id')).then(student => {
       console.log(student)
       // const cityFormat = student.city.split('·')
-      if (!student.name) {
+      if (student.name) {
         this.student = {
           baseInfo: {
             name: student.name,
-            sex: student.gender === 0 ? 'male' : 'female',
+            sex: student.gender,
             birthDate: student.birthday,
             tel: student.phone_number,
             mail: student.email,
@@ -189,48 +190,33 @@ export default {
             profession: student.profession
           },
           companyInfo: {
-            companyBrand: '',
-            website: '',
-            appName: '',
-            setup: '2018-12-25',
-            location: '广东省|广州市|海珠区',
-            staffNum: undefined,
-            positions: '',
-            companyInfo: '',
-            operationData: '',
-            profitScale: '',
-            finance: '',
+            companyBrand: student.company.name,
+            website: student.company.website,
+            appName: student.company.wx_public,
+            setup: student.company.create_time,
+            location: student.company.city.split('|'),
+            staffNum: student.company.number_employee,
+            positions: student.company.position.split('·'),
+            companyInfo: student.company.introduction,
+            operationData: student.company.company_data,
+            profitScale: student.company.income_scale,
+            finance: student.company.financing_situation,
             financeDetails: '',
-            companyValue: '',
+            companyValue: student.company.value_of_assessment,
             businessList: [],
             supply: ''
           },
-          // companyInfo: {
-          //   companyBrand: student.company.name,
-          //   website: student.company.website,
-          //   appName: student.company.wx_public,
-          //   setup: student.company.create_time,
-          //   location: student.company.city,
-          //   staffNum: student.company.number_employee,
-          //   positions: student.company.position,
-          //   companyInfo: student.company.introduction,
-          //   operationData: student.company.company_data,
-          //   profitScale: student.company.income_scale,
-          //   finance: student.company.financing_situation,
-          //   financeDetails: '',
-          //   companyValue: student.company.value_of_assessment,
-          //   businessList: [],
-          //   supply: ''
-          // },
-          clazz: option.clazz,
+          clazz: parseInt(option.clazz),
           referees: [],
           otherInfo: {}
         }
         this.baseInfoForm = this.student.baseInfo
+        this.baseInfoForm.sex = this.student.baseInfo.gender === 0 ? 'male' : 'female'
         console.log(this.baseInfoForm)
         console.log(this.student)
       }
-      this.student.clazz = option.clazz
+      this.student.clazz = parseInt(option.clazz)
+      this.sex = this.baseInfoForm.sex
     })
   },
   methods: {

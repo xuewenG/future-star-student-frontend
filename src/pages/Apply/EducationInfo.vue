@@ -134,7 +134,8 @@ export default {
       otherEducation: '',
       educationList: ['博士研究生', '硕士研究生', '本科', '专科', '其他'],
       professionList: ['素质教育类', '教育技术类', '学科教育类', '教育信息化类', '幼小教育类'],
-      student: {}
+      student: {},
+      education: ''
     }
   },
   methods: {
@@ -213,6 +214,7 @@ export default {
       console.log(JSON.parse(decodeURIComponent(student.data)))
       this.student = JSON.parse(decodeURIComponent(student.data))
       this.educationInfoForm = this.student.educationInfo
+      this.education = this.student.educationInfo.education
       console.log(this.student)
       console.log(this.educationInfoForm)
     }
