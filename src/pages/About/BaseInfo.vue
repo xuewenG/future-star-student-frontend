@@ -32,18 +32,18 @@
           </view>
           <radio
             class="blue radio margin-right-sm sm"
-            :class="sex=='male'?'checked':''"
-            :checked="sex=='male'?true:false"
-            value="男"
+            :class="sex==='male'?'checked':''"
+            :checked="sex==='male'?true:false"
+            value="male"
           />
           <p class="margin-right">
             男
           </p>
           <radio
             class="blue radio margin-right-sm sm"
-            :class="sex=='female'?'checked':''"
-            :checked="sex=='female'?true:false"
-            value="女"
+            :class="sex==='female'?'checked':''"
+            :checked="sex==='female'?true:false"
+            value="female"
           />
           <p>女</p>
         </view>
@@ -143,27 +143,31 @@ export default {
       },
       student: {
         baseInfo: {}
-      }
+      },
+      sex: ''
     }
   },
   onLoad () {
-    SchoolmateInfoRequest.getBaseInfo(uni.getStorageSync('student_id')).then(student => {
+    SchoolmateInfoRequest.getSchoolmateInfo(uni.getStorageSync('student_id')).then(student => {
       console.log('student', student)
+      this.student = student
+      this.baseInfoForm = this.student.baseInfo
+      this.sex = this.baseInfoForm.sex === 0 ? 'male' : 'female'
       // const cityFormat = student.city.split('·')
-      if (student.name) {
-        this.student = {
-          baseInfo: {
-            name: student.name,
-            sex: student.gender === 0 ? 'male' : 'female',
-            birthDate: student.birthday,
-            tel: student.phone_number,
-            mail: student.email,
-            city: student.city.split('|')
-          }
-        }
-        this.baseInfoForm = this.student.baseInfo
-        console.log('baseInfoForm', this.baseInfoForm)
-      }
+      // if (student.name) {
+      //   this.student = {
+      //     baseInfo: {
+      //       name: student.name,
+      //       sex: student.gender === 0 ? 'male' : 'female',
+      //       birthDate: student.birthday,
+      //       tel: student.phone_number,
+      //       mail: student.email,
+      //       city: student.city.split('|')
+      //     }
+      //   }
+      //   this.baseInfoForm = this.student.baseInfo
+      //   console.log('baseInfoForm', this.baseInfoForm)
+      // }
     })
   },
   methods: {
@@ -181,11 +185,10 @@ export default {
       if (sex === null || sex === '') {
         this.showToast('性别不能为空')
         return false
-      } else if (sex === '男') {
-        this.baseInfoForm.sex = 'male'
-      } else {
-        this.baseInfoForm.sex = 'female'
       }
+      console.log('check', sex)
+      this.sex = sex
+      this.baseInfoForm.sex = this.sex === 'male' ? 0 : 1
       return true
     },
     sexSelect (e) {
@@ -227,7 +230,7 @@ export default {
       if (!this.checkFormName(this.baseInfoForm.name)) {
         return
       }
-      if (!this.checkFormSex(this.baseInfoForm.sex)) {
+      if (!this.checkFormSex(this.sex)) {
         return
       }
       if (!this.checkFormTel(this.baseInfoForm.tel)) {
@@ -238,16 +241,30 @@ export default {
       }
       this.student.baseInfo = this.baseInfoForm
       this.student.baseInfo.city = this.baseInfoForm.city.join('|')
-      this.student.baseInfo.sex = this.baseInfoForm.sex === 'male' ? 0 : 1
-      console.log(this.student)
-      
-      uni.navigateTo({
-        url: '/pages/Apply/EducationInfo?data=' + encodeURIComponent(JSON.stringify(this.student)),
-        fail: (res) => {
-          console.log(res)
-        },
-        success: (res) => {
-          console.log(res)
+      this.student.baseInfo.sex = this.sex === 'male' ? 0 : 1
+      console.log('sex', this.sex)
+      console.log('student', this.student)
+      SchoolmateInfoRequest.editSchoolmateInfo(uni.getStorageSync('student_id'), this.student).then(r => {
+        const status = r
+        console.log('status', status)
+        if (status.success) {
+          uni.showToast({
+            title: '修改成功',
+            icon: 'success'
+          })
+          // uni.navigateTo({
+          //   url: '/pages/Apply/EducationInfo?data=' + encodeURIComponent(JSON.stringify(this.student)),
+          //   fail: (res) => {
+          //     console.log(res)
+          //   },
+          //   success: (res) => {
+          //     console.log(res)
+          //   }
+          // })
+        } else {
+          uni.showToast({
+            title: status.msg
+          })
         }
       })
     },
