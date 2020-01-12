@@ -1,10 +1,10 @@
 {
 	"pages": [
     {
-        "path": "pages/index",
+        "path": "pages/Login/Login",
         "style": {}
     }, {
-        "path": "pages/Login/Login",
+        "path": "pages/index",
         "style": {}
     }, {
         "path": "pages/Apply/CampInfo",

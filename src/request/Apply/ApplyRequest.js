@@ -115,5 +115,59 @@ export default {
     } catch (error) {
       console.log(error)
     }
+  },
+  async getStudentInfo (id) {
+    console.log(id)
+    try {
+      const resp = await uniRequest.get('/student/student/' + parseInt(id))
+      if (resp.data.code === STATE.REQUEST.SUCCESS) {
+        return resp.data.data
+      } else {
+        console.log(resp.data.msg)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  async edit (data) {
+    console.log(data)
+    // uni.request({
+    //   url:
+    // })
+    try {
+      const resp = await uniRequest.put('/student/student/' + parseInt(uni.getStorageSync('student_id')), data, {
+        dataType: 'JSON',
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+      if (resp.data.code === STATE.REQUEST.SUCCESS) {
+        console.log('修改信息成功')
+        return resp.data
+      } else {
+        console.log(resp.data.msg)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  async apply (data) {
+    console.log(data)
+    try {
+      const resp = await uniRequest.post('/clazz/student', data, {
+        dataType: 'JSON',
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+      if (resp.data.code === STATE.REQUEST.SUCCESS) {
+        console.log('报名成功')
+        return resp.data
+      } else {
+        console.log(resp.data.msg)
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
