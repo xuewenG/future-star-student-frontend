@@ -99,9 +99,6 @@
         "path": "pages/About/CompanyInfo",
         "style": {}
     }, {
-        "path": "pages/About/OtherInfo",
-        "style": {}
-    }, {
         "path": "components/SelectBar",
         "style": {
           "usingComponents": {

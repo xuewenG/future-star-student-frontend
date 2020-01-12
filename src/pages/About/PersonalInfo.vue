@@ -8,13 +8,13 @@
     >
       <view
         class="cu-item arrow content sm-border flex-sub"
-        @tap="navigateTo('BasicInfo')"
+        @tap="navigateTo('BaseInfo')"
       >
         基本信息
       </view>
       <view
         class="cu-item arrow content sm-border flex-sub"
-        @tap="navigateTo('BackgroundInfo')"
+        @tap="navigateTo('EducationInfo')"
       >
         教育/工作背景
       </view>
@@ -23,12 +23,6 @@
         @tap="navigateTo('CompanyInfo')"
       >
         公司/项目信息
-      </view>
-      <view
-        class="cu-item arrow content sm-border flex-sub"
-        @tap="navigateTo('IntroducerInfo')"
-      >
-        介绍人信息
       </view>
     </view>
   </view>

@@ -26,5 +26,19 @@ export default {
     } catch (error) {
       console.log(error)
     }
+  },
+  
+  async getBaseInfo (schoolmateId) {
+    console.log('getBasicInfo')
+    try {
+      const resp = await uniRequest.get('/student/student/' + parseInt(schoolmateId))
+      if (resp.data.code === STATE.REQUEST.SUCCESS) {
+        return resp.data.data
+      } else {
+        console.log(resp.data.msg)
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
