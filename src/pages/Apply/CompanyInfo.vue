@@ -456,8 +456,17 @@ export default {
       ],
       financeList: ['尚未获得投资', '已完成种子/天使融资', '已完成pre-A轮融资', '已完成A轮融资', '不方便透露', '其他'],
       otherPosition: '',
-      otherFinance: ''
+      otherFinance: '',
+      student: {}
     }
+  },
+  onLoad (student) {
+    this.student = JSON.parse(decodeURIComponent(student.data))
+    if (typeof (this.student.staffNum) !== 'undefined') {
+      this.companyForm = this.student.companyInfo
+    }
+    console.log(this.student)
+    console.log(this.companyForm)
   },
   methods: {
     selectSetupDate (e) {
@@ -624,9 +633,12 @@ export default {
         return
       }
       console.log(this.companyForm)
+      this.student.companyInfo = this.companyForm
+      this.student.companyInfo.location = this.companyForm.location.join('|')
+      this.student.companyInfo.positions = this.companyForm.positions.join('·')
       console.log('前往推荐人页')
       uni.navigateTo({
-        url: '/pages/Apply/RefereesInfo',
+        url: '/pages/Apply/RefereesInfo?data=' + encodeURIComponent(JSON.stringify(this.student)),
         fail: (res) => {
           console.log(res)
         },

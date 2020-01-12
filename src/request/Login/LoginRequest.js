@@ -1,4 +1,5 @@
 import uniRequest from 'uni-request'
+import STATE from '@/request/constant'
 export default {
   async login (data) {
     console.log('login')
@@ -6,7 +7,7 @@ export default {
       const response = await uniRequest.post('/student/login', data)
       console.log(response)
       uni.hideLoading()
-      if (response.data.code === '2000') {
+      if (response.data.code === STATE.REQUEST.SUCCESS) {
         uni.reLaunch({
           url: '/pages/index',
           fail: (res) => {

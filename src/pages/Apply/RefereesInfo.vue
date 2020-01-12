@@ -76,8 +76,13 @@ export default {
     return {
       refereesForm: {
         referees: []
-      }
+      },
+      student: {}
     }
+  },
+  onLoad (student) {
+    this.student = JSON.parse(decodeURIComponent(student.data))
+    console.log(this.student)
   },
   methods: {
     checkFormReferees (referees) {
@@ -100,11 +105,22 @@ export default {
       console.log('应返回公司项目信息页，同时保存当前页面数据')
     },
     checkNext () {
-      if (!this.checkFormReferees(this.refereesForm.referees)) {
+      if (!this.checkFormReferees(this.refereesForm.referees[0])) {
         return
       }
+      console.log(this.refereesForm.referees[0])
+      for (let i = 0; i < this.refereesForm.referees.length; i++) {
+        const referee = this.refereesForm.referees[i].split('/')
+        console.log(this.referee)
+        this.student.referees.push({
+          name: referee[0],
+          company: referee[1],
+          position: referee[2]
+        })
+        console.log(this.student.referees)
+      }
       uni.navigateTo({
-        url: '/pages/Apply/OtherInfo',
+        url: '/pages/Apply/OtherInfo?data=' + encodeURIComponent(JSON.stringify(this.student)),
         fail: (res) => {
           console.log(res)
         },

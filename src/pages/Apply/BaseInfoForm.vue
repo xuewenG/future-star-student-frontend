@@ -145,6 +145,7 @@
 </template>
 
 <script>
+import ApplyRequest from '@/request/Apply/ApplyRequest.js'
 export default {
   data () {
     return {
@@ -155,8 +156,82 @@ export default {
         tel: '',
         mail: '',
         city: ['广东省', '广州市', '海珠区']
+      },
+      student: {
+        baseInfo: {},
+        educationInfo: {},
+        companyInfo: {},
+        referees: [],
+        otherInfo: {},
+        clazz: ''
       }
     }
+  },
+  onLoad (option) {
+    console.log('您要报的班级', option.clazz)
+    ApplyRequest.getStudentInfo(uni.getStorageSync('student_id')).then(student => {
+      console.log(student)
+      // const cityFormat = student.city.split('·')
+      if (!student.name) {
+        this.student = {
+          baseInfo: {
+            name: student.name,
+            sex: student.gender === 0 ? 'male' : 'female',
+            birthDate: student.birthday,
+            tel: student.phone_number,
+            mail: student.email,
+            city: student.city.split('|')
+          },
+          educationInfo: {
+            education: student.education,
+            graduation: student.school,
+            career: '2004-2008' + '/' + student.previous_company + '/' + student.previous_position,
+            profession: student.profession
+          },
+          companyInfo: {
+            companyBrand: '',
+            website: '',
+            appName: '',
+            setup: '2018-12-25',
+            location: '广东省|广州市|海珠区',
+            staffNum: undefined,
+            positions: '',
+            companyInfo: '',
+            operationData: '',
+            profitScale: '',
+            finance: '',
+            financeDetails: '',
+            companyValue: '',
+            businessList: [],
+            supply: ''
+          },
+          // companyInfo: {
+          //   companyBrand: student.company.name,
+          //   website: student.company.website,
+          //   appName: student.company.wx_public,
+          //   setup: student.company.create_time,
+          //   location: student.company.city,
+          //   staffNum: student.company.number_employee,
+          //   positions: student.company.position,
+          //   companyInfo: student.company.introduction,
+          //   operationData: student.company.company_data,
+          //   profitScale: student.company.income_scale,
+          //   finance: student.company.financing_situation,
+          //   financeDetails: '',
+          //   companyValue: student.company.value_of_assessment,
+          //   businessList: [],
+          //   supply: ''
+          // },
+          clazz: option.clazz,
+          referees: [],
+          otherInfo: {}
+        }
+        this.baseInfoForm = this.student.baseInfo
+        console.log(this.baseInfoForm)
+        console.log(this.student)
+      }
+      this.student.clazz = option.clazz
+    })
   },
   methods: {
     checkName (e) {
@@ -228,9 +303,12 @@ export default {
       if (!this.checkFormMail(this.baseInfoForm.mail)) {
         return
       }
-      console.log(this.baseInfoForm)
+      this.student.baseInfo = this.baseInfoForm
+      this.student.baseInfo.city = this.baseInfoForm.city.join('|')
+      this.student.baseInfo.sex = this.baseInfoForm.sex === 'male' ? 0 : 1
+      console.log(this.student)
       uni.navigateTo({
-        url: '/pages/Apply/EducationInfo',
+        url: '/pages/Apply/EducationInfo?data=' + encodeURIComponent(JSON.stringify(this.student)),
         fail: (res) => {
           console.log(res)
         },

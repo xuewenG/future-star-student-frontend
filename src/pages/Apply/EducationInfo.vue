@@ -128,10 +128,13 @@ export default {
       educationInfoForm: {
         education: '',
         graduation: '',
-        career: ''
+        career: '',
+        profession: ''
       },
       otherEducation: '',
-      educationList: ['博士研究生', '硕士研究生', '本科', '专科', '其他']
+      educationList: ['博士研究生', '硕士研究生', '本科', '专科', '其他'],
+      professionList: ['素质教育类', '教育技术类', '学科教育类', '教育信息化类', '幼小教育类'],
+      student: {}
     }
   },
   methods: {
@@ -188,9 +191,10 @@ export default {
         return
       }
       console.log(this.educationInfoForm)
+      this.student.educationInfo = this.educationInfoForm
       console.log('前往公司信息页')
       uni.navigateTo({
-        url: '/pages/Apply/CompanyInfo',
+        url: '/pages/Apply/CompanyInfo?data=' + encodeURIComponent(JSON.stringify(this.student)),
         fail: (res) => {
           console.log(res)
         },
@@ -204,6 +208,13 @@ export default {
         title: info,
         icon: 'none'
       })
+    },
+    onLoad (student) {
+      console.log(JSON.parse(decodeURIComponent(student.data)))
+      this.student = JSON.parse(decodeURIComponent(student.data))
+      this.educationInfoForm = this.student.educationInfo
+      console.log(this.student)
+      console.log(this.educationInfoForm)
     }
   }
 }

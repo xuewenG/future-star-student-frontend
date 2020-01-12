@@ -15,35 +15,19 @@
         v-for="(item, index) in getSwipperCampList"
         :key="index"
         :class="cardCur==index?'cur':''"
+        @click="showCampInfo(index)"
       >
         <view class="swiper-item">
           <image
-            :src="item.swiperImg"
+            :src="item.data.swiperImg"
             mode="aspectFill"
           />
         </view>
       </swiper-item>
     </swiper>
-
     <item-list
       :list="campList"
     />
-    <!-- <view class="cu-list menu sm-border card-menu margin-top">
-      <view
-        v-for="(campItem, index) in campList"
-        :key="index"
-        class="cu-item arrow"
-        @tap="showCampInfo"
-      >
-        <view
-          class="cu-avatar round lg"
-          :style="'background-image:url('+campItem.campImg+');'"
-        />
-        <view class="margin-left content flex-sub">
-          <view v-text="campItem.intro" />
-        </view>
-      </view>
-    </view> -->
   </view>
 </template>
 
@@ -75,15 +59,16 @@ export default {
     cardSwiper (e) {
       this.cardCur = e.detail.current
     },
-    showCampInfo (e) {
-      console.log(e)
+    showCampInfo (index) {
+      const item = this.getSwipperCampList[index]
+      /* global uni:false */
       uni.navigateTo({
-        url: '/pages/Apply/CampInfo?campId=' + this.cardCur,
-        fail: (res) => {
-          console.log(res)
+        url: item.url + '?data=' + encodeURIComponent(JSON.stringify(item.data)),
+        fail: function () {
+          console.log('fail to navigate to ' + item.url)
         },
-        success: (res) => {
-          console.log(res)
+        success: function () {
+          console.log('succeed to navigate to ' + item.url)
         }
       })
     }

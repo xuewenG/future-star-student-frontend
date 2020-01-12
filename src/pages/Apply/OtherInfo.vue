@@ -40,8 +40,8 @@
           <view class="cu-form-group">
             <radio
               class="blue radio margin-right-sm sm"
-              :class="otherForm.check==='accept'?'checked':''"
-              :checked="otherForm.check==='accept'?true:false"
+              :class="otherForm.check===0?'checked':''"
+              :checked="otherForm.check===0?true:false"
               value="接受"
             />
             <p class="margin-right">
@@ -49,8 +49,8 @@
             </p>
             <radio
               class="blue radio margin-right-sm sm"
-              :class="otherForm.check==='refuse'?'checked':''"
-              :checked="otherForm.check==='refuse'?true:false"
+              :class="otherForm.check===1?'checked':''"
+              :checked="otherForm.check===1?true:false"
               value="不接受"
             />
             <p>不接受</p>
@@ -167,6 +167,7 @@
 </template>
 
 <script>
+import ApplyRequest from '@/request/Apply/ApplyRequest.js'
 export default {
   data () {
     return {
@@ -197,8 +198,13 @@ export default {
           checked: false
         }
       ],
-      otherCanal: ''
+      otherCanal: '',
+      student: {}
     }
+  },
+  onLoad (student) {
+    this.student = JSON.parse(decodeURIComponent(student.data))
+    console.log(this.student)
   },
   methods: {
     checkFormCheck (check) {
@@ -206,9 +212,9 @@ export default {
         this.showToast('请选择是否接受考勤')
         return false
       } else if (check === '接受') {
-        this.otherForm.check = 'accpt'
+        this.otherForm.check = '0'
       } else {
-        this.otherForm.check = 'refuse'
+        this.otherForm.check = '1'
       }
       return true
     },
@@ -275,20 +281,71 @@ export default {
       })
     },
     submitApplyForm () {
-      uni.redirectTo({
-        url: '/pages/Apply/CampInfo',
-        fail: (res) => {
-          console.log(res)
-        },
-        success: (res) => {
-          console.log(res)
+      const data = {
+        name: this.student.baseInfo.name,
+        birthday: this.student.baseInfo.birthDate,
+        phone_number: this.student.baseInfo.tel,
+        wx: this.student.baseInfo.wx,
+        email: this.student.baseInfo.mail,
+        city: this.student.baseInfo.city,
+        school: this.student.educationInfo.graduation,
+        previous_company: this.student.educationInfo.career.split('/')[1],
+        profession: this.student.educationInfo.profession,
+        education: this.student.educationInfo.education,
+        previous_position: this.student.educationInfo.career.split('/')[2],
+        gender: this.student.baseInfo.sex,
+        company: {
+          name: this.student.companyInfo.companyBrand,
+          website: this.student.companyInfo.website,
+          wx_public: this.student.companyInfo.appName,
+          create_time: this.student.companyInfo.setup,
+          city: this.student.companyInfo.location,
+          number_employee: this.student.companyInfo.staffNum,
+          position: this.student.companyInfo.positions,
+          introduction: this.student.companyInfo.companyInfo,
+          company_data: this.student.companyInfo.operationData,
+          income_scale: this.student.companyInfo.profitScale,
+          value_of_assessment: this.student.companyInfo.companyValue,
+          financing_situation: this.student.companyInfo.finance
         }
+      }
+      const apply = {
+        student_id: uni.getStorageSync('student_id'),
+        clazz_id: this.student.clazz,
+        application: {
+          accept_absence: this.otherForm.check,
+          reason_application: this.otherForm.applyReason,
+          contribution_for_us: this.otherForm.contributions,
+          way: this.otherForm.canals.join('|')
+        },
+        recommendation_people: this.student.referees
+      }
+      console.log('修改信息', data)
+      console.log('报名信息：', apply)
+      ApplyRequest.edit(data).then(res => {
+        console.log('编辑成功', res)
+        ApplyRequest.apply(apply).then(res => {
+          console.log('报名成功', res)
+          // uni.redirectTo({
+          //   url: '/pages/Apply/CampInfo',
+          //   fail: (res) => {
+          //     console.log(res)
+          //   },
+          //   success: (res) => {
+          //     console.log(res)
+          //   }
+          // })
+          // // uni.showToast({
+          // //   title: '报名成功',
+          // //   duration: 3000
+          // // })
+          // console.log(this.otherForm)
+        }).catch(err => {
+          console.log('报名失败', err)
+        })
+      }).catch(err => {
+        console.log('编辑失败', err)
       })
-      uni.showToast({
-        title: '报名成功',
-        duration: 3000
-      })
-      console.log(this.otherForm)
     }
   }
 }

@@ -21,7 +21,7 @@
       <view class="cu-item shadow">
         <view class="image">
           <image
-            :src="camp.swipperImg"
+            :src="camp.swiperImg"
             class="png"
             mode="widthFix"
           />
@@ -107,8 +107,46 @@
     </view>
 
     <view class="padding">
+      <form>
+        <view class="cu-bar bg-white margin-top-sm solids-bottom">
+          <view class="action">
+            <text class="cuIcon-titles text-orange" /> 报名班级
+          </view>
+        </view>
+        <radio-group
+          class="block"
+          @change="selectClazz"
+        >
+          <view class="cu-bar bg-white cu-item">
+            <view class="action">
+              <text class="cuIcon-profile text-cyan margin-left" />
+              <text class="margin-left">
+                请选择报名的班级
+              </text>
+            </view>
+          </view>
+          <view class="cu-form-group cu-list menu text-left">
+            <view
+              v-for="(clazz, index) in camp.clazzList"
+              :key="index"
+              class="cu-item"
+            >
+              <label class="flex justify-between align-center flex-sub">
+                <radio
+                  class="blue radio"
+                  :class="clazzApply===clazz.id?'checked':''"
+                  :checked="clazzApply===clazz.id?true:false"
+                  :value="clazz.id"
+                />
+                <view class="flex-sub margin-left">{{ clazz.name }}</view>
+              </label>
+            </view>
+          </view>
+        </radio-group>
+      </form>
+
       <button
-        class="cu-btn bg-cyan shadow block"
+        class="cu-btn bg-cyan shadow block margin"
         @tap="toApply"
       >
         我要报名
@@ -119,6 +157,7 @@
 
 <script>
 import ApplyRequest from '@/request/Apply/ApplyRequest.js'
+import STATE from '@/request/constant'
 export default {
   name: 'CampInfo',
   data () {
@@ -137,7 +176,10 @@ export default {
           }]
         }]
       },
-      classCollapse: '1'
+      classCollapse: '1',
+      clazzApply: '',
+      clazzApplyState: '',
+      toastTitle: ['您已通过初筛，请等待电话面试通知', '您未通过录取', '您已被录取，请线下缴费', '您已成功毕业']
     }
   },
   mounted () {
@@ -157,22 +199,51 @@ export default {
     classChange (e) {
       this.classCollapse = e.detail
     },
+    checkClazz (clazzApply) {
+      if (clazzApply === null || clazzApply === '') {
+        uni.showToast({
+          title: '请选择报名班级',
+          icon: 'none'
+        })
+        return false
+      }
+      this.clazzApply = clazzApply
+      return true
+    },
+    selectClazz (e) {
+      this.clazzApply = e.detail.value
+    },
     toApply (e) {
-      console.log(e)
-      /* global uni:false */
-      uni.navigateTo({
-        url: '../Apply/BaseInfoForm',
-        fail: (res) => {
-          console.log(res)
-        },
-        success: (res) => {
-          console.log(res)
+      if (!this.checkClazz(this.clazzApply)) {
+        return
+      }
+      ApplyRequest.getClazzApplyState(this.clazzApply, uni.getStorageSync('student_id')).then(state => {
+        if (state === STATE.AUDIT.NOT_APPLY) {
+          // uni.setStorageSync('clazz_apply', this.clazzApply)
+          // console.log(uni.getStorageSync('clazz_apply'))
+          console.log(state)
+          /* global uni:false */
+          uni.navigateTo({
+            url: '../Apply/BaseInfoForm?clazz=' + this.clazzApply,
+            fail: (res) => {
+              console.log(res)
+            },
+            success: (res) => {
+              console.log(res)
+            }
+          })
+        } else {
+          uni.showToast({
+            title: this.toastTitle[state],
+            duration: 3000
+          })
         }
       })
     }
   },
   onLoad: function (option) {
-    this.camp.id = option.id
+    this.camp = JSON.parse(decodeURIComponent(option.data))
+    console.log(this.camp)
   }
 }
 </script>
