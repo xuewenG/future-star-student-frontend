@@ -173,7 +173,7 @@ export default {
     return {
       otherForm: {
         check: 'accept',
-        applyReason: '',
+        applyReason: 0,
         contributions: '',
         canals: []
       },
@@ -212,9 +212,9 @@ export default {
         this.showToast('请选择是否接受考勤')
         return false
       } else if (check === '接受') {
-        this.otherForm.check = '0'
+        this.otherForm.check = 0
       } else {
-        this.otherForm.check = '1'
+        this.otherForm.check = 1
       }
       return true
     },
@@ -324,24 +324,30 @@ export default {
       console.log('报名信息：', apply)
       ApplyRequest.edit(data).then(res => {
         console.log('编辑成功', res)
-        ApplyRequest.apply(apply).then(res => {
-          console.log('报名成功', res)
-          // uni.redirectTo({
-          //   url: '/pages/Apply/CampInfo',
-          //   fail: (res) => {
-          //     console.log(res)
-          //   },
-          //   success: (res) => {
-          //     console.log(res)
-          //   }
-          // })
-          // // uni.showToast({
-          // //   title: '报名成功',
-          // //   duration: 3000
-          // // })
-          // console.log(this.otherForm)
+        ApplyRequest.apply(apply).then(msg => {
+          console.log(msg)
+          if (msg.detail) {
+            uni.showToast({
+              title: '报名成功',
+              duration: 3000
+            })
+          } else {
+            uni.showToast({
+              title: '已报名',
+              icon: 'none'
+            })
+          }
+          uni.redirectTo({
+            url: '/pages/Apply/CampInfo',
+            fail: (res) => {
+              console.log(res)
+            },
+            success: (res) => {
+              console.log(res)
+            }
+          })
         }).catch(err => {
-          console.log('报名失败', err)
+          console.log('网络错误', err)
         })
       }).catch(err => {
         console.log('编辑失败', err)

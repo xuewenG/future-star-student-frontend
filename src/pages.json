@@ -3,10 +3,11 @@
     {
         "path": "pages/Login/Login",
         "style": {}
-    },  {
+    },
+    {
         "path": "pages/index",
         "style": {}
-    },  {
+    }, {
         "path": "pages/Apply/CampInfo",
         "style": {
           "usingComponents": {
@@ -18,6 +19,18 @@
         }
     }, {
         "path": "pages/Apply/BaseInfoForm",
+        "style": {}
+    }, {
+        "path": "pages/Apply/EducationInfo",
+        "style": {}
+    }, {
+        "path": "pages/Apply/CompanyInfo",
+        "style": {}
+    }, {
+        "path": "pages/Apply/RefereesInfo",
+        "style": {}
+    }, {
+        "path": "pages/Apply/OtherInfo",
         "style": {}
     }, {
         "path": "pages/Course/Course",
@@ -49,14 +62,7 @@
         "style" : {}
     }, {
         "path" : "pages/Activity/MyActivity",
-        "style" : {
-          "usingComponents": {
-            "van-collapse": "/static/vant/collapse/index",
-            "van-collapse-item": "/static/vant/collapse-item/index",
-            "van-cell": "/static/vant/cell/index",
-            "van-cell-group": "/static/vant/cell-group/index"
-          }
-        }
+        "style" : {}
     }, {
         "path" : "pages/Activity/ActivityInfo",
         "style" : {}

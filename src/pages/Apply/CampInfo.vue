@@ -219,8 +219,6 @@ export default {
       }
       ApplyRequest.getClazzApplyState(this.clazzApply, uni.getStorageSync('student_id')).then(state => {
         if (state === STATE.AUDIT.NOT_APPLY) {
-          // uni.setStorageSync('clazz_apply', this.clazzApply)
-          // console.log(uni.getStorageSync('clazz_apply'))
           console.log(state)
           /* global uni:false */
           uni.navigateTo({
@@ -235,6 +233,7 @@ export default {
         } else {
           uni.showToast({
             title: this.toastTitle[state],
+            icon: 'none',
             duration: 3000
           })
         }
