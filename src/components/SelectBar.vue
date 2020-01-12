@@ -1,131 +1,96 @@
 <template>
-  <view
-    class="cu-bar bg-white search fixed"
-    :style="[{top:customBar + 'px'}]"
-  >
-    <van-dropdown-menu>
-      <van-dropdown-item
-        value="value1"
-        options="option1"
-      />
-      <van-dropdown-item
-        value="value2"
-        options="option2"
-      />
-    </van-dropdown-menu>
-    <!-- <van-dropdown-menu>
-      <van-dropdown-item
-        :title="届别"
-        :value="camp"
-        :options="campOptions"
-        @change="getCampOption(value)"
-      />
-      <van-dropdown-item
-        :title="地区"
-        :value="camp"
-        :options="campOptions"
-        @change="getCampOption(value)"
-      />
-      <van-dropdown-item
-        :title="行业"
-        :value="camp"
-        :options="campOptions"
-        @change="getCampOption(value)"
-      />
-    </van-dropdown-menu> -->
-  </view>
-
-  <!-- <dropdown-menu>
-    <dropdown-item
-      v-for="(searchConditions, conditionIndex) in searchList"
-      :title="searchConditions.condition"
-      :options="searchConditions.options"
-      value="searchConditions.options[0].value"
-      @change="getCondition(conditionIndex)"
+  <view>
+    <view
+      class="cu-bar bg-white search fixed"
+      :style="[{top:customBar + 'px'}]"
     >
-    </dropdown-item>
-  </dropdown-menu> -->
+      <view class="search-form round">
+        <text class="cuIcon-search" />
+        <input
+          type="text"
+          placeholder="输入搜索的校友名"
+          confirm-type="search"
+          @confirm="setConditions"
+        >
+      </view>
+      <view class="action">
+        <button
+          class="cu-btn bg-gradual-green shadow-blur round"
+          @tap="setConditions"
+        >
+          搜索
+        </button>
+      </view>
+    </view>
+    <sl-filter
+      :theme-color="themeColor"
+      :style="[{top:searchBar + 'px'}]"
+      :menu-list="menuList"
+      @result="result"
+    />
+  </view>
 </template>
 
 <script>
+import slFilter from '@/components/sl-filter/sl-filter.vue'
+// import SchoolmateRequest from '@/request/Schoolmate/SchoolmateRequest.js'
 export default {
-  // props: {
-  //   searchList: {
-  //     type: Array,
-  //     required: true
-  //   }
-  // },
+  components: {
+    slFilter
+  },
+  prop: {
+    menus: {
+      type: Array,
+      required: true
+    }
+  },
   data () {
     return {
       customBar: this.CustomBar,
-      option1: [
-        { text: '全部商品', value: 0 },
-        { text: '新款商品', value: 1 },
-        { text: '活动商品', value: 2 }
-      ],
-      option2: [
-        { text: '默认排序', value: 'a' },
-        { text: '好评排序', value: 'b' },
-        { text: '销量排序', value: 'c' }
-      ],
-      value1: 0,
-      value2: 'a',
-      campOptions: [
-        {
-          text: '第一期',
-          value: 0
-        }, {
-          text: '第二期',
-          value: 1
-        }, {
-          text: '第三期',
-          value: 2
-        }
-      ],
-      areaOptions: [
-        {
-          text: '第一期',
-          value: 0
-        }, {
-          text: '第二期',
-          value: 1
-        }, {
-          text: '第三期',
-          value: 2
-        }
-      ],
-      professionOptions: [
-        {
-          text: '素质教育',
-          value: 0
-        }, {
-          text: '学科教育',
-          value: 1
-        }, {
-          text: '幼小教育',
-          value: 2
-        }
-      ],
-      camp: 0,
-      area: 0,
-      profession: 0,
-      campOption: '',
-      areaOption: '',
-      professionOption: ''
+      searchBar: '',
+      selectBar: '',
+      titleColor: '#ffffff',
+      themeColor: '#39b54a',
+      // filterResult: '',
+      menuList: this.menus,
+      conditions: {
+        camp: '',
+        name: '',
+        city: '',
+        profession: ''
+      }
     }
   },
+  created () {
+    this.$emit('searchSchoolmate', this.conditions)
+    this.$emit('getSearchBar', this.searchBar)
+  },
+  // mounted () {
+  //   SchoolmateRequest.getCampList().then(campList => {
+  //     console.log(campList)
+  //     this.$set(this.menuList[0], 'detailList', campList)
+  //   })
+  // },
+  onReady () {
+    const that = this
+    uni.createSelectorQuery().in(this).select('.cu-bar').boundingClientRect(function (res) {
+      that.searchBar = res.height
+    }).exec()
+    // uni.createSelectorQuery().in(this).select('.content').boundingClientRect(function (res) {
+    //   that.menuBar = res.height
+    // }).exec()
+  },
   methods: {
-    getCampOption (value) {
-      this.campOption = this.campOptions.find(ele => ele.value === value).text
-      console.log(this.campOption)
+    setConditions (e) {
+      console.log(e.detail.value)
+      this.conditions.name = e.detail.value
     },
-    getAreaOption (value) {
-      this.areaOption = this.areaOptions.find(ele => ele.value === value).text
-      console.log(this.areaOption)
-    },
-    getProfessionOption (value) {
-      this.professionOption = this.professionOptions.find(ele => ele.value === value).text
-      console.log(this.professionOption)
+    result (val) {
+      console.log('filter_result:' + JSON.stringify(val))
+      const filterResult = JSON.stringify(val)
+      this.conditions.camp = filterResult.camp
+      this.conditions.city = filterResult.city
+      this.conditions.profession = filterResult.profession
     }
   }
 }
