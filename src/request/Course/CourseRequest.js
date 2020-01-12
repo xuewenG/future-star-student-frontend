@@ -23,6 +23,7 @@ export default {
             })
           }
         }
+        console.log('OngoingClassList', list)
         return list
       } else {
         console.error(resp.data.msg)

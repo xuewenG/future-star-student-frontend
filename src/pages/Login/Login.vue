@@ -105,8 +105,6 @@ export default {
           })
         }
       })
-      uni.clearStorageSync()
-      uni.setStorageSync('user_id', 1)
     }
   },
   onLoad () {

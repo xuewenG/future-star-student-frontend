@@ -113,16 +113,17 @@ export default {
   },
   mounted () {
     this.loadModal = true
-    ActivityRequest.getMyEnrollingActivityList(1).then(r => {
+    const UserId = uni.getStorageSync('user_id')
+    ActivityRequest.getMyEnrollingActivityList(UserId).then(r => {
       this.enrollingActivityList = r
       // console.log(this.enrollingActivityList)
     }).then(() => {
-      ActivityRequest.getMyOngoingActivityList(1).then(r => {
+      ActivityRequest.getMyOngoingActivityList(UserId).then(r => {
         this.ongoingActivityList = r
         // console.log(this.ongoingActivityList)
       })
     }).then(() => {
-      ActivityRequest.getMyFinishedActivityList(1).then(r => {
+      ActivityRequest.getMyFinishedActivityList(UserId).then(r => {
         this.finishedActivityList = r
         // console.log(this.finishedActivityList)
       })

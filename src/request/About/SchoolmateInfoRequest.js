@@ -6,6 +6,7 @@ export default {
     try {
       const resp = await uniRequest.get('/student/student/' + parseInt(id))
       if (resp.data.code === STATE.REQUEST.SUCCESS) {
+        console.log('validate', resp.data.data.state)
         if (resp.data.data.state === STATE.SCHOOLMATE.VALID || resp.data.data.state === STATE.SCHOOLMATE.NOT_GRADUATE) {
           return {
             state: 'success',

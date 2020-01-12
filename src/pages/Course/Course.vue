@@ -100,6 +100,7 @@ export default {
   },
   mounted () {
     this.loadModal = true
+    this.currentUserId = uni.getStorageSync('user_id')
     CourseRequest.getOngoingClassList(this.currentUserId).then(r => {
       this.courseItemList[0] = r
       for (let i = 0; i < this.courseItemList[0].length; i++) {
