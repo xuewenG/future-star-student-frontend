@@ -121,7 +121,7 @@ export default {
     this.activityData = JSON.parse(decodeURIComponent(option.data))
     console.log('activityState', this.activityData.state)
     if (this.activityData.state === STATE.ACTIVITY.ENROLLING) {
-      ActivityEnrollRequest.validateEnrollQualification(this.activityData.id, uni.getStorageSync('user_id')).then(r => {
+      ActivityEnrollRequest.validateEnrollQualification(this.activityData.id, uni.getStorageSync('student_id')).then(r => {
         this.canApply = !(r.hasEnrolled)
         if (!this.canApply) {
           this.applyButtonText = '已报名'

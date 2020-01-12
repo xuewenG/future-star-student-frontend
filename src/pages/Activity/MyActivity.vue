@@ -113,7 +113,7 @@ export default {
   },
   mounted () {
     this.loadModal = true
-    const UserId = uni.getStorageSync('user_id')
+    const UserId = uni.getStorageSync('student_id')
     ActivityRequest.getMyEnrollingActivityList(UserId).then(r => {
       this.enrollingActivityList = r
       // console.log(this.enrollingActivityList)

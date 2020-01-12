@@ -32,7 +32,8 @@ export default {
             area: item.company.city,
             company: item.company.name,
             position: item.company.position,
-            profession: item.profession
+            profession: item.profession,
+            data: item
           })
         }
         return list

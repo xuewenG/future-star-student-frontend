@@ -5,7 +5,7 @@
         v-for="(schoolmateItem, schoolmateIndex) in schoolmateList"
         :key="schoolmateIndex"
         class="cu-item arrow"
-        @tap="getSchoolmateInfo(schoolmateItem.id)"
+        @tap="getSchoolmateInfo(schoolmateItem.data)"
       >
         <view
           class="cu-avatar round lg"
@@ -55,10 +55,10 @@ export default {
     })
   },
   methods: {
-    getSchoolmateInfo (id) {
+    getSchoolmateInfo (schoolmate) {
       /* global uni:false */
       uni.navigateTo({
-        url: '/pages/Schoolmate/SchoolmateInfo?schoolmateId=' + id,
+        url: '/pages/Schoolmate/SchoolmateInfo?schoolmate=' + encodeURIComponent(JSON.stringify(schoolmate)),
         success: (res) => {
           console.log(res)
         },
