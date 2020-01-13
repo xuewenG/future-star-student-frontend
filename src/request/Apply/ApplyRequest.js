@@ -78,7 +78,7 @@ export default {
           courseList.push({
             id: course.id,
             name: course.name,
-            type: course.type,
+            type: course.sort,
             spot: course.location,
             schedule: course.begin_time,
             state: course.state,
@@ -129,19 +129,21 @@ export default {
       console.log(error)
     }
   },
-  async edit (data) {
+  async edit (editData) {
     try {
-      const resp = await uniRequest.put('/student/student/' + parseInt(uni.getStorageSync('student_id')), data, {
+      const resp = await uniRequest.put('/student/student/' + parseInt(uni.getStorageSync('student_id')), editData, {
         dataType: 'JSON',
         headers: {
           'content-type': 'application/json'
         }
       })
-      if (resp.data.code === STATE.REQUEST.SUCCESS) {
+      console.log(resp)
+      const data = JSON.parse(resp.data)
+      if (data.code === STATE.REQUEST.SUCCESS) {
         console.log('修改信息成功')
-        return resp.data
+        return data
       } else {
-        console.log(resp.data.msg)
+        console.log(data.msg)
       }
     } catch (error) {
       console.log(error)
@@ -159,7 +161,10 @@ export default {
         },
         success: function (resp) {
           const msg = {}
-          if (resp.data.data.code === STATE.REQUEST.SUCCESS) {
+          console.log(resp)
+          console.log(JSON.parse(resp.data))
+          const data = JSON.parse(resp.data)
+          if (data.code === STATE.REQUEST.SUCCESS) {
             console.log('报名成功')
             msg.detail = 1
           } else {

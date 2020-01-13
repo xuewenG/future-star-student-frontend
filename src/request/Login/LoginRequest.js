@@ -18,6 +18,7 @@ export default {
             console.log('进入小程序成功')
             console.log(res)
             uni.setStorageSync('student_id', response.data.data.student.id)
+            uni.setStorageSync('student_id', 1)
           }
         })
       } else {

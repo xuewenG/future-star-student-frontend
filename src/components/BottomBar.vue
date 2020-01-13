@@ -37,7 +37,7 @@ export default {
         this.PageCur = e.currentTarget.dataset.cur
         this.$emit('cur-changed', e.currentTarget.dataset.cur)
       } else {
-        const uid = uni.getStorageSync('user_id')
+        const uid = uni.getStorageSync('student_id')
         if (uid) {
           SchoolmateInfoRequest.validateIsSchoolmate(uid).then(r => {
             const isSchoolmate = r.isSchoolmate
