@@ -1,5 +1,6 @@
 import uniRequest from 'uni-request'
 import STATE from '@/request/constant'
+import { toLocalStudentData, toRemoteStudentData } from '@/request/util'
 
 export default {
   async validateIsSchoolmate (id) {
@@ -22,6 +23,39 @@ export default {
         }
       } else {
         console.log(resp.data.msg)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
+  async getSchoolmateInfo (schoolmateId) {
+    console.log('getSchoolmateInfo')
+    try {
+      const resp = await uniRequest.get('/student/student/' + parseInt(schoolmateId))
+      if (resp.data.code === STATE.REQUEST.SUCCESS) {
+        return toLocalStudentData(resp.data.data)
+      } else {
+        console.log(resp.data.msg)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
+  async editSchoolmateInfo (schoolmateId, student) {
+    console.log('editSchoolmateInfo')
+    try {
+      const resp = await uniRequest.put('/student/student/' + parseInt(schoolmateId), toRemoteStudentData(student), {
+        dataType: 'JSON',
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+      const data = JSON.parse(resp.data)
+      return {
+        success: data.code === STATE.REQUEST.SUCCESS,
+        msg: data.msg
       }
     } catch (error) {
       console.log(error)

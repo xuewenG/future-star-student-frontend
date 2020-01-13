@@ -39,7 +39,10 @@
         >
           <view
             class="cu-form-group"
-            style="-webkit-justify-content:start; justify-content:start"
+            style="
+
+  -webkit-justify-content: start;
+  justify-content: start;"
           >
             <radio
               class="blue radio margin-right-sm sm"

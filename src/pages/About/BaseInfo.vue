@@ -1,16 +1,8 @@
 <template>
   <view>
-    <cu-custom
-      bg-color="bg-white"
-      :is-back="true"
-    >
-      <block slot="backText">
-        返回
-      </block>
-      <block slot="content">
-        未来之星
-      </block>
-    </cu-custom>
+    <title-bar
+      title="基本信息"
+    />
     <form>
       <view class="cu-bar bg-white margin-top-sm">
         <view class="action">
@@ -33,15 +25,9 @@
         class="block"
         @change="sexSelect"
       >
-        <view
-          class="cu-form-group"
-          style="
-
-  -webkit-justify-content: start;
-  justify-content: start;"
-        >
+        <view class="cu-form-group">
           <text class="cuIcon-male text-cyan" />
-          <view class="title margin-left">
+          <view class="title">
             性别
           </view>
           <radio
@@ -90,18 +76,14 @@
           name="input"
           @blur="checkTel"
         >
-      </view>
-      <view class="cu-form-group">
-        <text class="cuIcon-weixin text-cyan" />
-        <view class="title margin-left">
-          微信号码
+        <view class="cu-capsule radius">
+          <view class="cu-tag bg-blue ">
+            +86
+          </view>
+          <view class="cu-tag line-blue">
+            中国大陆
+          </view>
         </view>
-        <input
-          v-model="baseInfoForm.wx"
-          placeholder="请输入微信号"
-          name="input"
-          @blur="checkWechat"
-        >
       </view>
       <view class="cu-form-group">
         <text class="cuIcon-mail text-cyan" />
@@ -130,103 +112,62 @@
           </view>
         </picker>
       </view>
-      <view class="cu-list menu sm-border">
-        <view class="cu-item flex">
-          <view @tap="checkBefore">
-            <text class="lg text-grey cuIcon-back" />
-            <text
-              class="basis-xl margin-left content"
-            >
-              上一页
-            </text>
-          </view>
-          <view @tap="checkNext">
-            <text
-              class="basis-xl margin-right content"
-            >
-              下一页
-            </text>
-            <text class="lg text-grey cuIcon-right" />
-          </view>
-        </view>
+      <view class="padding flex flex-direction">
+        <button
+          class="cu-btn bg-green lg"
+          @tap="saveChanges"
+        >
+          确认修改
+        </button>
       </view>
     </form>
   </view>
 </template>
 
 <script>
-import ApplyRequest from '@/request/Apply/ApplyRequest.js'
+import TitleBar from '@/components/TitleBar.vue'
+import SchoolmateInfoRequest from '@/request/About/SchoolmateInfoRequest'
 export default {
+  components: {
+    TitleBar
+  },
   data () {
     return {
       baseInfoForm: {
         name: '',
-        sex: 0,
+        sex: 'male',
         birthDate: '2018-12-25',
         tel: '',
-        wx: '',
         mail: '',
         city: ['广东省', '广州市', '海珠区']
       },
       student: {
-        baseInfo: {},
-        educationInfo: {},
-        companyInfo: {},
-        referees: [],
-        otherInfo: {},
-        clazz: ''
+        baseInfo: {}
       },
       sex: ''
     }
   },
-  onLoad (option) {
-    console.log('您要报的班级', option.clazz)
-    ApplyRequest.getStudentInfo(uni.getStorageSync('student_id')).then(student => {
-      console.log(student)
-      if (student.name) {
-        this.student = {
-          baseInfo: {
-            name: student.name,
-            sex: student.gender,
-            birthDate: student.birthday,
-            tel: student.phone_number,
-            mail: student.email,
-            city: student.city.split('|'),
-            wx: student.wx
-          },
-          educationInfo: {
-            education: student.education,
-            graduation: student.school,
-            career: '2004-2008' + '/' + student.previous_company + '/' + student.previous_position,
-            profession: student.profession
-          },
-          companyInfo: {
-            companyBrand: student.company.name,
-            website: student.company.website,
-            appName: student.company.wx_public,
-            setup: student.company.create_time,
-            location: student.company.city.split('|'),
-            staffNum: student.company.number_employee,
-            positions: student.company.position.split('·'),
-            companyInfo: student.company.introduction,
-            operationData: student.company.company_data,
-            profitScale: student.company.income_scale,
-            finance: student.company.financing_situation,
-            financeDetails: '',
-            companyValue: student.company.value_of_assessment,
-            businessList: [],
-            supply: ''
-          },
-          clazz: parseInt(option.clazz),
-          referees: [],
-          otherInfo: {}
-        }
-        this.baseInfoForm = this.student.baseInfo
-        this.sex = this.student.baseInfo.sex === 0 ? 'male' : 'female'
-        console.log(this.sex)
-        console.log(this.student)
-      }
-      this.student.clazz = parseInt(option.clazz)
+  onLoad () {
+    SchoolmateInfoRequest.getSchoolmateInfo(uni.getStorageSync('student_id')).then(student => {
+      console.log('student', student)
+      this.student = student
+      this.baseInfoForm = this.student.baseInfo
+      this.sex = this.baseInfoForm.sex === 0 ? 'male' : 'female'
+      // const cityFormat = student.city.split('·')
+      // if (student.name) {
+      //   this.student = {
+      //     baseInfo: {
+      //       name: student.name,
+      //       sex: student.gender === 0 ? 'male' : 'female',
+      //       birthDate: student.birthday,
+      //       tel: student.phone_number,
+      //       mail: student.email,
+      //       city: student.city.split('|')
+      //     }
+      //   }
+      //   this.baseInfoForm = this.student.baseInfo
+      //   console.log('baseInfoForm', this.baseInfoForm)
+      // }
     })
   },
   methods: {
@@ -245,20 +186,12 @@ export default {
         this.showToast('性别不能为空')
         return false
       }
-      return true
-    },
-    checkWechat (e) {
-      this.checkFormWechat(e.detail.value)
-    },
-    checkFormWechat (wx) {
-      if (wx === null || wx === '') {
-        this.showToast('请填入微信号')
-        return false
-      }
+      console.log('check', sex)
+      this.sex = sex
+      this.baseInfoForm.sex = this.sex === 'male' ? 0 : 1
       return true
     },
     sexSelect (e) {
-      this.sex = e.detail.value
       this.checkFormSex(e.detail.value)
     },
     selectBirthDate (e) {
@@ -293,38 +226,41 @@ export default {
     checkMail (e) {
       this.checkFormMail(e.detail.value)
     },
-    checkNext () {
+    saveChanges () {
       if (!this.checkFormName(this.baseInfoForm.name)) {
         return
       }
-      if (!this.checkFormSex(this.baseInfoForm.sex)) {
+      if (!this.checkFormSex(this.sex)) {
         return
       }
       if (!this.checkFormTel(this.baseInfoForm.tel)) {
         return
       }
-      if (!this.checkFormWechat(this.baseInfoForm.wx)) {
-        return
-      }
       if (!this.checkFormMail(this.baseInfoForm.mail)) {
         return
       }
-      this.baseInfoForm.sex = this.sex === 'male' ? 0 : 1
       this.student.baseInfo = this.baseInfoForm
       // this.student.baseInfo.city = this.baseInfoForm.city.join('|')
-      console.log(this.student)
-      uni.navigateTo({
-        url: '/pages/Apply/EducationInfo?data=' + encodeURIComponent(JSON.stringify(this.student)),
-        fail: (res) => {
-          console.log(res)
-        },
-        success: (res) => {
-          console.log(res)
+      this.student.baseInfo.sex = this.sex === 'male' ? 0 : 1
+      console.log('sex', this.sex)
+      console.log('student', this.student)
+      SchoolmateInfoRequest.editSchoolmateInfo(uni.getStorageSync('student_id'), this.student).then(r => {
+        const status = r
+        console.log('status', status)
+        if (status.success) {
+          uni.showToast({
+            title: '修改成功',
+            icon: 'success'
+          })
+          uni.navigateBack({
+            delta: 1
+          })
+        } else {
+          uni.showToast({
+            title: status.msg
+          })
         }
       })
-    },
-    checkBefore () {
-      this.showToast('已经是第一页')
     },
     showToast (info) {
       uni.showToast({
@@ -337,7 +273,4 @@ export default {
 </script>
 
 <style>
-.cu-form-group picker .picker {
-  text-align: start;
-}
 </style>
