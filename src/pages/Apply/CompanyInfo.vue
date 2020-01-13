@@ -653,8 +653,8 @@ export default {
       }
       console.log(this.companyForm)
       this.student.companyInfo = this.companyForm
-      this.student.companyInfo.location = this.companyForm.location.join('|')
-      this.student.companyInfo.positions = this.companyForm.positions.join('·')
+      // this.student.companyInfo.location = this.companyForm.location.join('|')
+      // this.student.companyInfo.positions = this.companyForm.positions.join('·')
       console.log('前往推荐人页')
       uni.navigateTo({
         url: '/pages/Apply/RefereesInfo?data=' + encodeURIComponent(JSON.stringify(this.student)),

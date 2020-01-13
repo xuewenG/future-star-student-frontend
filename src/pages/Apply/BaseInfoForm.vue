@@ -33,25 +33,28 @@
         class="block"
         @change="sexSelect"
       >
-        <view class="cu-form-group">
+        <view
+          class="cu-form-group"
+          style="-webkit-justify-content:start; justify-content:start"
+        >
           <text class="cuIcon-male text-cyan" />
-          <view class="title">
+          <view class="title margin-left">
             性别
           </view>
           <radio
             class="blue radio margin-right-sm sm"
-            :class="sex=='male'?'checked':''"
-            :checked="sex=='male'?true:false"
-            value="男"
+            :class="sex==='male'?'checked':''"
+            :checked="sex==='male'?true:false"
+            value="male"
           />
           <p class="margin-right">
             男
           </p>
           <radio
             class="blue radio margin-right-sm sm"
-            :class="sex=='female'?'checked':''"
-            :checked="sex=='female'?true:false"
-            value="女"
+            :class="sex==='female'?'checked':''"
+            :checked="sex==='female'?true:false"
+            value="female"
           />
           <p>女</p>
         </view>
@@ -84,14 +87,18 @@
           name="input"
           @blur="checkTel"
         >
-        <view class="cu-capsule radius">
-          <view class="cu-tag bg-blue ">
-            +86
-          </view>
-          <view class="cu-tag line-blue">
-            中国大陆
-          </view>
+      </view>
+      <view class="cu-form-group">
+        <text class="cuIcon-weixin text-cyan" />
+        <view class="title margin-left">
+          微信号码
         </view>
+        <input
+          v-model="baseInfoForm.wx"
+          placeholder="请输入微信号"
+          name="input"
+          @blur="checkWechat"
+        >
       </view>
       <view class="cu-form-group">
         <text class="cuIcon-mail text-cyan" />
@@ -151,9 +158,10 @@ export default {
     return {
       baseInfoForm: {
         name: '',
-        sex: 'male',
+        sex: 0,
         birthDate: '2018-12-25',
         tel: '',
+        wx: '',
         mail: '',
         city: ['广东省', '广州市', '海珠区']
       },
@@ -172,7 +180,6 @@ export default {
     console.log('您要报的班级', option.clazz)
     ApplyRequest.getStudentInfo(uni.getStorageSync('student_id')).then(student => {
       console.log(student)
-      // const cityFormat = student.city.split('·')
       if (student.name) {
         this.student = {
           baseInfo: {
@@ -181,7 +188,8 @@ export default {
             birthDate: student.birthday,
             tel: student.phone_number,
             mail: student.email,
-            city: student.city.split('|')
+            city: student.city.split('|'),
+            wx: student.wx
           },
           educationInfo: {
             education: student.education,
@@ -211,12 +219,11 @@ export default {
           otherInfo: {}
         }
         this.baseInfoForm = this.student.baseInfo
-        this.baseInfoForm.sex = this.student.baseInfo.gender === 0 ? 'male' : 'female'
-        console.log(this.baseInfoForm)
+        this.sex = this.student.baseInfo.sex === 0 ? 'male' : 'female'
+        console.log(this.sex)
         console.log(this.student)
       }
       this.student.clazz = parseInt(option.clazz)
-      this.sex = this.baseInfoForm.sex
     })
   },
   methods: {
@@ -234,14 +241,21 @@ export default {
       if (sex === null || sex === '') {
         this.showToast('性别不能为空')
         return false
-      } else if (sex === '男') {
-        this.baseInfoForm.sex = 'male'
-      } else {
-        this.baseInfoForm.sex = 'female'
+      }
+      return true
+    },
+    checkWechat (e) {
+      this.checkFormWechat(e.detail.value)
+    },
+    checkFormWechat (wx) {
+      if (wx === null || wx === '') {
+        this.showToast('请填入微信号')
+        return false
       }
       return true
     },
     sexSelect (e) {
+      this.sex = e.detail.value
       this.checkFormSex(e.detail.value)
     },
     selectBirthDate (e) {
@@ -286,12 +300,15 @@ export default {
       if (!this.checkFormTel(this.baseInfoForm.tel)) {
         return
       }
+      if (!this.checkFormWechat(this.baseInfoForm.wx)) {
+        return
+      }
       if (!this.checkFormMail(this.baseInfoForm.mail)) {
         return
       }
+      this.baseInfoForm.sex = this.sex === 'male' ? 0 : 1
       this.student.baseInfo = this.baseInfoForm
-      this.student.baseInfo.city = this.baseInfoForm.city.join('|')
-      this.student.baseInfo.sex = this.baseInfoForm.sex === 'male' ? 0 : 1
+      // this.student.baseInfo.city = this.baseInfoForm.city.join('|')
       console.log(this.student)
       uni.navigateTo({
         url: '/pages/Apply/EducationInfo?data=' + encodeURIComponent(JSON.stringify(this.student)),
@@ -317,4 +334,7 @@ export default {
 </script>
 
 <style>
+.cu-form-group picker .picker {
+  text-align: start;
+}
 </style>
