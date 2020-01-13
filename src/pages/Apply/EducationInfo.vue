@@ -12,7 +12,7 @@
       </block>
     </cu-custom>
     <form>
-      <view class="cu-bar bg-white margin-top-sm solids-bottom">
+      <view class="cu-bar bg-white solids-bottom">
         <view class="action">
           <text class="cuIcon-titles text-orange" /> 教育/工作背景
         </view>
@@ -288,18 +288,20 @@ export default {
     onLoad (student) {
       console.log(JSON.parse(decodeURIComponent(student.data)))
       this.student = JSON.parse(decodeURIComponent(student.data))
-      this.educationInfoForm = this.student.educationInfo
-      this.educationInfoForm.profession = this.student.educationInfo.profession.split('|')
-      this.education = this.student.educationInfo.education
-      for (let i = 0, lenI = this.professionList.length; i < lenI; ++i) {
-        if (this.educationInfoForm.profession.includes(this.professionList[i].value)) {
-          this.$set(this.professionList[i], 'checked', true)
-        } else {
-          this.$set(this.professionList[i], 'checked', false)
+      if (JSON.stringify(this.student.educationInfo) !== '{}') {
+        this.educationInfoForm = this.student.educationInfo
+        this.educationInfoForm.profession = this.student.educationInfo.profession.split('|')
+        this.education = this.student.educationInfo.education
+        for (let i = 0, lenI = this.professionList.length; i < lenI; ++i) {
+          if (this.educationInfoForm.profession.includes(this.professionList[i].value)) {
+            this.$set(this.professionList[i], 'checked', true)
+          } else {
+            this.$set(this.professionList[i], 'checked', false)
+          }
         }
+        console.log(this.student)
+        console.log(this.educationInfoForm)
       }
-      console.log(this.student)
-      console.log(this.educationInfoForm)
     }
   }
 }

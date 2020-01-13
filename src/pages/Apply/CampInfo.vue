@@ -12,42 +12,54 @@
       </block>
     </cu-custom>
 
-    <view class="cu-bar bg-white margin-top-sm">
+    <view class="cu-bar bg-white">
       <view class="action">
-        <text class="cuIcon-titles text-orange" /> {{ camp.name }}
+        <text class="cuIcon-titles text-green text-sl" /> {{ camp.name }}
       </view>
     </view>
     <view class="cu-card case">
-      <view class="cu-item shadow">
+      <view class="cu-item">
         <view class="image">
           <image
             :src="camp.swiperImg"
             class="png"
+            width="100%"
             mode="widthFix"
           />
-          <view class="cu-tag bg-blue">
-            招生
-          </view>
         </view>
-        <view class="cu-item margin">
-          <view class="text-content flex-sub cuIcon-">
+        <view class="cu-item">
+          <view class="text-content flex-sub">
             <van-cell :title="camp.introduction" />
           </view>
         </view>
       </view>
+      <!-- <view class="cu-bar bg-white">
+        <view class="action">
+          <text class="cuIcon-titles text-green" /> 班级列表
+        </view>
+      </view> -->
     </view>
 
     <view
       v-for="(clazz, index) in camp.clazzList"
       :key="index"
     >
-      <view class="cu-bar bg-white">
-        <view class="action">
-          <text class="cuIcon-titles text-orange" /> {{ clazz.name }}
-        </view>
-      </view>
-      <view class="cu-card case">
-        <view class="cu-item shadow">
+      <view class="cu-card case shadow">
+        <view class="cu-item">
+          <view class="cu-bar bg-white">
+            <view class="action">
+              <text class="cuIcon-titles text-green" /> {{ clazz.name }}
+            </view>
+            <view class="action">
+              <button
+                class="cu-btn bg-green"
+                :disabled="clazz.state !== 1"
+                @tap="applyClazz(clazz)"
+              >
+                {{ applyButtonName[clazz.state] }}
+              </button>
+            </view>
+          </view>
           <view class="image">
             <image
               :src="clazz.img"
@@ -78,7 +90,7 @@
             >
               <view class="cu-bar bg-white">
                 <view class="action">
-                  <text class="cuIcon-titles text-orange" /> 课程安排
+                  <text class="cuIcon-titles text-green" /> 课程安排
                 </view>
               </view>
               <van-cell-group>
@@ -90,7 +102,7 @@
               </van-cell-group>
               <view class="cu-bar bg-white margin-top-sm">
                 <view class="action">
-                  <text class="cuIcon-titles text-orange" /> 往期教师&拟邀讲师
+                  <text class="cuIcon-titles text-green" /> 往期教师&拟邀讲师
                 </view>
               </view>
               <van-cell-group>
@@ -106,11 +118,11 @@
       </view>
     </view>
 
-    <view class="padding-sm">
+    <!-- <view class="padding-sm">
       <form>
         <view class="cu-bar bg-white margin-top-sm solids-bottom">
           <view class="action">
-            <text class="cuIcon-titles text-orange" /> 报名班级
+            <text class="cuIcon-titles text-green" /> 报名班级
           </view>
         </view>
         <radio-group
@@ -149,7 +161,7 @@
       >
         我要报名
       </button>
-    </view>
+    </view> -->
   </view>
 </template>
 
@@ -160,6 +172,7 @@ export default {
   name: 'CampInfo',
   data () {
     return {
+      applyButtonName: ['未开放', '报名', '报名已结束', '报名已结束', '报名已结束'],
       camp: {
         id: '',
         name: '',
@@ -213,16 +226,17 @@ export default {
       this.clazzApply = e.detail.value
       console.log('当前被选中：', this.clazzApply)
     },
-    toApply (e) {
-      if (!this.checkClazz(this.clazzApply)) {
-        return
-      }
-      ApplyRequest.getClazzApplyState(this.clazzApply, uni.getStorageSync('student_id')).then(state => {
+    applyClazz (clazz) {
+      // if (!this.checkClazz(this.clazzApply)) {
+      //   return
+      // }
+      console.log(clazz)
+      ApplyRequest.getClazzApplyState(clazz.id, uni.getStorageSync('student_id')).then(state => {
         if (state === STATE.AUDIT.NOT_APPLY) {
           console.log(state)
           /* global uni:false */
           uni.navigateTo({
-            url: '../Apply/BaseInfoForm?clazz=' + this.clazzApply,
+            url: '../Apply/BaseInfoForm?clazz=' + clazz.id,
             fail: (res) => {
               console.log(res)
             },

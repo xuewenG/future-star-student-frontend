@@ -12,7 +12,7 @@ export default {
         list = []// make a direct use of list in order to pass eslint
         for (let i = 0; i < parseInt(resp.data.data.count); i++) {
           const item = resp.data.data.results[i].clazz
-          console.log(item)
+          console.log('ongoingClazzItem', item)
           if (item.state === STATE.ACTIVITY.UNDERWAY) {
             list.push({
               id: item.id,
@@ -42,6 +42,7 @@ export default {
         list = []// make a direct use of list in order to pass eslint
         for (let i = 0; i < parseInt(resp.data.data.count); i++) {
           const item = resp.data.data.results[i].clazz
+          console.log('auditingItem', item)
           if (item.state === STATE.ACTIVITY.BEFORE) {
             list.push({
               id: item.id,

@@ -12,7 +12,7 @@
       </block>
     </cu-custom>
     <form>
-      <view class="cu-bar bg-white margin-top-sm solids-bottom">
+      <view class="cu-bar bg-white solids-bottom">
         <view class="action">
           <text class="cuIcon-titles text-orange" /> 其他信息
         </view>

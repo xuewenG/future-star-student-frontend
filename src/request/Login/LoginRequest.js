@@ -19,7 +19,7 @@ export default {
             console.log(res)
             uni.clearStorage()
             uni.setStorageSync('student_id', response.data.data.student.id)
-            uni.setStorageSync('student_id', 1)
+            // uni.setStorageSync('student_id', 1)
           }
         })
       } else {
