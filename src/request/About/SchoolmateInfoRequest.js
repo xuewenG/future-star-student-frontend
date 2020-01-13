@@ -28,7 +28,7 @@ export default {
       console.log(error)
     }
   },
-  
+
   async getSchoolmateInfo (schoolmateId) {
     console.log('getSchoolmateInfo')
     try {
@@ -42,7 +42,7 @@ export default {
       console.log(error)
     }
   },
-  
+
   async editSchoolmateInfo (schoolmateId, student) {
     console.log('editSchoolmateInfo')
     try {
