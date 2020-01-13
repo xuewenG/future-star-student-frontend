@@ -240,7 +240,7 @@ export default {
         return
       }
       this.student.baseInfo = this.baseInfoForm
-      this.student.baseInfo.city = this.baseInfoForm.city.join('|')
+      // this.student.baseInfo.city = this.baseInfoForm.city.join('|')
       this.student.baseInfo.sex = this.sex === 'male' ? 0 : 1
       console.log('sex', this.sex)
       console.log('student', this.student)

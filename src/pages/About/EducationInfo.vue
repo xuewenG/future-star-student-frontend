@@ -184,7 +184,7 @@ export default {
         return
       }
       console.log(this.educationInfoForm)
-      this.student.educationInfo = this.educationInfoForm
+      // this.student.educationInfo = this.educationInfoForm.city.join('|')
       SchoolmateInfoRequest.editSchoolmateInfo(uni.getStorageSync('student_id'), this.student).then(r => {
         const status = r
         console.log('status', status)
