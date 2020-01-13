@@ -3,6 +3,15 @@ export default {
   REQUEST: {
     SUCCESS: '2000'
   },
+  RESOURCE: {
+    OPEN: 0,
+    CLOSED: 1
+  },
+  RESOURCE_TYPE: {
+    TEXT: 0,
+    PPT: 1,
+    VIDEO: 2
+  },
   SCHOOLMATE: {
     INVALID: 0,
     NOT_GRADUATE: 1,
@@ -23,14 +32,5 @@ export default {
     UNDERWAY: 3,
     CLOSED: 4,
     CANCELLED: 5
-  },
-  RESOURCE: {
-    OPEN: 0,
-    CLOSED: 1
-  },
-  RESOURCE_TYPE: {
-    TEXT: 0,
-    PPT: 1,
-    VIDEO: 2
   }
 }
