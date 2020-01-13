@@ -83,10 +83,12 @@ export default {
   },
   methods: {
     stringify (time) {
-      console.log('src', time)
-      console.log('date', (new Date(time)).toISOString())
-      console.log('target', toChineseTimeString(new Date(time)))
-      return toChineseTimeString(new Date(time))
+      if (time !== undefined) {
+        // console.log('src', time)
+        // console.log('date', (new Date(time)).toISOString())
+        // console.log('target', toChineseTimeString(new Date(time)))
+        return toChineseTimeString(new Date(time))
+      }
     },
     changeLoading () {
       this.loadModal = false
@@ -111,15 +113,12 @@ export default {
           })
         }
       })
-    },
-    test (e) {
-      console.log(e)
     }
   },
   onLoad (option) {
     this.loadModal = true
     this.activityData = JSON.parse(decodeURIComponent(option.data))
-    console.log('activityState', this.activityData.state)
+    // console.log('activityState', this.activityData.state)
     if (this.activityData.state === STATE.ACTIVITY.ENROLLING) {
       ActivityEnrollRequest.validateEnrollQualification(this.activityData.id, uni.getStorageSync('student_id')).then(r => {
         this.canApply = !(r.hasEnrolled)

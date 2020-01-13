@@ -11,21 +11,11 @@
       <swiper-item
         v-for="(item,index) in swiperList"
         :key="index"
+        @tap="naviagteTo(index)"
       >
         <image
-          v-if="item.type=='image'"
-          :src="item.url"
+          :src="item.image"
           mode="aspectFit"
-        />
-        <video
-          v-if="item.type=='video'"
-          :src="item.url"
-          autoplay
-          loop
-          muted
-          :show-play-btn="false"
-          :controls="false"
-          objectFit="cover"
         />
       </swiper-item>
     </swiper>
@@ -60,62 +50,22 @@ export default {
       loadModal: false,
       navigatorList: ['正在进行', '即将开始'],
       swiperList: [
-        {
-          id: 0,
-          type: 'image',
-          url: '/static/EdStarsQualityClass.png'
-        }, {
-          id: 1,
-          type: 'image',
-          url: '/static/EdStarsQualityClass.png'
-        }, {
-          id: 2,
-          type: 'image',
-          url: '/static/EdStarsQualityClass.png'
-        }
-      ],
-      ongoingActivityList: [
         // {
+        //   id: 0,
+        //   type: 'image',
+        //   url: '/static/EdStarsQualityClass.png'
+        // }, {
         //   id: 1,
-        //   name: '热门活动1',
-        //   img: '../../static/EdStarsLogo.png',
-        //   intro: '',
-        //   url: '/pages/Activity/ActivityInfo'
+        //   type: 'image',
+        //   url: '/static/EdStarsQualityClass.png'
         // }, {
         //   id: 2,
-        //   name: '热门活动2',
-        //   img: '../../static/EdStarsLogo.png',
-        //   intro: '',
-        //   url: '/pages/Activity/ActivityInfo'
-        // }, {
-        //   id: 3,
-        //   name: '热门活动3',
-        //   img: '../../static/EdStarsLogo.png',
-        //   intro: '',
-        //   url: '/pages/Activity/ActivityInfo'
+        //   type: 'image',
+        //   url: '/static/EdStarsQualityClass.png'
         // }
       ],
-      awaitActivityList: [
-        // {
-        //   id: 4,
-        //   name: '即将上线的活动1',
-        //   img: '../../static/EdStarsLogo.png',
-        //   intro: '',
-        //   url: '/pages/Activity/ActivityInfo'
-        // }, {
-        //   id: 5,
-        //   name: '即将上线的活动2',
-        //   img: '../../static/EdStarsLogo.png',
-        //   intro: '',
-        //   url: '/pages/Activity/ActivityInfo'
-        // }, {
-        //   id: 6,
-        //   name: '即将上线的活动3',
-        //   img: '../../static/EdStarsLogo.png',
-        //   intro: '',
-        //   url: '/pages/Activity/ActivityInfo'
-        // }
-      ]
+      ongoingActivityList: [],
+      awaitActivityList: []
     }
   },
   mounted () {
@@ -123,6 +73,10 @@ export default {
     ActivityRequest.getOngoingActivityList().then(r => {
       this.ongoingActivityList = r
       this.loadModal = false
+      // this.swiperList = this.ongoingActivityList.slice(0,
+      //  this.ongoingActivityList.length < 3 ? this.ongoingActivityList.length : 3)
+      this.swiperList = this.ongoingActivityList.slice(0,2)
+      console.log(this.swiperList)
     })
     ActivityRequest.getAwaitActivityList().then(r => {
       this.awaitActivityList = r
@@ -131,6 +85,19 @@ export default {
   methods: {
     getCurrentList (i) {
       this.TabCur = i
+    },
+    naviagteTo (index) {
+      const item = this.swiperList[index]
+      /* global uni:false */
+      uni.navigateTo({
+        url: item.url + '?data=' + encodeURIComponent(JSON.stringify(item.data)),
+        fail: function () {
+          console.log('fail to navigate to ' + item.url)
+        },
+        success: function () {
+          console.log('succeed to navigate to ' + item.url)
+        }
+      })
     }
   }
 }

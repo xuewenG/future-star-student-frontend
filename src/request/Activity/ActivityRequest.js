@@ -14,6 +14,7 @@ export default {
           list.push({
             id: item.id,
             name: item.name,
+            image: item.image,
             img: item.icon,
             intro: '',
             url: '/pages/Activity/ActivityInfo',

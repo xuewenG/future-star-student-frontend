@@ -28,6 +28,7 @@ export function toLocalStudentData (student) {
   if (student.name) {
     return {
       baseInfo: {
+        avatar_url: student.avatar_url,
         name: student.name,
         sex: student.gender,
         birthDate: student.birthday,
