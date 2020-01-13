@@ -44,6 +44,17 @@ export default {
       }
     }
   },
+  mounted () {
+    SchoolmateInfoRequest.getSchoolmateInfo(uni.getStorageSync('student_id')).then(student => {
+      console.log('student', student)
+      this.aboutItem = {
+        id: uni.getStorageSync('student_id'),
+        img: student.baseInfo.avatar_url,
+        name: student.baseInfo.name,
+        intro: student.companyInfo.companyBrand + student.companyInfo.positions[0]
+      }
+    })
+  },
   methods: {
     navigateToAboutInfo (id) {
       const url = '/pages/About/PersonalInfo'
@@ -58,17 +69,6 @@ export default {
         }
       })
     }
-  },
-  mounted () {
-    SchoolmateInfoRequest.getSchoolmateInfo(uni.getStorageSync('student_id')).then(student => {
-      console.log('student', student)
-      this.aboutItem = {
-        id: uni.getStorageSync('student_id'),
-        img: student.baseInfo.avatar_url,
-        name: student.baseInfo.name,
-        intro: student.companyInfo.companyBrand+student.companyInfo.positions[0]
-      }
-    })
   }
 }
 </script>

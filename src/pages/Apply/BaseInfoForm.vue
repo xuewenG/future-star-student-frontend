@@ -35,7 +35,10 @@
       >
         <view
           class="cu-form-group"
-          style="-webkit-justify-content:start; justify-content:start"
+          style="
+
+  -webkit-justify-content: start;
+  justify-content: start;"
         >
           <text class="cuIcon-male text-cyan" />
           <view class="title margin-left">

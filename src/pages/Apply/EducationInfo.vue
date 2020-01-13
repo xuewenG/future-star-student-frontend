@@ -66,7 +66,7 @@
             </text>
           </view>
         </view>
-<!--        <view class="cu-item text-gray">
+        <!--        <view class="cu-item text-gray">
           如：2004-2008/北京大学/计算机科学/学士
         </view> -->
         <view class="cu-form-group cu-item align-start">

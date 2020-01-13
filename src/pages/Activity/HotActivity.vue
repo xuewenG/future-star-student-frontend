@@ -75,7 +75,7 @@ export default {
       this.loadModal = false
       // this.swiperList = this.ongoingActivityList.slice(0,
       //  this.ongoingActivityList.length < 3 ? this.ongoingActivityList.length : 3)
-      this.swiperList = this.ongoingActivityList.slice(0,2)
+      this.swiperList = this.ongoingActivityList.slice(0, 2)
       console.log(this.swiperList)
     })
     ActivityRequest.getAwaitActivityList().then(r => {
