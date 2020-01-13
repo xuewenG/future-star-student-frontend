@@ -37,7 +37,10 @@
           class="block"
           @change="selectCheck"
         >
-          <view class="cu-form-group">
+          <view
+            class="cu-form-group"
+            style="-webkit-justify-content:start; justify-content:start"
+          >
             <radio
               class="blue radio margin-right-sm sm"
               :class="otherForm.check===0?'checked':''"
@@ -172,8 +175,8 @@ export default {
   data () {
     return {
       otherForm: {
-        check: 'accept',
-        applyReason: 0,
+        check: 0,
+        applyReason: '',
         contributions: '',
         canals: []
       },
@@ -211,14 +214,11 @@ export default {
       if (check === null || check === '') {
         this.showToast('请选择是否接受考勤')
         return false
-      } else if (check === '接受') {
-        this.otherForm.check = 0
-      } else {
-        this.otherForm.check = 1
       }
       return true
     },
     selectCheck (e) {
+      this.otherForm.check = e.detail.value === '接受' ? 0 : 1
       this.checkFormCheck(e.detail.value)
     },
     checkTextArea (text, info) {
@@ -287,10 +287,10 @@ export default {
         phone_number: this.student.baseInfo.tel,
         wx: this.student.baseInfo.wx,
         email: this.student.baseInfo.mail,
-        city: this.student.baseInfo.city,
+        city: this.student.baseInfo.city.join('|'),
         school: this.student.educationInfo.graduation,
         previous_company: this.student.educationInfo.career.split('/')[1],
-        profession: this.student.educationInfo.profession,
+        profession: this.student.educationInfo.profession.join('|'),
         education: this.student.educationInfo.education,
         previous_position: this.student.educationInfo.career.split('/')[2],
         gender: this.student.baseInfo.sex,
@@ -299,9 +299,9 @@ export default {
           website: this.student.companyInfo.website,
           wx_public: this.student.companyInfo.appName,
           create_time: this.student.companyInfo.setup,
-          city: this.student.companyInfo.location,
+          city: this.student.companyInfo.location.join('|'),
           number_employee: this.student.companyInfo.staffNum,
-          position: this.student.companyInfo.positions,
+          position: this.student.companyInfo.positions.join('·'),
           introduction: this.student.companyInfo.companyInfo,
           company_data: this.student.companyInfo.operationData,
           income_scale: this.student.companyInfo.profitScale,
@@ -337,14 +337,17 @@ export default {
               icon: 'none'
             })
           }
-          uni.redirectTo({
-            url: '/pages/Apply/CampInfo',
-            fail: (res) => {
-              console.log(res)
-            },
-            success: (res) => {
-              console.log(res)
-            }
+          // uni.redirectTo({
+          //   url: '/pages/Apply/Apply',
+          //   fail: (res) => {
+          //     console.log(res)
+          //   },
+          //   success: (res) => {
+          //     console.log(res)
+          //   }
+          // })
+          uni.navigateBack({
+            delta: 5
           })
         }).catch(err => {
           console.log('网络错误', err)

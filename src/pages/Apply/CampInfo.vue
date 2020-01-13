@@ -58,8 +58,9 @@
               {{ clazz.name }}
             </view>
           </view>
-          <view class="cu-item margin">
-            <view class="text-content flex-sub cuIcon-attention">
+          <view class="margin action flex">
+            <text class="cuIcon-attentionfill text-grey lg" />
+            <view class="title margin-left-sm">
               {{ clazz.info }}
             </view>
           </view>
@@ -94,7 +95,6 @@
               </view>
               <van-cell-group>
                 <van-cell
-                  center
                   :icon="course.lecturer.avatar"
                   :title="course.lecturer.name + ' ' + course.lecturer.title"
                   :label="course.lecturer.introduction"
@@ -106,7 +106,7 @@
       </view>
     </view>
 
-    <view class="padding">
+    <view class="padding-sm">
       <form>
         <view class="cu-bar bg-white margin-top-sm solids-bottom">
           <view class="action">
@@ -119,8 +119,8 @@
         >
           <view class="cu-bar bg-white cu-item">
             <view class="action">
-              <text class="cuIcon-profile text-cyan margin-left" />
-              <text class="margin-left">
+              <text class="cuIcon-post text-cyan margin-left" />
+              <text class="title">
                 请选择报名的班级
               </text>
             </view>
@@ -134,8 +134,6 @@
               <label class="flex justify-between align-center flex-sub">
                 <radio
                   class="blue radio"
-                  :class="clazzApply===clazz.id?'checked':''"
-                  :checked="clazzApply===clazz.id?true:false"
                   :value="clazz.id"
                 />
                 <view class="flex-sub margin-left">{{ clazz.name }}</view>
@@ -211,7 +209,9 @@ export default {
       return true
     },
     selectClazz (e) {
+      console.log(e.detail.value)
       this.clazzApply = e.detail.value
+      console.log('当前被选中：', this.clazzApply)
     },
     toApply (e) {
       if (!this.checkClazz(this.clazzApply)) {

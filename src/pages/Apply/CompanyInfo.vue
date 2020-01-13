@@ -413,6 +413,7 @@
 
 <script>
 import { uniNumberBox } from '@dcloudio/uni-ui'
+import STATE from '@/request/constant'
 export default {
   components: {
     uniNumberBox
@@ -496,17 +497,29 @@ export default {
     selectCompanyValue (e) {
       this.companyForm.companyValue = parseFloat(e).toFixed(2)
     },
-    selectBusinuessImg () {
+    selectBusinuessImg (e) {
       uni.chooseImage({
         count: 4,
-        sizeType: ['original', 'compressed'],
+        sizeType: ['original'],
         sourceType: ['album'],
         success: (res) => {
-          if (this.companyForm.businessList !== 0) {
-            this.companyForm.businessList = this.companyForm.businessList.concat(res.tempFilePaths)
-          } else {
-            this.companyForm.businessList = res.tempFilePaths
+          console.log(res.tempFiles)
+          const tempFilePaths = res.tempFilePaths
+          for (let i = 0; i < tempFilePaths.length; i++) {
+            console.log(tempFilePaths[i])
+            uni.uploadFile({
+              url: STATE.HOST + '/file/upload',
+              filePath: tempFilePaths[i],
+              name: 'file',
+              success: (uploadFileRes) => {
+                res = JSON.parse(uploadFileRes.data)
+                this.companyForm.businessList.push(res.data.url)
+              }
+            })
           }
+        },
+        error: (e) => {
+          console.log(e)
         }
       })
     },
@@ -640,8 +653,8 @@ export default {
       }
       console.log(this.companyForm)
       this.student.companyInfo = this.companyForm
-      this.student.companyInfo.location = this.companyForm.location.join('|')
-      this.student.companyInfo.positions = this.companyForm.positions.join('·')
+      // this.student.companyInfo.location = this.companyForm.location.join('|')
+      // this.student.companyInfo.positions = this.companyForm.positions.join('·')
       console.log('前往推荐人页')
       uni.navigateTo({
         url: '/pages/Apply/RefereesInfo?data=' + encodeURIComponent(JSON.stringify(this.student)),

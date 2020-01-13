@@ -34,7 +34,7 @@ export default {
       OpenId: '',
       nickName: null,
       avatarUrl: null,
-      allow: uni.getStorageSync('allow')// 默认为true
+      allow: uni.getStorageSync('allow')
     }
   },
   methods: {
@@ -147,4 +147,5 @@ export default {
   border-radius: 80rpx;
   font-size: 35rpx;
 }
+
 </style>
