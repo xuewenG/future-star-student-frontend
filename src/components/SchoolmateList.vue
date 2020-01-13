@@ -39,7 +39,7 @@
                   {{ schoolmateItem.company.name + schoolmateItem.company.position }}
                 </view>
                 <view class="text-gray text-sm">
-                  {{ schoolmateItem.city }} &nbsp;|&nbsp;{{ schoolmateItem.profession }}
+                  {{ schoolmateItem.city.split('|').slice(0, 2).join('') }} &nbsp;|&nbsp;{{ schoolmateItem.profession }}
                 </view>
               </view>
             </view>

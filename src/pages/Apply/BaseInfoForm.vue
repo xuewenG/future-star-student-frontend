@@ -12,12 +12,12 @@
       </block>
     </cu-custom>
     <form>
-      <view class="cu-bar bg-white margin-top-sm">
+      <view class="cu-bar bg-white sm-border">
         <view class="action">
           <text class="cuIcon-titles text-orange" /> 基本信息
         </view>
       </view>
-      <view class="cu-form-group margin-top">
+      <view class="cu-form-group">
         <text class="cuIcon-expressman text-cyan" />
         <view class="title margin-left">
           姓名
@@ -226,7 +226,9 @@ export default {
         console.log(this.sex)
         console.log(this.student)
       }
+
       this.student.clazz = parseInt(option.clazz)
+      console.log(this.student)
     })
   },
   methods: {

@@ -12,7 +12,7 @@
       </block>
     </cu-custom>
     <form>
-      <view class="cu-bar bg-white margin-top-sm solids-bottom">
+      <view class="cu-bar bg-white solids-bottom">
         <view class="action">
           <text class="cuIcon-titles text-orange" /> 公司/项目信息
         </view>
@@ -464,14 +464,16 @@ export default {
   },
   onLoad (student) {
     this.student = JSON.parse(decodeURIComponent(student.data))
-    this.companyForm = this.student.companyInfo
-    const position = this.positionList
-    for (let i = 0, lenI = position.length; i < lenI; ++i) {
-      if (this.companyForm.positions.includes(position[i].value)) {
-        this.$set(position[i], 'checked', true)
+    if (JSON.stringify(this.student.companyInfo) !== '{}') {
+      this.companyForm = this.student.companyInfo
+      const position = this.positionList
+      for (let i = 0, lenI = position.length; i < lenI; ++i) {
+        if (this.companyForm.positions.includes(position[i].value)) {
+          this.$set(position[i], 'checked', true)
+        }
       }
+      this.finance = this.student.companyInfo.finance
     }
-    this.finance = this.student.companyInfo.finance
     console.log(this.student)
     console.log(this.companyForm)
   },
